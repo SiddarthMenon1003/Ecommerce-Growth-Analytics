@@ -12,10 +12,23 @@ Identify customer retention patterns by grouping customers according to
 their first purchase month and tracking repeat purchases over time.
 
 Expected Output:
-Monthly customer cohorts with active customer counts across subsequent months.
+Monthly customer cohorts with active customer counts, cohort sizes,
+and retention rates across subsequent months.
 
 ===============================================================================
 */
+
+----------------------------------------------------------------------------
+-- Remove Existing Analytics Table
+----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS customer_cohorts;
+
+----------------------------------------------------------------------------
+-- Create Customer Cohort Analytics Table
+----------------------------------------------------------------------------
+
+CREATE TABLE customer_cohorts AS
 
 ----------------------------------------------------------------------------
 -- STEP 1 : Identify Each Customer's First Purchase Month
@@ -95,30 +108,65 @@ cohort_activity AS (
 
     FROM customer_orders
 
+),
+
+----------------------------------------------------------------------------
+-- STEP 4 : Calculate Cohort Size
+----------------------------------------------------------------------------
+
+cohort_sizes AS (
+
+    SELECT
+
+        cohort_month,
+
+        COUNT(DISTINCT customer_unique_id) AS cohort_size
+
+    FROM first_purchase
+
+    GROUP BY
+
+        cohort_month
+
 )
 
 ----------------------------------------------------------------------------
--- STEP 4 : Aggregate Customers Per Cohort
+-- STEP 5 : Build Cohort Analytics Table
 ----------------------------------------------------------------------------
 
 SELECT
 
-    cohort_month,
+    ca.cohort_month,
 
-    month_number,
+    ca.month_number,
 
-    COUNT(DISTINCT customer_unique_id) AS active_customers
+    COUNT(DISTINCT ca.customer_unique_id) AS active_customers,
 
-FROM cohort_activity
+    cs.cohort_size,
+
+    ROUND(
+        COUNT(DISTINCT ca.customer_unique_id)::NUMERIC
+        /
+        cs.cohort_size,
+        4
+    ) AS retention_rate
+
+FROM cohort_activity ca
+
+JOIN cohort_sizes cs
+
+    ON ca.cohort_month = cs.cohort_month
 
 GROUP BY
 
-    cohort_month,
+    ca.cohort_month,
 
-    month_number
+    ca.month_number,
+
+    cs.cohort_size
 
 ORDER BY
 
-    cohort_month,
+    ca.cohort_month,
 
-    month_number;
+    ca.month_number;

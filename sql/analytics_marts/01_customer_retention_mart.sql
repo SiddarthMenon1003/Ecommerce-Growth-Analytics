@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS customer_value_mart;
+DROP TABLE IF EXISTS customer_retention_mart;
 
-CREATE TABLE customer_value_mart AS
+CREATE TABLE customer_retention_mart AS
 
 WITH dataset_max_date AS (
 

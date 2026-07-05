@@ -13,11 +13,11 @@
 * [x] Environment Setup
 * [x] PostgreSQL Configuration
 * [x] Project Structure
-* [ ] Data Warehouse Design
-* [ ] ETL Pipeline Development
-* [ ] Customer Retention Analysis
-* [ ] Marketing Analytics
-* [ ] Customer Segmentation
+* [x] Data Warehouse Design
+* [x] ETL Pipeline Development
+* [x] Customer Retention Analysis
+* [x] Marketing Analytics
+* [x] Customer Segmentation
 * [ ] Funnel Optimization
 * [ ] Revenue Growth Analysis
 * [ ] Experimentation Framework

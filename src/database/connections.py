@@ -15,7 +15,6 @@ if __name__ == "__main__":
         connection = engine.connect()
         print("Connected to growth_lab")
         connection.close()
-
     except Exception as e:
         print("Connection Failed")
         print(e)

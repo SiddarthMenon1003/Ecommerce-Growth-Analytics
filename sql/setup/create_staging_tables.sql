@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS stg_order_reviews;
 DROP TABLE IF EXISTS stg_products;
 DROP TABLE IF EXISTS stg_sellers;
 DROP TABLE IF EXISTS stg_geolocation;
-
 CREATE TABLE stg_customers (
     customer_id TEXT,
     customer_unique_id TEXT,
@@ -14,7 +13,6 @@ CREATE TABLE stg_customers (
     customer_city TEXT,
     customer_state TEXT
 );
-
 CREATE TABLE stg_orders (
     order_id TEXT,
     customer_id TEXT,
@@ -25,7 +23,6 @@ CREATE TABLE stg_orders (
     order_delivered_customer_date TEXT,
     order_estimated_delivery_date TEXT
 );
-
 CREATE TABLE stg_order_items (
     order_id TEXT,
     order_item_id INTEGER,
@@ -35,7 +32,6 @@ CREATE TABLE stg_order_items (
     price FLOAT,
     freight_value FLOAT
 );
-
 CREATE TABLE stg_order_payments (
     order_id TEXT,
     payment_sequential INTEGER,
@@ -43,7 +39,6 @@ CREATE TABLE stg_order_payments (
     payment_installments INTEGER,
     payment_value FLOAT
 );
-
 CREATE TABLE stg_order_reviews (
     review_id TEXT,
     order_id TEXT,
@@ -53,7 +48,6 @@ CREATE TABLE stg_order_reviews (
     review_creation_date TEXT,
     review_answer_timestamp TEXT
 );
-
 CREATE TABLE stg_products (
     product_id TEXT,
     product_category_name TEXT,
@@ -65,14 +59,12 @@ CREATE TABLE stg_products (
     product_height_cm FLOAT,
     product_width_cm FLOAT
 );
-
 CREATE TABLE stg_sellers (
     seller_id TEXT,
     seller_zip_code_prefix INTEGER,
     seller_city TEXT,
     seller_state TEXT
 );
-
 CREATE TABLE stg_geolocation (
     geolocation_zip_code_prefix INTEGER,
     geolocation_lat FLOAT,

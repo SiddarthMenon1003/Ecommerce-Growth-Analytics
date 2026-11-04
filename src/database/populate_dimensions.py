@@ -3,10 +3,7 @@ from src.utils.sql_runner import run_sql_file
 
 
 def populate_dimensions():
-    run_sql_file(
-        SQL_PATH / "transform" / "populate_dimensions.sql"
-    )
-
+    run_sql_file(SQL_PATH / "transform" / "populate_dimensions.sql")
     print("Dimension tables populated successfully.")
 
 

@@ -7,7 +7,6 @@ from src.database.connections import engine
 BASE_DIR = Path(__file__).resolve().parents[2]
 RAW_DATA_PATH = BASE_DIR / "data" / "raw"
 
-
 DATASETS = {
     "stg_customers": "olist_customers_dataset.csv",
     "stg_orders": "olist_orders_dataset.csv",
@@ -21,25 +20,17 @@ DATASETS = {
 
 
 def load_staging():
-
     for table, csv_file in DATASETS.items():
-
         print(f"\nLoading {table}...")
-
         try:
             df = pd.read_csv(RAW_DATA_PATH / csv_file)
-
-            
-
             if table == "stg_products":
                 df = df.rename(columns={
                     "product_name_lenght": "product_name_length",
                     "product_description_lenght": "product_description_length"
                 })
-
             with engine.begin() as conn:
                 conn.execute(text(f"TRUNCATE TABLE {table};"))
-
             df.to_sql(
                 table,
                 engine,
@@ -48,9 +39,7 @@ def load_staging():
                 method="multi",
                 chunksize=500
             )
-
             print(f"✓ {table}: {len(df):,} rows loaded")
-
         except Exception as e:
             print(f"\n❌ FAILED: {table}")
             print(e)

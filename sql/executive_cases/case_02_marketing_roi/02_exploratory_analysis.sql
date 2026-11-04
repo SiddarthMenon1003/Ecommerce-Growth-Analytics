@@ -15,7 +15,6 @@ FROM marketing_roi_mart
 GROUP BY customer_type
 ORDER BY avg_revenue DESC;
 
-
 -- Average Purchase Frequency
 
 SELECT
@@ -24,7 +23,6 @@ SELECT
 FROM marketing_roi_mart
 GROUP BY customer_type;
 
-
 -- Average Estimated LTV
 
 SELECT
@@ -32,7 +30,6 @@ SELECT
     ROUND(AVG(estimated_ltv),2) AS avg_ltv
 FROM marketing_roi_mart
 GROUP BY customer_type;
-
 
 -- Marketing Priority Distribution
 

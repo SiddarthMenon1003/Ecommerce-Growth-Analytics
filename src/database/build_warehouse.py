@@ -3,13 +3,9 @@ from src.database.populate_facts import populate_facts
 
 
 def build_warehouse():
-
     print("\n========== BUILDING WAREHOUSE ==========\n")
-
     populate_dimensions()
-
     populate_facts()
-
     print("\nWarehouse build complete.\n")
 
 

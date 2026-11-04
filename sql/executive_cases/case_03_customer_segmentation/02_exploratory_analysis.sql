@@ -12,21 +12,13 @@
 ------------------------------------------------------------
 
 SELECT
-
     COUNT(*) AS total_customers,
-
     SUM(total_revenue) AS total_revenue,
-
     ROUND(AVG(total_revenue),2) AS avg_customer_revenue,
-
     ROUND(AVG(estimated_ltv),2) AS avg_estimated_ltv,
-
     ROUND(AVG(avg_order_value),2) AS avg_order_value,
-
     ROUND(AVG(customer_lifetime_days),2) AS avg_customer_lifetime_days,
-
     ROUND(AVG(purchase_frequency),4) AS avg_purchase_frequency
-
 FROM customer_segmentation_mart;
 
 ------------------------------------------------------------
@@ -34,23 +26,14 @@ FROM customer_segmentation_mart;
 ------------------------------------------------------------
 
 SELECT
-
     customer_value_segment,
-
     COUNT(*) AS customers,
-
     ROUND(SUM(total_revenue),2) AS revenue,
-
     ROUND(AVG(total_revenue),2) AS avg_revenue,
-
     ROUND(AVG(estimated_ltv),2) AS avg_ltv,
-
     ROUND(AVG(avg_order_value),2) AS avg_order_value
-
 FROM customer_segmentation_mart
-
 GROUP BY customer_value_segment
-
 ORDER BY revenue DESC;
 
 ------------------------------------------------------------
@@ -58,19 +41,12 @@ ORDER BY revenue DESC;
 ------------------------------------------------------------
 
 SELECT
-
     customer_type,
-
     COUNT(*) AS customers,
-
     ROUND(SUM(total_revenue),2) AS revenue,
-
     ROUND(AVG(total_orders),2) AS avg_orders
-
 FROM customer_segmentation_mart
-
 GROUP BY customer_type
-
 ORDER BY revenue DESC;
 
 ------------------------------------------------------------
@@ -78,21 +54,13 @@ ORDER BY revenue DESC;
 ------------------------------------------------------------
 
 SELECT
-
     purchase_frequency_band,
-
     COUNT(*) AS customers,
-
     ROUND(AVG(total_orders),2) AS avg_orders,
-
     ROUND(AVG(purchase_frequency),4) AS avg_purchase_frequency,
-
     ROUND(AVG(total_revenue),2) AS avg_revenue
-
 FROM customer_segmentation_mart
-
 GROUP BY purchase_frequency_band
-
 ORDER BY avg_purchase_frequency DESC;
 
 ------------------------------------------------------------
@@ -100,19 +68,12 @@ ORDER BY avg_purchase_frequency DESC;
 ------------------------------------------------------------
 
 SELECT
-
     spending_band,
-
     COUNT(*) AS customers,
-
     ROUND(AVG(avg_order_value),2) AS avg_order_value,
-
     ROUND(SUM(total_revenue),2) AS revenue
-
 FROM customer_segmentation_mart
-
 GROUP BY spending_band
-
 ORDER BY revenue DESC;
 
 ------------------------------------------------------------
@@ -120,19 +81,12 @@ ORDER BY revenue DESC;
 ------------------------------------------------------------
 
 SELECT
-
     engagement_status,
-
     COUNT(*) AS customers,
-
     ROUND(SUM(total_revenue),2) AS revenue,
-
     ROUND(AVG(days_since_last_purchase),2) AS avg_days_since_purchase
-
 FROM customer_segmentation_mart
-
 GROUP BY engagement_status
-
 ORDER BY revenue DESC;
 
 ------------------------------------------------------------
@@ -140,24 +94,15 @@ ORDER BY revenue DESC;
 ------------------------------------------------------------
 
 SELECT
-
     customer_value_segment,
-
     engagement_status,
-
     COUNT(*) AS customers,
-
     ROUND(SUM(total_revenue),2) AS revenue
-
 FROM customer_segmentation_mart
-
 GROUP BY
-
     customer_value_segment,
     engagement_status
-
 ORDER BY
-
     customer_value_segment,
     engagement_status;
 
@@ -166,25 +111,15 @@ ORDER BY
 ------------------------------------------------------------
 
 SELECT
-
     customer_unique_id,
-
     total_orders,
-
     total_revenue,
-
     estimated_ltv,
-
     customer_value_segment,
-
     purchase_frequency_band,
-
     spending_band
-
 FROM customer_segmentation_mart
-
 ORDER BY total_revenue DESC
-
 LIMIT 20;
 
 ------------------------------------------------------------
@@ -192,23 +127,14 @@ LIMIT 20;
 ------------------------------------------------------------
 
 SELECT
-
     customer_unique_id,
-
     estimated_ltv,
-
     total_revenue,
-
     total_orders,
-
     customer_value_segment,
-
     engagement_status
-
 FROM customer_segmentation_mart
-
 ORDER BY estimated_ltv DESC
-
 LIMIT 20;
 
 ------------------------------------------------------------
@@ -216,17 +142,12 @@ LIMIT 20;
 ------------------------------------------------------------
 
 SELECT
-
     customer_value_segment,
-
     ROUND(
         SUM(total_revenue) /
         SUM(SUM(total_revenue)) OVER () * 100,
         2
     ) AS revenue_share_percent
-
 FROM customer_segmentation_mart
-
 GROUP BY customer_value_segment
-
 ORDER BY revenue_share_percent DESC;

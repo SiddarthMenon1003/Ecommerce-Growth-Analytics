@@ -11,7 +11,6 @@ TRUNCATE TABLE dim_sellers CASCADE;
 --------------------------------------------------
 
 INSERT INTO dim_customers
-
 SELECT DISTINCT
     customer_id,
     customer_unique_id,
@@ -25,7 +24,6 @@ FROM stg_customers;
 --------------------------------------------------
 
 INSERT INTO dim_products
-
 SELECT DISTINCT
     product_id,
     product_category_name,
@@ -43,7 +41,6 @@ FROM stg_products;
 --------------------------------------------------
 
 INSERT INTO dim_sellers
-
 SELECT DISTINCT
     seller_id,
     seller_zip_code_prefix,

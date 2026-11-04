@@ -3,10 +3,7 @@ from src.utils.sql_runner import run_sql_file
 
 
 def populate_facts():
-    run_sql_file(
-        SQL_PATH / "transform" / "populate_facts.sql"
-    )
-
+    run_sql_file(SQL_PATH / "transform" / "populate_facts.sql")
     print("Fact tables populated successfully.")
 
 

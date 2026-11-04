@@ -32,34 +32,24 @@ FROM (
 ------------------------------------------------------------
 
 SELECT
-
     COUNT(*) FILTER (WHERE total_revenue IS NULL)
         AS missing_revenue,
-
     COUNT(*) FILTER (WHERE estimated_ltv IS NULL)
         AS missing_ltv,
-
     COUNT(*) FILTER (WHERE avg_order_value IS NULL)
         AS missing_avg_order_value,
-
     COUNT(*) FILTER (WHERE purchase_frequency IS NULL)
         AS missing_purchase_frequency,
-
     COUNT(*) FILTER (WHERE customer_lifetime_days IS NULL)
         AS missing_lifetime_days,
-
     COUNT(*) FILTER (WHERE customer_value_segment IS NULL)
         AS missing_customer_segment,
-
     COUNT(*) FILTER (WHERE purchase_frequency_band IS NULL)
         AS missing_frequency_band,
-
     COUNT(*) FILTER (WHERE spending_band IS NULL)
         AS missing_spending_band,
-
     COUNT(*) FILTER (WHERE engagement_status IS NULL)
         AS missing_engagement_status
-
 FROM customer_segmentation_mart;
 
 ------------------------------------------------------------
@@ -107,15 +97,10 @@ WHERE customer_lifetime_days < 0;
 ------------------------------------------------------------
 
 SELECT
-
     customer_value_segment,
-
     COUNT(*) AS customers
-
 FROM customer_segmentation_mart
-
 GROUP BY customer_value_segment
-
 ORDER BY customers DESC;
 
 ------------------------------------------------------------
@@ -123,15 +108,10 @@ ORDER BY customers DESC;
 ------------------------------------------------------------
 
 SELECT
-
     purchase_frequency_band,
-
     COUNT(*) AS customers
-
 FROM customer_segmentation_mart
-
 GROUP BY purchase_frequency_band
-
 ORDER BY customers DESC;
 
 ------------------------------------------------------------
@@ -139,15 +119,10 @@ ORDER BY customers DESC;
 ------------------------------------------------------------
 
 SELECT
-
     spending_band,
-
     COUNT(*) AS customers
-
 FROM customer_segmentation_mart
-
 GROUP BY spending_band
-
 ORDER BY customers DESC;
 
 ------------------------------------------------------------
@@ -155,13 +130,8 @@ ORDER BY customers DESC;
 ------------------------------------------------------------
 
 SELECT
-
     engagement_status,
-
     COUNT(*) AS customers
-
 FROM customer_segmentation_mart
-
 GROUP BY engagement_status
-
 ORDER BY customers DESC;

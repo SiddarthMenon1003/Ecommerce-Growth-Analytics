@@ -22,26 +22,17 @@ Monthly customer retention percentages for each acquisition cohort.
 ----------------------------------------------------------------------------
 
 WITH first_purchase AS (
-
     SELECT
-
         dc.customer_unique_id,
-
         DATE_TRUNC(
             'month',
             MIN(fo.order_purchase_timestamp)
         ) AS cohort_month
-
     FROM fact_orders fo
-
     JOIN dim_customers dc
-
     ON fo.customer_id = dc.customer_id
-
     GROUP BY
-
         dc.customer_unique_id
-
 ),
 
 ----------------------------------------------------------------------------
@@ -49,28 +40,18 @@ WITH first_purchase AS (
 ----------------------------------------------------------------------------
 
 customer_orders AS (
-
     SELECT
-
         dc.customer_unique_id,
-
         fp.cohort_month,
-
         DATE_TRUNC(
             'month',
             fo.order_purchase_timestamp
         ) AS purchase_month
-
     FROM fact_orders fo
-
     JOIN dim_customers dc
-
     ON fo.customer_id = dc.customer_id
-
     JOIN first_purchase fp
-
     ON dc.customer_unique_id = fp.customer_unique_id
-
 ),
 
 ----------------------------------------------------------------------------
@@ -78,21 +59,15 @@ customer_orders AS (
 ----------------------------------------------------------------------------
 
 cohort_activity AS (
-
     SELECT
-
         cohort_month,
-
         (
             EXTRACT(YEAR FROM AGE(purchase_month, cohort_month)) * 12
             +
             EXTRACT(MONTH FROM AGE(purchase_month, cohort_month))
         )::INTEGER AS month_number,
-
         customer_unique_id
-
     FROM customer_orders
-
 ),
 
 ----------------------------------------------------------------------------
@@ -100,23 +75,14 @@ cohort_activity AS (
 ----------------------------------------------------------------------------
 
 cohort_counts AS (
-
     SELECT
-
         cohort_month,
-
         month_number,
-
         COUNT(DISTINCT customer_unique_id) AS active_customers
-
     FROM cohort_activity
-
     GROUP BY
-
         cohort_month,
-
         month_number
-
 ),
 
 ----------------------------------------------------------------------------
@@ -124,23 +90,16 @@ cohort_counts AS (
 ----------------------------------------------------------------------------
 
 retention AS (
-
     SELECT
-
         cohort_month,
-
         month_number,
-
         active_customers,
-
         FIRST_VALUE(active_customers)
         OVER (
             PARTITION BY cohort_month
             ORDER BY month_number
         ) AS cohort_size
-
     FROM cohort_counts
-
 )
 
 ----------------------------------------------------------------------------
@@ -148,15 +107,10 @@ retention AS (
 ----------------------------------------------------------------------------
 
 SELECT
-
     cohort_month,
-
     month_number,
-
     cohort_size,
-
     active_customers,
-
     ROUND(
         (
             active_customers::NUMERIC
@@ -165,11 +119,7 @@ SELECT
         ) * 100,
         2
     ) AS retention_rate
-
 FROM retention
-
 ORDER BY
-
     cohort_month,
-
     month_number;

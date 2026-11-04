@@ -14,7 +14,6 @@ SELECT
     COUNT(*) AS total_customers
 FROM marketing_roi_mart;
 
-
 -- Missing Customer IDs
 
 SELECT
@@ -22,14 +21,12 @@ SELECT
 FROM marketing_roi_mart
 WHERE customer_id IS NULL;
 
-
 -- Missing Revenue
 
 SELECT
     COUNT(*) AS missing_revenue
 FROM marketing_roi_mart
 WHERE total_revenue IS NULL;
-
 
 -- Customer Types
 
@@ -39,7 +36,6 @@ SELECT
 FROM marketing_roi_mart
 GROUP BY customer_type;
 
-
 -- Marketing Priorities
 
 SELECT
@@ -48,7 +44,6 @@ SELECT
 FROM marketing_roi_mart
 GROUP BY marketing_priority;
 
-
 -- Customer Value Segments
 
 SELECT
@@ -56,7 +51,6 @@ SELECT
     COUNT(*) AS customers
 FROM marketing_roi_mart
 GROUP BY customer_value_segment;
-
 
 -- Duplicate Customers
 

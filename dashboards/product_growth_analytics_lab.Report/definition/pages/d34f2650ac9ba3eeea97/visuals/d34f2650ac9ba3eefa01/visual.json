@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Marketing ROI",
+                    "value": "Marketing Performance",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "15pt",
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Stop spending evenly: the top 20% deliver 53% of revenue at ~R$430 each — concentrate budget there.",
+                    "value": "Direct budget to high-value customers; the long tail yields little.",
                     "textStyle": {
                       "fontSize": "9pt",
                       "color": "#D6DAE2"

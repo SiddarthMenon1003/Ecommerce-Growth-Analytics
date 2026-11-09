@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Value Segmentation",
+                    "value": "Customer Value Analysis",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "15pt",
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Value is highly concentrated: the top 20% of customers drive 53% of revenue (R$8.56M, ~R$430 each).",
+                    "value": "Segmenting customers by value shows where revenue truly comes from.",
                     "textStyle": {
                       "fontSize": "9pt",
                       "color": "#D6DAE2"

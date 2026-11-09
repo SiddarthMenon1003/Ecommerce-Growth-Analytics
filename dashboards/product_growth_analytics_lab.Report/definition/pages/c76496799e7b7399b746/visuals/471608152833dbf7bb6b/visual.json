@@ -1,0 +1,254 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "471608152833dbf7bb6b",
+  "position": {
+    "x": 571,
+    "y": 441,
+    "z": 3005,
+    "width": 337,
+    "height": 263,
+    "tabOrder": 3005
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Executive Insights:",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "20pt",
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "High Value customers represent the smallest customer segment but contribute the highest revenue and estimated lifetime value, making them the most strategically important group.",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Medium Value customers form the largest growth opportunity and can be converted into premium customers through targeted upsell and cross-sell initiatives.",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Low Value customers account for a significant share of the customer base but deliver comparatively lower revenue, requiring cost-efficient engagement strategies.",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Customer value is concentrated within a limited portion of the customer base, reinforcing the need for value-based rather than volume-based marketing decisions.",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Business Recommendation:",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "20pt",
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Prioritize retention and loyalty investments for ",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  },
+                  {
+                    "value": "High Value",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#C8CDD6"
+                    }
+                  },
+                  {
+                    "value": " customers to protect long-term revenue. Focus personalized upsell campaigns on ",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  },
+                  {
+                    "value": "Medium Value",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#C8CDD6"
+                    }
+                  },
+                  {
+                    "value": " customers to increase lifetime value, while managing ",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  },
+                  {
+                    "value": "Low Value",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#C8CDD6"
+                    }
+                  },
+                  {
+                    "value": " customers through automated, low-cost engagement programs. Allocating resources according to customer value rather than customer volume will maximize long-term profitability and marketing efficiency.",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "This is concise, executive-friendly, and aligns with the storytelling style you've established in Cases 01 and 02.",
+                    "textStyle": {
+                      "color": "#C8CDD6"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1C1F27'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2A2E38'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "0d5a851746f7d5a1fa01",
   "position": {
-    "x": 340,
-    "y": 300,
+    "x": 240,
+    "y": 250,
     "z": 100,
-    "width": 600,
-    "height": 120,
+    "width": 800,
+    "height": 340,
     "tabOrder": 100
   },
   "visual": {
@@ -22,9 +22,83 @@
                   {
                     "value": "CASE 01",
                     "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "28pt",
-                      "color": "#7B6CFF"
+                      "fontSize": "16pt",
+                      "color": "#FF8A4C",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "horizontalTextAlignment": "center",
+                "textRuns": [
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontSize": "6pt",
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ]
+              },
+              {
+                "horizontalTextAlignment": "center",
+                "textRuns": [
+                  {
+                    "value": "Customer Retention",
+                    "textStyle": {
+                      "fontSize": "40pt",
+                      "color": "#FFFFFF",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "horizontalTextAlignment": "center",
+                "textRuns": [
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ]
+              },
+              {
+                "horizontalTextAlignment": "center",
+                "textRuns": [
+                  {
+                    "value": "Do customers come back after their first purchase?",
+                    "textStyle": {
+                      "fontSize": "15pt",
+                      "color": "#9AA3B2"
+                    }
+                  }
+                ]
+              },
+              {
+                "horizontalTextAlignment": "center",
+                "textRuns": [
+                  {
+                    "value": " ",
+                    "textStyle": {
+                      "fontSize": "6pt",
+                      "color": "#FFFFFF"
+                    }
+                  }
+                ]
+              },
+              {
+                "horizontalTextAlignment": "center",
+                "textRuns": [
+                  {
+                    "value": "Only 3.1% ever do.",
+                    "textStyle": {
+                      "fontSize": "18pt",
+                      "color": "#2DD4BF",
+                      "fontWeight": "bold"
                     }
                   }
                 ]

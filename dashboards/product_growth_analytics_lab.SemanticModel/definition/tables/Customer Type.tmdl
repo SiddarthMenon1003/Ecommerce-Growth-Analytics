@@ -1,0 +1,36 @@
+table 'Customer Type'
+	lineageTag: 3dfc2432-eef2-4e53-879a-5f25bed35c6f
+
+	measure 'Revenue by Customer Type' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Customer Type'[Customer Type]),
+			    "One-Time", [Average Revenue per One-Time Customer],
+			    "Repeat", [Average Revenue per Repeat Customer]
+			)
+		lineageTag: 9f4f2117-e1e2-4932-a1c3-776f6887c8c1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Customer Type'
+		lineageTag: bb067475-f6fb-4773-8e25-5c0fd964fc79
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Customer Type]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Customer Type' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Customer Type", STRING,
+				    {
+				        {"One-Time"},
+				        {"Repeat"}
+				    }
+				)
+
+	annotation PBI_Id = a6e2ab01ef6248ad9ef8602afed21f97
+

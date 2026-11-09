@@ -1,0 +1,62 @@
+table 'Dim Sellers'
+	lineageTag: e60ba6bb-9b0d-4b9f-b4c8-b43ac237ea3f
+
+	column seller_id
+		dataType: string
+		isHidden
+		lineageTag: 3b967f91-0f36-4d99-a29a-2c93eb7ba9be
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ZIP Prefix'
+		dataType: int64
+		formatString: 0
+		lineageTag: 49720c9a-1e04-4f8b-ba2b-2285abd2b6d0
+		summarizeBy: none
+		sourceColumn: ZIP Prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Seller City'
+		dataType: string
+		lineageTag: d3777133-1577-40a4-88bf-244c2d4e3908
+		summarizeBy: none
+		sourceColumn: Seller City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Seller State'
+		dataType: string
+		lineageTag: b8459fd0-884c-41dd-9858-b891ceb56207
+		summarizeBy: none
+		sourceColumn: Seller State
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Location
+		lineageTag: fe7b8e98-05d2-4b69-b67d-1a08297e1166
+
+		level 'Seller State'
+			lineageTag: f1328a01-0318-4d3d-ac81-aaaaeaca6d12
+			column: 'Seller State'
+
+		level 'Seller City'
+			lineageTag: 5eca0c9b-0053-4e9b-bf6b-b9e51c3ffd37
+			column: 'Seller City'
+
+	partition 'Dim Sellers' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_dim_sellers = Source{[Schema="public",Item="dim_sellers"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(public_dim_sellers,{{"seller_city", "Seller City"}, {"seller_state", "Seller State"}, {"seller_zip_code_prefix", "ZIP Prefix"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,27 @@
+table 'Purchase Frequency'
+	lineageTag: 4ed2674b-6720-46ba-bf0e-551152fa79fb
+
+	column Bucket
+		lineageTag: f9f20397-0193-4cf3-bc5b-406469ef5d9e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Bucket]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Purchase Frequency' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Bucket", STRING,
+				    {
+				        {"1 Order"},
+				        {"2 Orders"},
+				        {"3 Orders"},
+				        {"4+ Orders"}
+				    }
+				)
+
+	annotation PBI_Id = 5edd81f053e74f8ca69c78d1d954d275
+

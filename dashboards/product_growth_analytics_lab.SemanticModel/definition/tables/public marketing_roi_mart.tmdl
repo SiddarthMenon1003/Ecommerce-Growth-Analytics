@@ -1,0 +1,160 @@
+table 'public marketing_roi_mart'
+	lineageTag: 25198660-c72b-4e08-aa28-2f2fa191f596
+
+	column customer_id
+		dataType: string
+		lineageTag: 45063866-55f7-4525-90ee-89bf216b9a95
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 41113726-1776-49df-878f-a07c1af0c608
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: e1b13e10-cad0-4298-bb3a-37cc6917d480
+		summarizeBy: sum
+		sourceColumn: total_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_revenue
+		dataType: double
+		lineageTag: 3ef0b170-6c09-4b2d-b510-eeabd902ef8e
+		summarizeBy: sum
+		sourceColumn: total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_order_value
+		dataType: double
+		lineageTag: 125eb6e9-e7d5-40dc-a6e2-14a6aeacf6b8
+		summarizeBy: sum
+		sourceColumn: avg_order_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column first_purchase_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 56e183ea-1363-47a9-99a2-dcd378ef6b86
+		summarizeBy: none
+		sourceColumn: first_purchase_date
+
+		variation Variation
+			isDefault
+			relationship: 32a703f5-a294-4fc9-9d80-1e5fa5cc0f17
+			defaultHierarchy: LocalDateTable_174acd95-e2f6-4f13-8074-66d8782bc3e2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_purchase_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e7583cf3-98cd-446f-b09d-f06016991142
+		summarizeBy: none
+		sourceColumn: last_purchase_date
+
+		variation Variation
+			isDefault
+			relationship: 22623243-ff2b-472c-bf76-588f617b9c37
+			defaultHierarchy: LocalDateTable_12355f95-fde2-4978-8c7d-a8d7705b7b13.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_lifetime_days
+		dataType: int64
+		formatString: 0
+		lineageTag: d7ff0edf-68d0-4aab-8857-192908be1394
+		summarizeBy: sum
+		sourceColumn: customer_lifetime_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		lineageTag: e0979027-3a78-4ac6-be2b-c2888bc06c62
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_frequency
+		dataType: double
+		lineageTag: f2bb2148-d9d4-43f4-8cbc-3573c5ea431e
+		summarizeBy: sum
+		sourceColumn: purchase_frequency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column customer_type
+		dataType: string
+		lineageTag: 5a131b2e-785d-49b3-b9c9-dd756002ac5d
+		summarizeBy: none
+		sourceColumn: customer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_percentile
+		dataType: int64
+		formatString: 0
+		lineageTag: 59683520-13d0-495c-a82d-1cc646afeb73
+		summarizeBy: sum
+		sourceColumn: revenue_percentile
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_value_segment
+		dataType: string
+		lineageTag: 6e27ddf7-85c4-47aa-ab77-42f2acb1a038
+		summarizeBy: none
+		sourceColumn: customer_value_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column estimated_ltv
+		dataType: double
+		lineageTag: 28385cd7-ba1e-4e55-9d0c-1ee12d826bf9
+		summarizeBy: sum
+		sourceColumn: estimated_ltv
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column marketing_priority
+		dataType: string
+		lineageTag: 0ec8a5b2-48d4-46e9-911f-8d3183e5495e
+		summarizeBy: none
+		sourceColumn: marketing_priority
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public marketing_roi_mart' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_marketing_roi_mart = Source{[Schema="public",Item="marketing_roi_mart"]}[Data]
+				in
+				    public_marketing_roi_mart
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

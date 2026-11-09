@@ -1,0 +1,65 @@
+table 'Fact Payments'
+	lineageTag: d03fca8f-86ae-4f4b-bd38-b1a1ad2d546a
+
+	column order_id
+		dataType: string
+		isHidden
+		lineageTag: ea3f54fc-a73f-4f5f-84be-4337e61c33bb
+		summarizeBy: none
+		sourceColumn: order_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_sequential
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a84ff171-cbd6-4a44-9d34-780030a60e31
+		summarizeBy: sum
+		sourceColumn: payment_sequential
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Type'
+		dataType: string
+		lineageTag: 31a1a2ab-da7a-4224-a34a-a5d904621546
+		summarizeBy: none
+		sourceColumn: Payment Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Installments
+		dataType: int64
+		formatString: 0
+		lineageTag: c1206c50-1d6c-4cc0-aec7-d43c39cd5330
+		summarizeBy: sum
+		sourceColumn: Installments
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Value'
+		dataType: double
+		lineageTag: 11ee21e3-1fa5-4d09-a8fd-07e36f0dad56
+		summarizeBy: sum
+		sourceColumn: Payment Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact Payments' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_fact_payments = Source{[Schema="public",Item="fact_payments"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(public_fact_payments,{{"payment_type", "Payment Type"}, {"payment_value", "Payment Value"}, {"payment_installments", "Installments"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

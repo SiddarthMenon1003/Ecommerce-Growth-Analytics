@@ -1,0 +1,91 @@
+table 'public customer_cohorts'
+	lineageTag: 0dbdd95f-9afa-43cf-bd19-ef7a6639583c
+
+	measure 'Weighted Retention %' =
+			
+			DIVIDE(
+			    SUM('public customer_cohorts'[active_customers]),
+			    SUM('public customer_cohorts'[cohort_size]),
+			    0
+			)
+		lineageTag: edc79fab-5528-4fdb-8e7e-5c2229224736
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cohort_month
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 67871612-f21b-4924-9701-521fa9e2a13c
+		summarizeBy: none
+		sourceColumn: cohort_month
+
+		variation Variation
+			isDefault
+			relationship: 6ede47f7-08e1-42f8-b8b3-00f3d9b247b7
+			defaultHierarchy: LocalDateTable_7d40558d-1f73-45fa-9415-0f990d496f30.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b897a92-e15e-43f6-8303-a1c99538e8d4
+		summarizeBy: sum
+		sourceColumn: month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column active_customers
+		dataType: int64
+		formatString: 0
+		lineageTag: 0af977f7-f7a0-4aea-8c34-0377b78dc352
+		summarizeBy: sum
+		sourceColumn: active_customers
+
+		annotation SummarizationSetBy = Automatic
+
+	column cohort_size
+		dataType: int64
+		formatString: 0
+		lineageTag: 69e45f4a-22ba-4891-b26c-2c46bc69516c
+		summarizeBy: sum
+		sourceColumn: cohort_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column retention_rate
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 1c80cc99-e925-46cf-ac0b-431ee8015368
+		summarizeBy: sum
+		sourceColumn: retention_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cohort Month Label' =
+			
+			FORMAT(
+			    'public customer_cohorts'[cohort_month],
+			    "MMM yyyy"
+			)
+		lineageTag: ab139d93-2fc2-4c0d-8f35-e1b9f5201ff3
+		summarizeBy: none
+		sortByColumn: cohort_month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public customer_cohorts' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_customer_cohorts = Source{[Schema="public",Item="customer_cohorts"]}[Data]
+				in
+				    public_customer_cohorts
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

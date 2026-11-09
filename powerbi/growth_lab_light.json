@@ -1,0 +1,191 @@
+{
+  "name": "Growth Lab Light",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/themes/1.0.0/schema.json",
+
+  "dataColors": [
+    "#7B6CFF",
+    "#2DD4BF",
+    "#F2B134",
+    "#F2727D",
+    "#A78BFA",
+    "#4CC2FF",
+    "#46D39A",
+    "#F178B6"
+  ],
+
+  "good": "#46D39A",
+  "neutral": "#F2B134",
+  "bad": "#F2727D",
+  "maximum": "#7B6CFF",
+  "center": "#4CC2FF",
+  "minimum": "#232734",
+  "null": "#6B7280",
+
+  "firstLevelElements": "#F4F6FB",
+  "secondLevelElements": "#9AA3B2",
+  "thirdLevelElements": "#262A34",
+  "fourthLevelElements": "#6B7280",
+  "background": "#1C1F27",
+  "secondaryBackground": "#14161C",
+  "tableAccent": "#7B6CFF",
+  "foreground": "#F4F6FB",
+  "foregroundNeutralSecondary": "#9AA3B2",
+  "foregroundNeutralTertiary": "#6B7280",
+  "hyperlink": "#8FA0FF",
+
+  "textClasses": {
+    "title":   { "fontFace": "Segoe UI Semibold", "fontSize": 11, "color": "#F4F6FB" },
+    "header":  { "fontFace": "Segoe UI Semibold", "fontSize": 11, "color": "#F4F6FB" },
+    "callout": { "fontFace": "Segoe UI Semibold", "fontSize": 18, "color": "#F4F6FB" },
+    "label":   { "fontFace": "Segoe UI", "fontSize": 9, "color": "#9AA3B2" }
+  },
+
+  "visualStyles": {
+    "*": {
+      "*": {
+        "*": [
+          { "fontFamily": "Segoe UI", "fontSize": 9, "color": { "solid": { "color": "#F4F6FB" } } }
+        ],
+        "background": [
+          { "show": true, "color": { "solid": { "color": "#1C1F27" } }, "transparency": 0 }
+        ],
+        "border": [
+          { "show": true, "color": { "solid": { "color": "#2A2E38" } }, "radius": 6 }
+        ],
+        "dropShadow": [
+          { "show": false }
+        ],
+        "visualHeader": [
+          { "show": true, "background": { "solid": { "color": "#1C1F27" } }, "foreground": { "solid": { "color": "#6B7280" } }, "border": { "solid": { "color": "#1C1F27" } }, "transparency": 0 }
+        ],
+        "visualTooltip": [
+          { "show": true, "titleFontColor": { "solid": { "color": "#F4F6FB" } }, "valueFontColor": { "solid": { "color": "#9AA3B2" } }, "backgroundColor": { "solid": { "color": "#1C1F27" } }, "fontFamily": "Segoe UI", "fontSize": 9 }
+        ],
+        "title": [
+          { "show": true, "titleWrap": true, "fontColor": { "solid": { "color": "#F4F6FB" } }, "fontSize": 11, "fontFamily": "Segoe UI Semibold", "alignment": "left", "background": { "solid": { "color": "#1C1F27" } } }
+        ],
+        "subTitle": [
+          { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "fontFamily": "Segoe UI", "alignment": "left" }
+        ],
+        "padding": [
+          { "left": 12, "right": 12, "top": 12, "bottom": 12 }
+        ]
+      }
+    },
+
+    "page": {
+      "*": {
+        "background": [ { "color": { "solid": { "color": "#14161C" } }, "transparency": 0 } ],
+        "outspace": [ { "color": { "solid": { "color": "#14161C" } }, "transparency": 0 } ]
+      }
+    },
+
+    "card": {
+      "*": {
+        "background": [ { "show": true, "color": { "solid": { "color": "#1C1F27" } } } ],
+        "border": [ { "show": true, "color": { "solid": { "color": "#2A2E38" } }, "radius": 6 } ],
+        "labels": [ { "color": { "solid": { "color": "#F4F6FB" } }, "fontSize": 18, "fontFamily": "Segoe UI Semibold" } ],
+        "categoryLabels": [ { "show": true, "color": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "fontFamily": "Segoe UI" } ],
+        "wordWrap": [ { "show": true } ]
+      }
+    },
+
+    "cardVisual": {
+      "*": {
+        "calloutValue": [ { "color": { "solid": { "color": "#F4F6FB" } }, "fontSize": 18, "fontFamily": "Segoe UI Semibold" } ],
+        "background": [ { "show": true, "color": { "solid": { "color": "#1C1F27" } } } ],
+        "border": [ { "show": true, "color": { "solid": { "color": "#2A2E38" } }, "radius": 6 } ]
+      }
+    },
+
+    "multiRowCard": {
+      "*": {
+        "background": [ { "show": true, "color": { "solid": { "color": "#1C1F27" } } } ],
+        "border": [ { "show": true, "color": { "solid": { "color": "#2A2E38" } }, "radius": 6 } ],
+        "dataLabels": [ { "color": { "solid": { "color": "#F4F6FB" } }, "fontSize": 18, "fontFamily": "Segoe UI Semibold" } ],
+        "categoryLabels": [ { "color": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9 } ],
+        "cardTitle": [ { "color": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9 } ]
+      }
+    },
+
+    "slicer": {
+      "*": {
+        "background": [ { "show": true, "color": { "solid": { "color": "#1C1F27" } } } ],
+        "border": [ { "show": true, "color": { "solid": { "color": "#2A2E38" } }, "radius": 6 } ],
+        "header": [ { "show": true, "fontColor": { "solid": { "color": "#F4F6FB" } }, "background": { "solid": { "color": "#1C1F27" } }, "fontSize": 9, "fontFamily": "Segoe UI Semibold" } ],
+        "items": [ { "fontColor": { "solid": { "color": "#9AA3B2" } }, "background": { "solid": { "color": "#1C1F27" } }, "fontSize": 9 } ],
+        "selection": [ { "fontColor": { "solid": { "color": "#FFFFFF" } }, "background": { "solid": { "color": "#7B6CFF" } } } ]
+      }
+    },
+
+    "columnChart": {
+      "*": {
+        "dataPoint": [ { "defaultColor": { "solid": { "color": "#7B6CFF" } }, "fill": { "solid": { "color": "#7B6CFF" } } } ],
+        "categoryAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineShow": false } ],
+        "valueAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineColor": { "solid": { "color": "#262A34" } }, "gridlineThickness": 1 } ],
+        "labels": [ { "show": false } ]
+      }
+    },
+
+    "barChart": {
+      "*": {
+        "dataPoint": [ { "defaultColor": { "solid": { "color": "#7B6CFF" } }, "fill": { "solid": { "color": "#7B6CFF" } } } ],
+        "categoryAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineShow": false } ],
+        "valueAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineColor": { "solid": { "color": "#262A34" } } } ],
+        "labels": [ { "show": false } ]
+      }
+    },
+
+    "clusteredBarChart": {
+      "*": {
+        "categoryAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineShow": false } ],
+        "valueAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineColor": { "solid": { "color": "#262A34" } } } ]
+      }
+    },
+
+    "clusteredColumnChart": {
+      "*": {
+        "categoryAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineShow": false } ],
+        "valueAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineColor": { "solid": { "color": "#262A34" } } } ]
+      }
+    },
+
+    "lineChart": {
+      "*": {
+        "categoryAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineShow": false } ],
+        "valueAxis": [ { "show": true, "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "gridlineColor": { "solid": { "color": "#262A34" } }, "gridlineThickness": 1 } ],
+        "lineStyles": [ { "strokeWidth": 2, "showMarker": false } ]
+      }
+    },
+
+    "donutChart": {
+      "*": {
+        "legend": [ { "show": true, "labelColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9 } ]
+      }
+    },
+
+    "tableEx": {
+      "*": {
+        "grid": [ { "gridVertical": false, "gridHorizontal": true, "gridHorizontalColor": { "solid": { "color": "#262A34" } }, "rowPadding": 6, "outlineColor": { "solid": { "color": "#2A2E38" } } } ],
+        "columnHeaders": [ { "fontColor": { "solid": { "color": "#F4F6FB" } }, "backColor": { "solid": { "color": "#14161C" } }, "fontFamily": "Segoe UI Semibold", "fontSize": 9 } ],
+        "values": [ { "fontColorPrimary": { "solid": { "color": "#9AA3B2" } }, "backColorPrimary": { "solid": { "color": "#1C1F27" } }, "fontColorSecondary": { "solid": { "color": "#9AA3B2" } }, "backColorSecondary": { "solid": { "color": "#191C23" } }, "fontSize": 9 } ]
+      }
+    },
+
+    "pivotTable": {
+      "*": {
+        "grid": [ { "gridVertical": false, "gridHorizontal": true, "gridHorizontalColor": { "solid": { "color": "#262A34" } }, "rowPadding": 6 } ],
+        "columnHeaders": [ { "fontColor": { "solid": { "color": "#F4F6FB" } }, "backColor": { "solid": { "color": "#14161C" } }, "fontFamily": "Segoe UI Semibold", "fontSize": 9 } ],
+        "values": [ { "fontColorPrimary": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9 } ]
+      }
+    },
+
+    "actionButton": {
+      "*": {
+        "fill": [ { "show": true, "fillColor": { "solid": { "color": "#1C1F27" } }, "transparency": 0 } ],
+        "border": [ { "show": true, "color": { "solid": { "color": "#2A2E38" } }, "radius": 6 } ],
+        "text": [ { "fontColor": { "solid": { "color": "#9AA3B2" } }, "fontSize": 9, "fontFamily": "Segoe UI" } ]
+      }
+    }
+  }
+}

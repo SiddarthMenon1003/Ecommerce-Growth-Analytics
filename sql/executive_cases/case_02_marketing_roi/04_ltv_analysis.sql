@@ -25,7 +25,7 @@ ORDER BY total_ltv DESC;
 -- Top 20 Customers
 
 SELECT
-    customer_id,
+    customer_unique_id,
     estimated_ltv,
     total_revenue,
     total_orders

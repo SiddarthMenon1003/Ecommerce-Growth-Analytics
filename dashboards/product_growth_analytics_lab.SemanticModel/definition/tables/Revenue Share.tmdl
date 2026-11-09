@@ -1,0 +1,25 @@
+table 'Revenue Share'
+	lineageTag: bc89986b-aca7-403d-bebc-73c60c87a931
+
+	column Type
+		lineageTag: d7afbcef-3ede-4e8c-ac6f-74a6fdf8e2ee
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Type]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Revenue Share' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Type", STRING,
+				    {
+				        {"Repeat"},
+				        {"One-Time"}
+				    }
+				)
+
+	annotation PBI_Id = ac44e6853cb8474cbdbcd2d510bd2e13
+

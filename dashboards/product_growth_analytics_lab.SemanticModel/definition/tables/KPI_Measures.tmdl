@@ -1,0 +1,1024 @@
+table KPI_Measures
+	lineageTag: cdcc393a-d32e-437a-b20d-cf04a6b54931
+
+	/// Total payment value (BRL) across all orders in the current filter context.
+	measure 'Total Revenue' = SUM ( 'Fact Payments'[Payment Value] )
+		formatString: "R$"#,0
+		displayFolder: Sales
+		lineageTag: d012c54f-b6f9-44a7-829d-1298b9ef1499
+
+	/// Distinct count of orders in the current filter context.
+	measure 'Total Orders' = DISTINCTCOUNT ( 'Fact Orders'[order_id] )
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: f7a7bce5-40e1-41ae-9dd9-42c7f73f8a6b
+
+	/// Distinct count of unique customers (customer_unique_id).
+	measure 'Total Customers' = DISTINCTCOUNT ( 'Dim Customers'[customer_unique_id] )
+		formatString: #,0
+		displayFolder: Customer
+		lineageTag: 974b88ca-f11d-4b71-9ff1-4d97cebfae1d
+
+	/// Total Revenue divided by Total Orders.
+	measure 'Average Order Value' = DIVIDE ( [Total Revenue], [Total Orders] )
+		formatString: "R$"#,0.00
+		displayFolder: Sales
+		lineageTag: ef308d0e-94b3-4833-8db3-0554b6de9b5a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Share of customers with more than one order.
+	measure 'Repeat Purchase Rate' =
+			
+			VAR CustomerPurchaseCounts =
+			    SUMMARIZE (
+			        NATURALINNERJOIN (
+			            'Fact Orders',
+			            'Dim Customers'
+			        ),
+			        'Dim Customers'[customer_unique_id],
+			        "PurchaseCount",
+			            DISTINCTCOUNT ( 'Fact Orders'[order_id] )
+			    )
+			
+			VAR RepeatCustomers =
+			    COUNTROWS (
+			        FILTER (
+			            CustomerPurchaseCounts,
+			            [PurchaseCount] > 1
+			        )
+			    )
+			
+			VAR TotalCustomers =
+			    COUNTROWS ( CustomerPurchaseCounts )
+			
+			RETURN
+			DIVIDE ( RepeatCustomers, TotalCustomers )
+		formatString: 0.0%
+		displayFolder: Customer
+		lineageTag: 523f3c47-fab9-48f4-af28-70ca05621106
+
+	/// Distinct customers active in the selected month.
+	measure 'Monthly Active Customers' =
+			
+			DISTINCTCOUNT('Dim Customers'[customer_unique_id])
+		formatString: #,0
+		displayFolder: Customer
+		lineageTag: cffe728c-9fd6-47f7-89ae-e0a90f1a618b
+
+	measure 'Product Revenue' =
+			
+			SUM ( 'Fact Order Items'[Product Price])
+		displayFolder: Sales
+		lineageTag: 5895ad82-8419-43e6-99b1-cdfeae5cd06e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Average number of orders per customer.
+	measure 'Orders per Customer' =
+			
+			DIVIDE(
+			    [Total Orders],
+			    [Total Customers]
+			)
+		formatString: 0.00
+		isHidden
+		displayFolder: Retention Analytics
+		lineageTag: de382418-a614-474d-9b92-6a768c70e1be
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total Revenue divided by Total Customers.
+	measure 'Revenue per Customer' =
+			
+			DIVIDE(
+			    [Total Revenue],
+			    [Total Customers]
+			)
+		formatString: "R$"#,0.00
+		displayFolder: Retention Analytics
+		lineageTag: bd7624e3-dcf8-4652-a3da-308bc4ce46b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Total Revenue divided by Total Orders.
+	measure 'Revenue per Order' =
+			
+			DIVIDE(
+			    [Total Revenue],
+			    [Total Orders]
+			)
+		formatString: "R$"#,0.00
+		isHidden
+		displayFolder: Retention Analytics
+		lineageTag: 399af071-4083-4e9e-8ce4-c01169cd1e9a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Ratio of unique customers to completed orders.
+	measure 'Customer Order Ratio' =
+			
+			DIVIDE(
+			    [Total Customers],
+			    [Total Orders]
+			)
+		isHidden
+		displayFolder: Retention Analytics
+		lineageTag: 477de5c3-2535-4dd9-b915-22ea2459084c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Repeat Customers' =
+			
+			VAR CustomerOrders =
+			    ADDCOLUMNS(
+			        VALUES('Dim Customers'[customer_unique_id]),
+			        "OrderCount",
+			            CALCULATE(
+			                DISTINCTCOUNT('Fact Orders'[order_id])
+			            )
+			    )
+			RETURN
+			COUNTROWS(
+			    FILTER(
+			        CustomerOrders,
+			        [OrderCount] > 1
+			    )
+			)
+		formatString: 0
+		displayFolder: Retention Analytics
+		lineageTag: d700aea6-8b0f-45ec-886d-242c9b99bfb9
+
+	measure 'One-Time Customers' =
+			
+			[Total Customers] - [Repeat Customers]
+		formatString: 0
+		isHidden
+		displayFolder: Retention Analytics
+		lineageTag: 58bf68f8-a9d0-4fb4-8245-0e270a4570fc
+
+		changedProperty = IsHidden
+
+	/// Repeat customers as a percentage of all customers.
+	measure 'Repeat Customer %' =
+			
+			DIVIDE(
+			    [Repeat Customers],
+			    [Total Customers]
+			)
+		formatString: 0.0%
+		displayFolder: Retention Analytics
+		lineageTag: b77e737a-77ef-420b-b756-476445a3488e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Repeat Customers (Monthly)' =
+			
+			VAR CurrentMonthEnd =
+			    MAX('Dim Date'[Date])
+			
+			RETURN
+			COUNTROWS(
+			    FILTER(
+			        VALUES('Dim Customers'[customer_unique_id]),
+			        CALCULATE(
+			            DISTINCTCOUNT('Fact Orders'[order_id]),
+			            FILTER(
+			                ALL('Dim Date'),
+			                'Dim Date'[Date] <= CurrentMonthEnd
+			            )
+			        ) > 1
+			    )
+			)
+		formatString: 0
+		displayFolder: Retention Analytics
+		lineageTag: 45e5d8e5-2eac-49bf-9436-5c9cf2cff09f
+
+	measure 'Repeat Orders' =
+			
+			VAR CustomerOrders =
+			    ADDCOLUMNS(
+			        VALUES('Dim Customers'[customer_unique_id]),
+			        "OrderCount",
+			            CALCULATE(
+			                DISTINCTCOUNT('Fact Orders'[order_id])
+			            )
+			    )
+			RETURN
+			SUMX(
+			    FILTER(CustomerOrders, [OrderCount] > 1),
+			    [OrderCount]
+			)
+		formatString: 0
+		displayFolder: Retention Analytics
+		lineageTag: 6ec6ab58-51cc-47c5-ad58-36a65276c324
+
+	measure 'Repeat Revenue' =
+			
+			VAR RepeatCustomerTable =
+			    FILTER(
+			        VALUES('Dim Customers'[customer_unique_id]),
+			        CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) > 1
+			    )
+			RETURN
+			CALCULATE(
+			    [Total Revenue],
+			    KEEPFILTERS(RepeatCustomerTable)
+			)
+		displayFolder: Retention Analytics
+		lineageTag: 2369819a-d270-4c67-87d5-79731b610063
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Repeat Revenue %' =
+			
+			DIVIDE(
+			    [Repeat Revenue],
+			    [Total Revenue]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Retention Analytics
+		lineageTag: 3e1df89b-248a-415d-b01f-2d99d06e34ed
+
+	measure 'Average Purchase Frequency' =
+			
+			DIVIDE(
+			    [Total Orders],
+			    [Total Customers]
+			)
+		displayFolder: Retention Analytics
+		lineageTag: 0a340b49-8c03-48d3-9605-a035a7c2a6de
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'One-Time Customer Revenue' =
+			
+			[Total Revenue] - [Repeat Revenue]
+		displayFolder: Customer Value
+		lineageTag: ba52a940-10b7-47d5-a36c-d66c24b4e784
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Repeat Customer Rate (Monthly)' =
+			
+			DIVIDE(
+			    [Repeat Customers (Monthly)],
+			    [Monthly Active Customers]
+			)
+		displayFolder: Retention Analytics
+		lineageTag: b0fdcb1d-248a-40be-913e-f0a9a35ec8e4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'One-Time Revenue %' =
+			
+			1 - [Repeat Revenue %]
+		displayFolder: Retention Analytics
+		lineageTag: 87b32b40-09dd-4ed7-bb78-30772c758c07
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue Share Value' =
+			
+			SWITCH(
+			    SELECTEDVALUE('Revenue Share'[Type]),
+			    "Repeat", [Repeat Revenue %],
+			    "One-Time", [One-Time Revenue %]
+			)
+		displayFolder: Retention Analytics
+		lineageTag: 1d80ef4d-1d6f-49ee-b039-baffbdc2de52
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Customers by Purchase Frequency' =
+			
+			VAR Bucket =
+			    SELECTEDVALUE('Purchase Frequency'[Bucket])
+			
+			RETURN
+			SWITCH(
+			    Bucket,
+			
+			    "1 Order",
+			        COUNTROWS(
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) = 1
+			            )
+			        ),
+			
+			    "2 Orders",
+			        COUNTROWS(
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) = 2
+			            )
+			        ),
+			
+			    "3 Orders",
+			        COUNTROWS(
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) = 3
+			            )
+			        ),
+			
+			    "4+ Orders",
+			        COUNTROWS(
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) >= 4
+			            )
+			        )
+			)
+		formatString: 0
+		displayFolder: Retention Analytics
+		lineageTag: 6c9c8374-f30d-4fff-879b-c422610f93f6
+
+	measure 'Customers by Purchase Frequency %' =
+			
+			DIVIDE(
+			    [Customers by Purchase Frequency],
+			    [Total Customers]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Retention Analytics
+		lineageTag: 89048b4b-1cc6-4a19-86b0-7ac7adbdc436
+
+	measure 'Revenue by Purchase Frequency' =
+			
+			VAR CurrentBucket =
+			    SELECTEDVALUE('Purchase Frequency'[Bucket])
+			
+			RETURN
+			SWITCH(
+			    CurrentBucket,
+			
+			    "1 Order",
+			        CALCULATE(
+			            [Total Revenue],
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) = 1
+			            )
+			        ),
+			
+			    "2 Orders",
+			        CALCULATE(
+			            [Total Revenue],
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) = 2
+			            )
+			        ),
+			
+			    "3 Orders",
+			        CALCULATE(
+			            [Total Revenue],
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) = 3
+			            )
+			        ),
+			
+			    "4+ Orders",
+			        CALCULATE(
+			            [Total Revenue],
+			            FILTER(
+			                VALUES('Dim Customers'[customer_unique_id]),
+			                CALCULATE(DISTINCTCOUNT('Fact Orders'[order_id])) >= 4
+			            )
+			        )
+			)
+		displayFolder: Purchase Frequency
+		lineageTag: 7ee0d2a7-6c9d-4aa0-a371-670404beb5ff
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Revenue per Repeat Customer' =
+			
+			DIVIDE(
+			    [Repeat Revenue],
+			    [Repeat Customers]
+			)
+		displayFolder: Customer Value
+		lineageTag: 00a8eb7b-6297-4fff-863c-068f730024a7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Revenue per One-Time Customer' =
+			
+			DIVIDE(
+			    [One-Time Customer Revenue],
+			    [One-Time Customers]
+			)
+		displayFolder: Customer Value
+		lineageTag: 8de9aef7-b680-4568-8915-168daf433dd6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue Lift' =
+			
+			DIVIDE(
+			    [Average Revenue per Repeat Customer],
+			    [Average Revenue per One-Time Customer]
+			)
+		displayFolder: Customer Value
+		lineageTag: ded5d4ab-c7cf-435e-bd9e-686ef872c138
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Customer Revenue' =
+			
+			[Revenue per Customer]
+		displayFolder: Customer Value
+		lineageTag: 8da06465-24ca-4241-8093-a5b0e325d159
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Top 10 Percent Customers' =
+			
+			ROUNDUP(
+			    [Total Customers] * 0.1,
+			    0
+			)
+		displayFolder: Customer Value
+		lineageTag: 9b5ebdb7-98b0-4d61-baf2-dd7c158b66cf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Customer Revenue' =
+			
+			[Total Revenue]
+		displayFolder: Customer
+		lineageTag: 804dcfd3-09f4-4acf-9eed-faa491f2575d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Customer Orders' =
+			
+			DISTINCTCOUNT('Fact Orders'[order_id])
+		formatString: 0
+		displayFolder: Customer
+		lineageTag: 57a60767-f9f8-42b1-a8d3-3cf2ffb4c511
+
+	measure 'Customer Average Order Value' =
+			
+			DIVIDE(
+			    [Customer Revenue],
+			    [Customer Orders]
+			)
+		displayFolder: Customer
+		lineageTag: d9d4e74c-13cf-4a87-9a83-050b0abc57ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Customer Revenue Rank' =
+			
+			RANKX(
+			    ALL('Dim Customers'[customer_unique_id]),
+			    [Customer Revenue],
+			    ,
+			    DESC,
+			    DENSE
+			)
+		formatString: 0
+		displayFolder: Customer Value
+		lineageTag: 156fe5b5-b8bc-4fe6-9b1d-97addfca8dba
+
+	measure 'Total Cohorts' =
+			
+			DISTINCTCOUNT('public customer_cohorts'[cohort_month])
+		formatString: 0
+		displayFolder: Retention Cohorts
+		lineageTag: dab11991-f229-428f-948b-913ac16c90ea
+
+	measure 'Average Month 1 Retention' =
+			
+			VAR Month1 =
+			    FILTER(
+			        'public customer_cohorts',
+			        'public customer_cohorts'[month_number] = 1
+			    )
+			
+			RETURN
+			DIVIDE(
+			    SUMX(Month1, 'public customer_cohorts'[active_customers]),
+			    SUMX(Month1, 'public customer_cohorts'[cohort_size])
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Retention Cohorts
+		lineageTag: 27ad3f86-74a8-4d16-90dc-6f080d7b6a15
+
+	measure 'Best Cohort Retention' =
+			
+			CALCULATE(
+			    MAX('public customer_cohorts'[retention_rate]),
+			    'public customer_cohorts'[month_number] = 1,
+			    'public customer_cohorts'[cohort_size] >= 100
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Retention Cohorts
+		lineageTag: f42d391c-8274-4665-b967-4ac4a4314577
+
+	measure 'Longest Active Cohort' =
+			
+			MAX('public customer_cohorts'[month_number])
+		formatString: 0
+		displayFolder: Retention Cohorts
+		lineageTag: efa13597-87ae-474b-957d-2ec69de6cbd2
+
+	measure 'CV Total Revenue' =
+			
+			SUM('public customer_value_mart'[total_revenue])
+		displayFolder: Customer Value
+		lineageTag: 576c7026-f411-430b-8135-f1c8748ae3e5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CV Average Orders Per Customer' =
+			
+			AVERAGE('public customer_value_mart'[total_orders])
+		displayFolder: Customer Value
+		lineageTag: cec6123c-64b9-4af4-8dc8-92a4707e673d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CV High Value Customers' =
+			
+			CALCULATE(
+			    COUNTROWS('public customer_value_mart'),
+			    'public customer_value_mart'[customer_value_segment] = "High Value"
+			)
+		formatString: 0
+		displayFolder: Customer Value
+		lineageTag: 5a16bb72-d874-4d13-8e48-564bd987b87e
+
+	measure 'CV High Value Customer %' =
+			
+			DIVIDE(
+			    [CV High Value Customers],
+			    COUNTROWS('public customer_value_mart')
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Customer Value
+		lineageTag: 5f7df652-160e-4623-ac4b-f12c4522c20d
+
+	measure 'CV Average Order Value' =
+			
+			AVERAGE('public customer_value_mart'[avg_order_value])
+		displayFolder: Customer Value
+		lineageTag: 091750c8-bccd-4ee4-9ee9-81ab13f85943
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Total Revenue' =
+			
+			SUM('public marketing_roi_mart'[total_revenue])
+		displayFolder: Marketing Performance
+		lineageTag: 36cdc010-6beb-4e3a-b439-904b27c620bd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Average LTV' =
+			
+			AVERAGE('public marketing_roi_mart'[estimated_ltv])
+		displayFolder: Marketing Performance
+		lineageTag: 9cebea9e-f78a-46d3-937d-d3a34a2787ad
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Average Order Value' =
+			
+			AVERAGE('public marketing_roi_mart'[avg_order_value])
+		displayFolder: Marketing Performance
+		lineageTag: e167b17a-ac66-4bcc-bd57-bb5bedc322ef
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Total Customers' =
+			
+			DISTINCTCOUNT('public marketing_roi_mart'[customer_id])
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: a4a794b8-2b88-4bcd-8f32-022654836faf
+
+	measure 'MP Convert Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public marketing_roi_mart'[customer_id]),
+			    'public marketing_roi_mart'[marketing_priority] = "Convert"
+			)
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: 19c17300-523e-46c8-bc85-b5927ab1ee5e
+
+	measure 'MP Convert %' =
+			
+			DIVIDE(
+			    [MP Convert Customers],
+			    [MP Total Customers]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Marketing Performance
+		lineageTag: 3b0a0c98-cc07-4fa5-90c1-84a43d014610
+
+	measure 'MP Low Priority Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public marketing_roi_mart'[customer_id]),
+			    'public marketing_roi_mart'[marketing_priority] = "Low Priority"
+			)
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: e3df5e49-b7aa-430d-a452-1f567823e70e
+
+	measure 'MP Nurture Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public marketing_roi_mart'[customer_id]),
+			    'public marketing_roi_mart'[marketing_priority] = "Nurture"
+			)
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: efc02ca6-4070-4cec-8df2-146bec9601e9
+
+	measure 'MP Nurture %' =
+			
+			DIVIDE(
+			    [MP Nurture Customers],
+			    [MP Total Customers]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Marketing Performance
+		lineageTag: 33440c1f-baea-4256-986d-9199da6524db
+
+	measure 'MP Low Priority %' =
+			
+			DIVIDE(
+			    [MP Low Priority Customers],
+			    [MP Total Customers]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Marketing Performance
+		lineageTag: b8aa40f1-82f2-4d36-977c-c3e61e15a723
+
+	measure 'MP Convert Revenue' =
+			
+			CALCULATE(
+			    SUM('public marketing_roi_mart'[total_revenue]),
+			    'public marketing_roi_mart'[marketing_priority] = "Convert"
+			)
+		displayFolder: Marketing Performance
+		lineageTag: af2684ff-c2b3-4625-850b-37e9f6995a04
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Nurture Revenue' =
+			
+			CALCULATE(
+			    SUM('public marketing_roi_mart'[total_revenue]),
+			    'public marketing_roi_mart'[marketing_priority] = "Nurture"
+			)
+		displayFolder: Marketing Performance
+		lineageTag: 0e51a8ca-5b49-4fec-aa5f-0ea3eae99be9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Low Priority Revenue' =
+			
+			CALCULATE(
+			    SUM('public marketing_roi_mart'[total_revenue]),
+			    'public marketing_roi_mart'[marketing_priority] = "Low Priority"
+			)
+		displayFolder: Marketing Performance
+		lineageTag: 71c221c9-ffa2-48c0-94a4-97fcd589d519
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Average Revenue' =
+			
+			AVERAGE('public marketing_roi_mart'[total_revenue])
+		displayFolder: Marketing Performance
+		lineageTag: 98ac23e1-dc5f-4b4b-8299-229f99efcf8f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP High Value Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public marketing_roi_mart'[customer_id]),
+			    'public marketing_roi_mart'[customer_value_segment] = "High Value"
+			)
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: dc7bca4a-bfcb-4202-a9a2-ed8ed11a1b9c
+
+	measure 'MP Revenue Rank' =
+			
+			MAX('public marketing_roi_mart'[revenue_percentile])
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: 64a7af4c-639d-4940-8c82-6d373456b6d4
+
+	measure 'MP Highest LTV' =
+			
+			MAX('public marketing_roi_mart'[estimated_ltv])
+		displayFolder: Marketing Performance
+		lineageTag: b23d6005-a5c6-484e-afce-502fe2ebafd7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Median LTV' =
+			
+			MEDIAN('public marketing_roi_mart'[estimated_ltv])
+		displayFolder: Marketing Performance
+		lineageTag: 4b8709ab-acea-4ca9-82d2-49aa21721c00
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Average Lifetime Days' =
+			
+			AVERAGE('public marketing_roi_mart'[customer_lifetime_days])
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: 052d6b16-e38a-465f-bc42-96601bb3ab3d
+
+	measure 'MP Average Days Since Last Purchase' =
+			
+			AVERAGE('public marketing_roi_mart'[days_since_last_purchase])
+		displayFolder: Marketing Performance
+		lineageTag: c5810e1e-ff18-4ec7-975a-3410a9425b20
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Average Purchase Frequency' =
+			
+			AVERAGE('public marketing_roi_mart'[purchase_frequency])
+		displayFolder: Marketing Performance
+		lineageTag: 4d14826d-e7b5-448b-99a3-8e4a4b8b8938
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Max Purchase Frequency' =
+			
+			MAX('public marketing_roi_mart'[purchase_frequency])
+		displayFolder: Marketing Performance
+		lineageTag: cf0f123e-6a47-46ee-a26f-814f99d6b979
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP Inactive Customers >180 Days' =
+			
+			CALCULATE(
+			    COUNTROWS('public marketing_roi_mart'),
+			    'public marketing_roi_mart'[days_since_last_purchase] > 180
+			)
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: 0e2506a5-1cf6-47e1-8873-526941cd0015
+
+	measure 'MP High LTV Customers' =
+			
+			CALCULATE(
+			    COUNTROWS('public marketing_roi_mart'),
+			    'public marketing_roi_mart'[estimated_ltv]
+			        > AVERAGE('public marketing_roi_mart'[estimated_ltv])
+			)
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: cd59c746-8add-4ecd-8853-d94e412c5083
+
+	measure 'MP High LTV %' =
+			
+			DIVIDE(
+			    [MP High LTV Customers],
+			    [MP Total Customers]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Marketing Performance
+		lineageTag: 2022ba1a-d64c-41ff-835f-b759d1101c0c
+
+	measure 'MP Total Lifetime Days' =
+			
+			SUM('public marketing_roi_mart'[customer_lifetime_days])
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: 702b20a6-03b9-4d94-8022-0c3022ac0bea
+
+	measure 'MP Top Revenue Customer' =
+			
+			MAX('public marketing_roi_mart'[total_revenue])
+		displayFolder: Marketing Performance
+		lineageTag: b07e053d-9f7f-40a0-befd-aa6e218e0759
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MP High LTV Target' = 40
+		formatString: 0
+		displayFolder: Marketing Performance
+		lineageTag: d145e6b2-bf3f-44da-8012-0bbd16dd449e
+
+	measure 'MP Primary Investment' =
+			
+			VAR TopPriority =
+			    TOPN(
+			        1,
+			        SUMMARIZE(
+			            'public marketing_roi_mart',
+			            'public marketing_roi_mart'[marketing_priority],
+			            "Revenue", SUM('public marketing_roi_mart'[total_revenue])
+			        ),
+			        [Revenue], DESC
+			    )
+			RETURN
+			    MAXX(TopPriority, 'public marketing_roi_mart'[marketing_priority])
+		displayFolder: Marketing Performance
+		lineageTag: c73e0fda-d1f6-411e-b72f-fb194c6a3132
+
+	measure 'CS Total Customers' =
+			
+			DISTINCTCOUNT('public customer_segmentation_mart'[customer_unique_id])
+		formatString: 0
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: e1f0e964-ddaa-4b7e-a83c-59990a1b304c
+
+	measure 'CS Total Revenue' =
+			
+			SUM('public customer_segmentation_mart'[total_revenue])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 79112a12-6034-48e9-bf24-f8431859b36e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Average Customer Revenue' =
+			
+			AVERAGE('public customer_segmentation_mart'[total_revenue])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: ea364040-2b89-4efa-810a-9ddf9452ab24
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Average Customer Revenues' =
+			
+			AVERAGE('public customer_segmentation_mart'[total_revenue])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 4ee47b83-a521-463b-93aa-7237985f2e74
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Average Estimated LTV' =
+			
+			AVERAGE('public customer_segmentation_mart'[estimated_ltv])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 3a4161f1-b7d1-4993-8e17-b55bbf03cb3c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Average Order Value' =
+			
+			AVERAGE('public customer_segmentation_mart'[avg_order_value])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 57b8549f-4e71-4fb2-bc00-5c8cd63cf35d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Total Orders' =
+			
+			SUM('public customer_segmentation_mart'[total_orders])
+		formatString: 0
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: cd4eaa3a-c659-40d2-8820-fb39d0d3f2b6
+
+	measure 'CS Average Purchase Frequency' =
+			
+			AVERAGE('public customer_segmentation_mart'[purchase_frequency])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 8a372eb7-470b-47f4-b252-006dcc132091
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Average Customer Lifetime' =
+			
+			AVERAGE('public customer_segmentation_mart'[customer_lifetime_days])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 88e5412d-4df6-449f-9a82-fdf0e6fe4082
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Average Days Since Last Purchase' =
+			
+			AVERAGE('public customer_segmentation_mart'[days_since_last_purchase])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 967c05e2-5e55-4da5-b947-c51eae5b4011
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Revenue per Order' =
+			
+			DIVIDE(
+			    [CS Total Revenue],
+			    [CS Total Orders]
+			)
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: d942ce3d-a147-42a7-b30f-b7d6c98043d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Highest Estimated LTV' =
+			
+			MAX('public customer_segmentation_mart'[estimated_ltv])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 9b541807-6f8f-4caa-afde-c1f3015eafbf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Median Estimated LTV' =
+			
+			MEDIAN('public customer_segmentation_mart'[estimated_ltv])
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 5173bd1f-d4c9-4e3c-a613-5a4d79f5bbd7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CS Active Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public customer_segmentation_mart'[customer_unique_id]),
+			    'public customer_segmentation_mart'[engagement_status] = "Active"
+			)
+		formatString: 0
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 5d9d4f8c-5983-47e8-82d5-1d779c521e9b
+
+	measure 'CS At Risk Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public customer_segmentation_mart'[customer_unique_id]),
+			    'public customer_segmentation_mart'[engagement_status] = "At Risk"
+			)
+		formatString: 0
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 1de3bb1a-e537-4261-91b2-6b0c3f25d564
+
+	measure 'CS Dormant Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public customer_segmentation_mart'[customer_unique_id]),
+			    'public customer_segmentation_mart'[engagement_status] = "Dormant"
+			)
+		formatString: 0
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: b3e6bed1-e49b-45be-b72b-4275b067aad0
+
+	measure 'CS Premium Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public customer_segmentation_mart'[customer_unique_id]),
+			    'public customer_segmentation_mart'[spending_band] = "Premium"
+			)
+		formatString: 0
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: 0141cb75-c94c-4ddb-b9a1-2ceb982110fb
+
+	measure 'CS High Frequency Customers' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('public customer_segmentation_mart'[customer_unique_id]),
+			    'public customer_segmentation_mart'[purchase_frequency_band] = "High Frequency"
+			)
+		formatString: 0
+		displayFolder: Customer Segmentation Metrics
+		lineageTag: aa539da6-f6b5-4026-9089-fbde5a1d183e
+
+	column _Measures
+		dataType: string
+		isHidden
+		lineageTag: 72adaabc-e80b-4d95-80f5-f0218c94fc11
+		summarizeBy: none
+		sourceColumn: _Measures
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI_Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "_Measures"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

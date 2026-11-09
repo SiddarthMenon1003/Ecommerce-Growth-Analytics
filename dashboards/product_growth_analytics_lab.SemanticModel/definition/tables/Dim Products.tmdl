@@ -1,0 +1,101 @@
+table 'Dim Products'
+	lineageTag: c9b3ca84-61cf-496d-8a00-71ded74ac75f
+
+	column product_id
+		dataType: string
+		isHidden
+		lineageTag: 75f47048-a7af-401f-8a4e-a02900ec572a
+		summarizeBy: none
+		sourceColumn: product_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: ec27e5d3-49d8-4f34-b872-634e277a131e
+		summarizeBy: none
+		sourceColumn: Product Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Name Length'
+		dataType: int64
+		formatString: 0
+		lineageTag: 91b1e68f-5c87-4100-95e6-aa922c5c1819
+		summarizeBy: none
+		sourceColumn: Name Length
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Description Length'
+		dataType: int64
+		formatString: 0
+		lineageTag: 74636d5f-b22f-42a6-9e3b-5410d8595255
+		summarizeBy: none
+		sourceColumn: Description Length
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Photo Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a38ed1f-0e5c-425f-b724-92243334cccb
+		summarizeBy: none
+		sourceColumn: Photo Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weight (g)'
+		dataType: double
+		lineageTag: 9f93ddbe-968d-41ce-8027-c458aa36d37e
+		summarizeBy: none
+		sourceColumn: Weight (g)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Length (cm)'
+		dataType: double
+		lineageTag: c530eabb-c0ff-4bbb-9199-d5109615afd7
+		summarizeBy: none
+		sourceColumn: Length (cm)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Height (cm)'
+		dataType: double
+		lineageTag: 2da04533-d1f3-4c81-9cd7-0daf571151b6
+		summarizeBy: none
+		sourceColumn: Height (cm)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Width (cm)'
+		dataType: double
+		lineageTag: 84b9b5aa-05d3-43c4-bc04-3a6d9c6d59a4
+		summarizeBy: none
+		sourceColumn: Width (cm)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Dim Products' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_dim_products = Source{[Schema="public",Item="dim_products"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(public_dim_products,{{"product_category_name", "Product Category"}, {"product_weight_g", "Weight (g)"}, {"product_length_cm", "Length (cm)"}, {"product_height_cm", "Height (cm)"}, {"product_width_cm", "Width (cm)"}, {"product_photos_qty", "Photo Count"}, {"product_description_length", "Description Length"}, {"product_name_length", "Name Length"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

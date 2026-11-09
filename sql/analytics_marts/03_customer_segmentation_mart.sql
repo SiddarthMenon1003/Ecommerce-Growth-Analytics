@@ -1,3 +1,7 @@
+-- Grain: ONE ROW PER customer_unique_id (true customer).
+-- Fixed 2026-11-04: previously grouped on order-scoped customer_id, collapsing every
+-- customer to one-time. Now aggregates across all orders per customer_unique_id.
+-- PBI: relate to Dim Customers on customer_unique_id (not customer_id).
 DROP TABLE IF EXISTS customer_segmentation_mart;
 CREATE TABLE customer_segmentation_mart AS
 WITH dataset_max_date AS (
@@ -7,7 +11,6 @@ WITH dataset_max_date AS (
 ),
 customer_orders AS (
     SELECT
-        dc.customer_id,
         dc.customer_unique_id,
         fo.order_id,
         fo.order_purchase_timestamp,
@@ -20,7 +23,6 @@ customer_orders AS (
 ),
 customer_metrics AS (
     SELECT
-        customer_id,
         customer_unique_id,
         COUNT(DISTINCT order_id) AS total_orders,
         ROUND(SUM(payment_value)::numeric,2) AS total_revenue,
@@ -29,7 +31,6 @@ customer_metrics AS (
         MAX(order_purchase_timestamp) AS last_purchase_date
     FROM customer_orders
     GROUP BY
-        customer_id,
         customer_unique_id
 ),
 customer_enriched AS (
@@ -82,7 +83,6 @@ segmentation_metrics AS (
     FROM customer_enriched
 )
 SELECT
-    customer_id,
     customer_unique_id,
     total_orders,
     total_revenue,

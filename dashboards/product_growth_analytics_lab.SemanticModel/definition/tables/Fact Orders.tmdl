@@ -1,0 +1,130 @@
+table 'Fact Orders'
+	lineageTag: 0e728658-4ddd-45f6-83c7-6e74417782db
+
+	column order_id
+		dataType: string
+		lineageTag: 3e08b7d4-90fc-48b4-9b8a-e20e42d6e352
+		summarizeBy: none
+		sourceColumn: order_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		isHidden
+		lineageTag: e338496a-ef1a-4048-9a87-a32ae6a332d3
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Status'
+		dataType: string
+		lineageTag: 93c7b28f-9130-411c-bfd5-ffd9c11695d2
+		summarizeBy: none
+		sourceColumn: Order Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_purchase_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 61cc8910-9a1b-481f-9d23-14c3d7a76b4a
+		summarizeBy: none
+		sourceColumn: order_purchase_timestamp
+
+		variation Variation
+			isDefault
+			relationship: b9397af5-8569-4264-820f-846be10cde3c
+			defaultHierarchy: LocalDateTable_a6e299c5-3a98-41d4-9d86-b9f23f29e178.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Approved Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6c350967-f129-4dc1-aa07-83afaebe91b6
+		summarizeBy: none
+		sourceColumn: Order Approved Date
+
+		variation Variation
+			isDefault
+			relationship: c7b98426-a6fa-4b15-b7e5-2032f8571f39
+			defaultHierarchy: LocalDateTable_9c82418a-0dcd-4942-bbe1-f5ed036d1ef3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_delivered_carrier_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: df511f3b-25d1-4a10-8f8a-5a8b54cb2225
+		summarizeBy: none
+		sourceColumn: order_delivered_carrier_date
+
+		variation Variation
+			isDefault
+			relationship: eb17968e-3ff2-44e3-a591-209c36343251
+			defaultHierarchy: LocalDateTable_923f44b3-a4c7-43f0-b302-f4092c0d7ddd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b8f4da7a-4c00-40b7-96c7-c646feae603d
+		summarizeBy: none
+		sourceColumn: Delivery Date
+
+		variation Variation
+			isDefault
+			relationship: b88b9d1f-4c00-4207-9f3a-39815f00f294
+			defaultHierarchy: LocalDateTable_62502698-68ee-4b15-bb2c-2681f2deb11c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimated Delivery Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ddeec2fb-7f1b-44ba-92aa-06472fe7dad2
+		summarizeBy: none
+		sourceColumn: Estimated Delivery Date
+
+		variation Variation
+			isDefault
+			relationship: 56c98044-68d4-4b75-b345-348c94f88428
+			defaultHierarchy: LocalDateTable_c1091816-7217-4957-ab9a-c8da48c704f3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date' =
+			
+			DATEVALUE ( 'Fact Orders'[order_purchase_timestamp] )
+		isHidden
+		formatString: Short Date
+		lineageTag: 32a14e51-6019-4dd2-b641-b77660810ccb
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Fact Orders' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_fact_orders = Source{[Schema="public",Item="fact_orders"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(public_fact_orders,{{"order_status", "Order Status"}, {"order_approved_at", "Order Approved Date"}, {"order_delivered_customer_date", "Delivery Date"}, {"order_estimated_delivery_date", "Estimated Delivery Date"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

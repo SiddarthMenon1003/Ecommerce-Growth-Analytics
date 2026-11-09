@@ -1,0 +1,111 @@
+table 'Dim Date'
+	lineageTag: 7389fa58-750f-4d14-a6f8-b986088a2e69
+
+	column Date
+		formatString: General Date
+		lineageTag: 1dba6594-594c-459f-96e1-fbe28997db4f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 7083a8f7-ad09-4574-b6ce-dacdd3955803
+			defaultHierarchy: LocalDateTable_bb8f912a-9332-4d26-b3b9-460bb6552226.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year =
+			
+			YEAR ( 'Dim Date'[Date] )
+		formatString: 0
+		lineageTag: a6caa2a7-7c14-4f54-b601-4c3f4206a7de
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number' =
+			
+			MONTH ( 'Dim Date'[Date] )
+		isHidden
+		formatString: 0
+		lineageTag: 78e7062c-9a63-4ede-96e9-bd738470ae96
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name' =
+			
+			FORMAT ( 'Dim Date'[Date], "MMM" )
+		lineageTag: b8a0c073-df73-48c8-9e1d-639610e674fc
+		summarizeBy: none
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter =
+			
+			"Q" & FORMAT ( 'Dim Date'[Date], "Q" )
+		lineageTag: cd5583ba-e8e6-4e33-95f4-44bad2f46569
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month' =
+			
+			FORMAT ( 'Dim Date'[Date], "YYYY-MM" )
+		lineageTag: f53108a4-c592-4ae5-bd34-9158573a8f07
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year' =
+			
+			FORMAT ( 'Dim Date'[Date], "MMM YYYY" )
+		lineageTag: c799c9ed-cabc-474d-942f-a1207d5e393d
+		summarizeBy: none
+		sortByColumn: 'Month Year Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year Sort' =
+			
+			YEAR ( 'Dim Date'[Date] ) * 100
+			    + MONTH ( 'Dim Date'[Date] )
+		isHidden
+		formatString: 0
+		lineageTag: 033e40e9-8da4-42ed-8e28-25d6d605aec5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Calendar
+		lineageTag: 3ef321bd-a857-4d13-b82d-91f9b1029f40
+
+		level Year
+			lineageTag: ddcd68cd-a1f5-4360-96d9-d4de145838dd
+			column: Year
+
+		level Quarter
+			lineageTag: ea539517-2125-48a0-8620-4e0d0c8f6d84
+			column: Quarter
+
+		level 'Month Name'
+			lineageTag: f2bdb8f9-0671-4a19-98bb-3cd05d2822fc
+			column: 'Month Name'
+
+		level Date
+			lineageTag: 35e8492c-c4cf-41fc-bbb1-942474df00ee
+			column: Date
+
+	partition 'Dim Date' = calculated
+		mode: import
+		source =
+				
+				CALENDAR (
+				    MIN ( 'Fact Orders'[order_purchase_timestamp] ),
+				    MAX ( 'Fact Orders'[order_purchase_timestamp] )
+				)
+
+	annotation PBI_Id = e94ee5f6e26945b7a467b97e88a2bd57
+

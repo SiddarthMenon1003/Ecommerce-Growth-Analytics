@@ -1,0 +1,81 @@
+table 'Dim Customers'
+	lineageTag: eed67031-b0de-4884-aeca-e44b34fd2f7b
+
+	column customer_id
+		dataType: string
+		lineageTag: 94d3fd50-78f6-4c33-ba3d-46334e9507db
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: bb3ae341-f15c-440a-9a9f-99d0cdef111f
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ZIP Prefix'
+		dataType: int64
+		formatString: 0
+		lineageTag: d967ab61-731e-4ed0-a5a6-42b61459f4ef
+		summarizeBy: sum
+		sourceColumn: ZIP Prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer City'
+		dataType: string
+		lineageTag: ad68e2c4-042d-4bda-84ed-dd9449a80955
+		summarizeBy: none
+		sourceColumn: Customer City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer State'
+		dataType: string
+		lineageTag: 7d42c3af-efaf-46b8-a83e-8ea6e0387d6f
+		summarizeBy: none
+		sourceColumn: Customer State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Short ID' =
+			
+			"C-" & RIGHT('Dim Customers'[customer_unique_id], 6)
+		lineageTag: 892fcc9d-0c65-4d17-9c7e-997131318308
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Location
+		lineageTag: bd6a602e-f0f9-428a-9525-6ed97c6fb634
+
+		level 'Customer State'
+			lineageTag: cb97172f-bf98-4bec-9b4c-e43ffd828d47
+			column: 'Customer State'
+
+		level 'Customer City'
+			lineageTag: bc3b7661-fc7a-48c9-ad97-16c878cd208a
+			column: 'Customer City'
+
+	partition 'Dim Customers' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_dim_customers = Source{[Schema="public",Item="dim_customers"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(public_dim_customers,{{"customer_city", "Customer City"}, {"customer_state", "Customer State"}, {"customer_zip_code_prefix", "ZIP Prefix"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

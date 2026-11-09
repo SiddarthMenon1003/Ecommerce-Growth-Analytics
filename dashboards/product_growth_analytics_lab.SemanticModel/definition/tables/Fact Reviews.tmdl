@@ -1,0 +1,92 @@
+table 'Fact Reviews'
+	lineageTag: b7d5c33d-22e9-45b5-ab89-0d72c2f5838a
+
+	column review_id
+		dataType: string
+		isHidden
+		lineageTag: 70608027-10a1-4cef-8d66-c6c0ea66e580
+		summarizeBy: none
+		sourceColumn: review_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		isHidden
+		lineageTag: 0ff38863-9ff5-44bd-b6d3-8dc45ecf2d28
+		summarizeBy: none
+		sourceColumn: order_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Review Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: aa7d38c1-1ce7-4823-a229-8ffa62f9b042
+		summarizeBy: sum
+		sourceColumn: Review Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Review Title'
+		dataType: string
+		lineageTag: 1abf1dd1-bce5-4d22-a8fb-e626934690f4
+		summarizeBy: none
+		sourceColumn: Review Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Review Comment'
+		dataType: string
+		lineageTag: 6c4c3113-345b-4d54-a381-cd4828ba66e4
+		summarizeBy: none
+		sourceColumn: Review Comment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Review Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b0044029-33b8-4fa4-8f43-246e41cb2770
+		summarizeBy: none
+		sourceColumn: Review Date
+
+		variation Variation
+			isDefault
+			relationship: 8f344a50-6779-4ca3-95fc-110a3df4a536
+			defaultHierarchy: LocalDateTable_8fb1d1ba-67e0-4677-b614-5c7d0b75525d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_answer_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5794d016-8f4e-4e6e-9ca6-30f217f5bbce
+		summarizeBy: none
+		sourceColumn: review_answer_timestamp
+
+		variation Variation
+			isDefault
+			relationship: 3fa4e1d7-03c4-4326-ae41-01459ce7746d
+			defaultHierarchy: LocalDateTable_3e1d9940-a86d-4800-a0e9-5eba103ebbe9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fact Reviews' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_fact_reviews = Source{[Schema="public",Item="fact_reviews"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(public_fact_reviews,{{"review_score", "Review Score"}, {"review_creation_date", "Review Date"}, {"review_comment_title", "Review Title"}, {"review_comment_message", "Review Comment"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

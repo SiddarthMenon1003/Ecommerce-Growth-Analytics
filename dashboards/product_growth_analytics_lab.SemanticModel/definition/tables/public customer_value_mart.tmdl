@@ -1,0 +1,143 @@
+table 'public customer_value_mart'
+	lineageTag: eb21ef2d-6b70-4c64-9410-08dda838fd5d
+
+	column customer_id
+		dataType: string
+		lineageTag: 0e560850-94d8-4daa-a516-5ffafa6023da
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: c427cf61-11e5-4b14-895a-bcda972b1d94
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 77761c31-4d37-4fa1-9656-cee481f49412
+		summarizeBy: sum
+		sourceColumn: total_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_revenue
+		dataType: double
+		lineageTag: b09ab0a2-8b86-4ad5-8624-7fbace54dceb
+		summarizeBy: sum
+		sourceColumn: total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_order_value
+		dataType: double
+		lineageTag: 17b7e378-4d87-42cd-9471-ddb7d116d4f6
+		summarizeBy: sum
+		sourceColumn: avg_order_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column first_purchase_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 12b2a89f-3e0a-49f0-8350-41e7821b5a32
+		summarizeBy: none
+		sourceColumn: first_purchase_date
+
+		variation Variation
+			isDefault
+			relationship: 058d808e-f7e8-4d2f-954b-e44fa137f661
+			defaultHierarchy: LocalDateTable_e4300712-1655-4216-8c4c-de23b73c884f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_purchase_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8d973f59-adf8-487c-ac68-a8fac457594f
+		summarizeBy: none
+		sourceColumn: last_purchase_date
+
+		variation Variation
+			isDefault
+			relationship: b3e60b8a-3332-45ed-925a-319151a9a6c7
+			defaultHierarchy: LocalDateTable_47a49fb3-21ca-4343-8ac0-2c594cf9af0d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_lifetime_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 692f0311-0166-4f1f-bb8c-3ea3a1056d8c
+		summarizeBy: sum
+		sourceColumn: customer_lifetime_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_purchase
+		dataType: int64
+		formatString: 0
+		lineageTag: 8de4f457-3b9e-4cb4-8264-03ba2aa709a9
+		summarizeBy: sum
+		sourceColumn: days_since_last_purchase
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_frequency
+		dataType: double
+		lineageTag: a2fbe593-b9bc-499f-9045-4d6c0e5c40f7
+		summarizeBy: sum
+		sourceColumn: purchase_frequency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue_rank
+		dataType: int64
+		formatString: 0
+		lineageTag: d27dc4da-c5e6-41c7-ba9d-27f07465b367
+		summarizeBy: sum
+		sourceColumn: revenue_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_percentile
+		dataType: int64
+		formatString: 0
+		lineageTag: c11ab552-9458-4a66-9dea-5c43159b5f2d
+		summarizeBy: sum
+		sourceColumn: revenue_percentile
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_value_segment
+		dataType: string
+		lineageTag: f237965c-1cc6-463e-8941-5c7e84b0a096
+		summarizeBy: none
+		sourceColumn: customer_value_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public customer_value_mart' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_customer_value_mart = Source{[Schema="public",Item="customer_value_mart"]}[Data]
+				in
+				    public_customer_value_mart
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

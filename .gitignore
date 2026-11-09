@@ -17,3 +17,8 @@ data/raw/
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Power BI (PBIP) local/cache artifacts
+*.abf
+**/.pbi/cache.abf
+**/.pbi/localSettings.json

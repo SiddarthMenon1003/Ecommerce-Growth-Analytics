@@ -1,0 +1,94 @@
+table 'Fact Order Items'
+	lineageTag: 537202ed-1236-4726-ba29-1fca0e3baca6
+
+	column order_id
+		dataType: string
+		isHidden
+		lineageTag: 1539bb45-5d10-405d-af93-7dbddeec2e61
+		summarizeBy: none
+		sourceColumn: order_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_item_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 20451847-ebcd-4b0f-b5f1-0065ada7d3b8
+		summarizeBy: sum
+		sourceColumn: order_item_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		isHidden
+		lineageTag: 04772a23-cb67-4fde-91fa-787a593b46fc
+		summarizeBy: none
+		sourceColumn: product_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_id
+		dataType: string
+		isHidden
+		lineageTag: 0ff0bf87-e533-4589-a1b8-041b20a6e1e2
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipping Deadline'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: eb3e6b71-4ea3-490f-af0d-f0d60e4c2b14
+		summarizeBy: none
+		sourceColumn: Shipping Deadline
+
+		variation Variation
+			isDefault
+			relationship: 224f7b60-44f8-4eb9-a679-2575a1278ad1
+			defaultHierarchy: LocalDateTable_89e1e87f-4bb3-4971-ae80-0d69028e02ad.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Price'
+		dataType: double
+		lineageTag: ba34c3d0-326a-4c28-b969-bda205781895
+		summarizeBy: sum
+		sourceColumn: Product Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Freight Cost'
+		dataType: double
+		lineageTag: 672e55ca-bba9-417f-bebe-f6b756804e35
+		summarizeBy: sum
+		sourceColumn: Freight Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Fact Order Items' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_fact_order_items = Source{[Schema="public",Item="fact_order_items"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(public_fact_order_items,{{"price", "Product Price"}, {"freight_value", "Freight Cost"}, {"shipping_limit_date", "Shipping Deadline"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

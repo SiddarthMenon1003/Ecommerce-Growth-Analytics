@@ -19,7 +19,7 @@ FROM marketing_roi_mart;
 SELECT
     COUNT(*) AS missing_customer_ids
 FROM marketing_roi_mart
-WHERE customer_id IS NULL;
+WHERE customer_unique_id IS NULL;
 
 -- Missing Revenue
 
@@ -55,8 +55,8 @@ GROUP BY customer_value_segment;
 -- Duplicate Customers
 
 SELECT
-    customer_id,
+    customer_unique_id,
     COUNT(*)
 FROM marketing_roi_mart
-GROUP BY customer_id
+GROUP BY customer_unique_id
 HAVING COUNT(*) > 1;

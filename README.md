@@ -16,9 +16,9 @@
 * [x] Data Warehouse Design
 * [x] ETL Pipeline Development
 * [x] Customer Retention Analysis
-* [x] Marketing Analytics
+* [x] Customer Value & Marketing Prioritisation
 * [x] Customer Segmentation
-* [ ] Funnel Optimization
+* [x] Funnel Optimization
 * [ ] Revenue Growth Analysis
 * [ ] Experimentation Framework
 * [ ] Churn Prediction Modeling
@@ -116,32 +116,38 @@ Acquiring customers is becoming increasingly expensive, making retention a strat
 
 # Case 2
 
-## Where Should Marketing Spend Budget?
+## Which Customers Should Marketing Prioritise?
 
 ### Business Problem
 
 Marketing budget is limited.
 
-Leadership must determine which acquisition channels generate sustainable value.
+Leadership must direct spend toward the customers that generate the most value.
+
+> **Data limitation:** the Olist dataset has no marketing spend, channel, or attribution
+> data, so true CAC / ROAS / payback **cannot** be computed. This case is scoped to
+> value-based customer prioritisation. See
+> `sql/executive_cases/case_02_marketing_roi/07_business_findings.md` for the honest
+> framing and the instrumentation needed to measure real marketing ROI later.
 
 ### Planned Analysis
 
-* Customer Acquisition Cost (CAC)
-* Return on Ad Spend (ROAS)
-* Customer Lifetime Value (LTV)
-* Channel Performance Analysis
+* Customer Value Segmentation (High / Medium / Low)
+* Value Concentration (Pareto)
+* Marketing Priority Assignment (Convert / Nurture / Low Priority)
 * Segment Profitability
+* Estimated Lifetime Value (proxy — pending customer-grain fix)
 
 ### Deliverables
 
-* Marketing Performance Dashboard
-* Channel Investment Strategy
+* Customer Value & Prioritisation Dashboard
+* Value-based Budget Allocation Strategy
 
 ### Expected Outcome
 
-* Improve marketing efficiency
-* Optimize budget allocation
-* Increase customer profitability
+* Direct spend to high-value customers
+* Optimize budget allocation by value tier
+* Define the data required to measure true marketing ROI
 
 ---
 

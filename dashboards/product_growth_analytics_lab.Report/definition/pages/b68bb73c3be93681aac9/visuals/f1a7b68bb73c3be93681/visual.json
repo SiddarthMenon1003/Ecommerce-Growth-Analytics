@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f1a7b68bb73c3be93681",
   "position": {
-    "x": 216,
+    "x": 230,
     "y": 744,
     "z": 25000,
     "height": 232,
-    "width": 1048,
+    "width": 1034,
     "tabOrder": 25000
   },
   "visual": {
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "KEY TAKEAWAY",
+                    "value": "WHY IT MATTERS",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
@@ -31,29 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Engagement collapses right after the first purchase.",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": " ",
-                    "textStyle": {
-                      "fontSize": "4pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Every acquisition cohort starts at 100% then decays sharply by month one; few customers return in later months.",
+                    "value": "Every acquisition cohort starts at 100% participation, then retention falls steeply within the first month and barely recovers.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"
@@ -66,7 +44,7 @@
                   {
                     "value": " ",
                     "textStyle": {
-                      "fontSize": "4pt"
+                      "fontSize": "6pt"
                     }
                   }
                 ]
@@ -74,15 +52,33 @@
               {
                 "textRuns": [
                   {
-                    "value": "ACTION   ",
+                    "value": "MY RECOMMENDATION",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "11pt",
+                      "fontSize": "10pt",
                       "color": "#2DD4BF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "\u23f1\ufe0f  ",
+                    "textStyle": {
+                      "fontSize": "15pt"
                     }
                   },
                   {
-                    "value": "Concentrate CRM spend in the first 30-60 days after purchase.",
+                    "value": "Own the first 60 days",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#FFFFFF"
+                    }
+                  },
+                  {
+                    "value": "  -  front-load onboarding, reminders and offers right after purchase.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"

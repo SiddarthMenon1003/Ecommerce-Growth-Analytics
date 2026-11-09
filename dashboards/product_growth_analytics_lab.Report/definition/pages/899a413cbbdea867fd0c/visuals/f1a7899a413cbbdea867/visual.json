@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f1a7899a413cbbdea867",
   "position": {
-    "x": 216,
+    "x": 230,
     "y": 744,
     "z": 25000,
     "height": 232,
-    "width": 1048,
+    "width": 1034,
     "tabOrder": 25000
   },
   "visual": {
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "KEY TAKEAWAY",
+                    "value": "WHY IT MATTERS",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
@@ -31,29 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Lifetime value is concentrated in a thin top tier.",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": " ",
-                    "textStyle": {
-                      "fontSize": "4pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Repeat customers are worth ~2x a one-time buyer (R$315 vs R$162); a small top decile carries most lifetime revenue.",
+                    "value": "Lifetime value is top-heavy - a thin top decile of customers contributes an outsized share of total revenue.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"
@@ -66,7 +44,7 @@
                   {
                     "value": " ",
                     "textStyle": {
-                      "fontSize": "4pt"
+                      "fontSize": "6pt"
                     }
                   }
                 ]
@@ -74,15 +52,33 @@
               {
                 "textRuns": [
                   {
-                    "value": "ACTION   ",
+                    "value": "MY RECOMMENDATION",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "11pt",
+                      "fontSize": "10pt",
                       "color": "#2DD4BF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "\ud83d\udc51  ",
+                    "textStyle": {
+                      "fontSize": "15pt"
                     }
                   },
                   {
-                    "value": "Launch a VIP / loyalty track for the top value decile.",
+                    "value": "Build a VIP tier",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#FFFFFF"
+                    }
+                  },
+                  {
+                    "value": "  -  concierge service and perks for the top value decile.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"

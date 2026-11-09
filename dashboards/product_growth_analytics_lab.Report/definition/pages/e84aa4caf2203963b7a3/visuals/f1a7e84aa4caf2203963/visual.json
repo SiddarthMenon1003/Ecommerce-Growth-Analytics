@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f1a7e84aa4caf2203963",
   "position": {
-    "x": 216,
+    "x": 230,
     "y": 744,
     "z": 25000,
     "height": 232,
-    "width": 1048,
+    "width": 1034,
     "tabOrder": 25000
   },
   "visual": {
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "KEY TAKEAWAY",
+                    "value": "WHY IT MATTERS",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
@@ -31,29 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "A few segments hold most of the value.",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": " ",
-                    "textStyle": {
-                      "fontSize": "4pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "High-Value (20%) = 53% of revenue (~R$430 each); Medium is the largest upside; Low is the biggest headcount but least revenue.",
+                    "value": "High-Value customers are worth ~R$430 each vs ~R$54 for the bottom 40% - an 8x value gap across the base.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"
@@ -66,7 +44,7 @@
                   {
                     "value": " ",
                     "textStyle": {
-                      "fontSize": "4pt"
+                      "fontSize": "6pt"
                     }
                   }
                 ]
@@ -74,15 +52,33 @@
               {
                 "textRuns": [
                   {
-                    "value": "ACTION   ",
+                    "value": "MY RECOMMENDATION",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "11pt",
+                      "fontSize": "10pt",
                       "color": "#2DD4BF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "\ud83e\udded  ",
+                    "textStyle": {
+                      "fontSize": "15pt"
                     }
                   },
                   {
-                    "value": "Run a distinct playbook per segment instead of one blanket strategy.",
+                    "value": "Stop treating segments alike",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#FFFFFF"
+                    }
+                  },
+                  {
+                    "value": "  -  protect High, upsell Medium, automate Low.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"

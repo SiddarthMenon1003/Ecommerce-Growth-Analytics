@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f1a7a0caaefe5bd7948e",
   "position": {
-    "x": 216,
+    "x": 230,
     "y": 744,
     "z": 25000,
     "height": 232,
-    "width": 1048,
+    "width": 1034,
     "tabOrder": 25000
   },
   "visual": {
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "KEY TAKEAWAY",
+                    "value": "WHY IT MATTERS",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
@@ -31,29 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "20% of customers drive 53% of revenue.",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": " ",
-                    "textStyle": {
-                      "fontSize": "4pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "High-Value (top 20%) = R$8.56M (~R$430 each); Nurture (40%) = 33% (~R$133); Low (40%) = 13% (~R$54).",
+                    "value": "High-Value (top 20%) spend ~R$430 each vs ~R$133 for Medium and ~R$54 for Low - an 8x gap top to bottom.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"
@@ -66,7 +44,7 @@
                   {
                     "value": " ",
                     "textStyle": {
-                      "fontSize": "4pt"
+                      "fontSize": "6pt"
                     }
                   }
                 ]
@@ -74,15 +52,33 @@
               {
                 "textRuns": [
                   {
-                    "value": "ACTION   ",
+                    "value": "MY RECOMMENDATION",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "11pt",
+                      "fontSize": "10pt",
                       "color": "#2DD4BF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "\ud83e\udded  ",
+                    "textStyle": {
+                      "fontSize": "15pt"
                     }
                   },
                   {
-                    "value": "Protect High-Value, develop Medium, automate service for Low.",
+                    "value": "Three segments, three playbooks",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#FFFFFF"
+                    }
+                  },
+                  {
+                    "value": "  -  protect High, grow Medium, automate Low.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"

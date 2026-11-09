@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f1a7cd5dfba6ac7438b8",
   "position": {
-    "x": 216,
+    "x": 230,
     "y": 744,
     "z": 25000,
     "height": 232,
-    "width": 1048,
+    "width": 1034,
     "tabOrder": 25000
   },
   "visual": {
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "KEY TAKEAWAY",
+                    "value": "WHY IT MATTERS",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
@@ -31,29 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Prioritise investment by customer value, not headcount.",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "15pt",
-                      "color": "#FFFFFF"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": " ",
-                    "textStyle": {
-                      "fontSize": "4pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Equal spend across 96K customers is inefficient; value-weighted targeting lifts expected marketing ROI.",
+                    "value": "Beyond the Convert tier, Nurture (40% of customers) adds ~33% of revenue and Low Priority (40%) only ~13%.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"
@@ -66,7 +44,7 @@
                   {
                     "value": " ",
                     "textStyle": {
-                      "fontSize": "4pt"
+                      "fontSize": "6pt"
                     }
                   }
                 ]
@@ -74,15 +52,33 @@
               {
                 "textRuns": [
                   {
-                    "value": "ACTION   ",
+                    "value": "MY RECOMMENDATION",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "11pt",
+                      "fontSize": "10pt",
                       "color": "#2DD4BF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "\ud83d\udcb0  ",
+                    "textStyle": {
+                      "fontSize": "15pt"
                     }
                   },
                   {
-                    "value": "Fund High-priority segments first; cap spend on low-return customers.",
+                    "value": "Fund Convert first",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt",
+                      "color": "#FFFFFF"
+                    }
+                  },
+                  {
+                    "value": "  -  Nurture second, starve the long tail.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#C7CDD9"

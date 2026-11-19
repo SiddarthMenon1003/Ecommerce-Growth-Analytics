@@ -10,7 +10,7 @@
     "tabOrder": 10002
   },
   "visual": {
-    "visualType": "funnel",
+    "visualType": "scatterChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,15 +20,52 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "public marketing_roi_mart"
+                      "Entity": "public customer_value_mart"
                     }
                   },
-                  "Property": "marketing_priority"
+                  "Property": "customer_unique_id"
                 }
               },
-              "queryRef": "public marketing_roi_mart.marketing_priority",
-              "nativeQueryRef": "marketing_priority",
+              "queryRef": "public customer_value_mart.customer_unique_id",
+              "nativeQueryRef": "customer_unique_id",
               "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "public customer_value_mart"
+                    }
+                  },
+                  "Property": "customer_value_segment"
+                }
+              },
+              "queryRef": "public customer_value_mart.customer_value_segment",
+              "nativeQueryRef": "customer_value_segment",
+              "active": true
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "public customer_value_mart"
+                    }
+                  },
+                  "Property": "customer_lifetime_days"
+                }
+              },
+              "queryRef": "public customer_value_mart.customer_lifetime_days",
+              "nativeQueryRef": "customer_lifetime_days"
             }
           ]
         },
@@ -36,38 +73,38 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "KPI_Measures"
+                      "Entity": "public customer_value_mart"
                     }
                   },
-                  "Property": "MP Total Customers"
+                  "Property": "total_revenue"
                 }
               },
-              "queryRef": "KPI_Measures.MP Total Customers",
-              "nativeQueryRef": "MP Total Customers"
+              "queryRef": "public customer_value_mart.total_revenue",
+              "nativeQueryRef": "total_revenue"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "public customer_value_mart"
+                    }
+                  },
+                  "Property": "total_orders"
+                }
+              },
+              "queryRef": "public customer_value_mart.total_orders",
+              "nativeQueryRef": "total_orders"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "KPI_Measures"
-                  }
-                },
-                "Property": "MP Total Customers"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
@@ -109,10 +146,17 @@
           }
         }
       ],
-      "labels": [
+      "categoryAxis": [
         {
           "properties": {
             "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
               "expr": {
                 "Literal": {
                   "Value": "true"
@@ -124,7 +168,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#020617'"
+                      "Value": "'#64748B'"
                     }
                   }
                 }
@@ -139,6 +183,64 @@
             }
           }
         }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "fillPoint": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -148,7 +250,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Customer Distribution by Marketing Priority'"
+                  "Value": "'Value vs Tenure \u2014 Lifetime Days vs Revenue (by segment)'"
                 }
               }
             },

@@ -10,7 +10,7 @@
     "tabOrder": 10000
   },
   "visual": {
-    "visualType": "funnel",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -23,11 +23,11 @@
                       "Entity": "public order_fulfillment_funnel_mart"
                     }
                   },
-                  "Property": "current_funnel_stage"
+                  "Property": "delivery_delay_category"
                 }
               },
-              "queryRef": "public order_fulfillment_funnel_mart.current_funnel_stage",
-              "nativeQueryRef": "current_funnel_stage",
+              "queryRef": "public order_fulfillment_funnel_mart.delivery_delay_category",
+              "nativeQueryRef": "delivery_delay_category",
               "active": true
             }
           ]
@@ -50,9 +50,91 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "public order_fulfillment_funnel_mart"
+                  }
+                },
+                "Property": "Total Orders Done"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "labels": [
         {
           "properties": {
@@ -77,7 +159,14 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "9D"
+                }
+              }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
@@ -120,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Order Fulfillment Funnel'"
+                  "Value": "'Orders by Delivery Timing'"
                 }
               }
             },

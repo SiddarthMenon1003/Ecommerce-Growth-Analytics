@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "3d5c8f4c4d4a942d35a9",
   "position": {
-    "x": 752,
-    "y": 390,
-    "z": 11000,
-    "height": 314,
-    "width": 512,
-    "tabOrder": 11000
+    "x": 525,
+    "y": 418,
+    "z": 10000,
+    "height": 300,
+    "width": 485,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -26,7 +26,7 @@
                   "Property": "Product Category"
                 }
               },
-              "queryRef": "public dim_products.product_category_name",
+              "queryRef": "Dim Products.Product Category",
               "nativeQueryRef": "Product Category",
               "active": true
             }
@@ -79,7 +79,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#4CC2FF'"
+                      "Value": "'#8E44C9'"
                     }
                   }
                 }
@@ -90,7 +90,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#4CC2FF'"
+                      "Value": "'#8E44C9'"
                     }
                   }
                 }
@@ -107,7 +107,18 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Orders by Product Category'"
+                  "Value": "'Orders by Category'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2559'"
+                    }
+                  }
                 }
               }
             }
@@ -129,7 +140,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -153,7 +164,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#E6EAF2'"
                     }
                   }
                 }
@@ -162,7 +173,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "12D"
                 }
               }
             }

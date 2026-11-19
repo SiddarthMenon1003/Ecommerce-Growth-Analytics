@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "5f84d40f932fd942afc4",
   "position": {
-    "x": 224,
-    "y": 390,
-    "z": 8000,
-    "height": 314,
-    "width": 512,
-    "tabOrder": 8000
+    "x": 24,
+    "y": 418,
+    "z": 10000,
+    "height": 300,
+    "width": 485,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "lineChart",
@@ -26,7 +26,7 @@
                   "Property": "Month Year"
                 }
               },
-              "queryRef": "Dim_Date.Month Year",
+              "queryRef": "Dim Date.Month Year",
               "nativeQueryRef": "Month Year",
               "active": true
             }
@@ -45,11 +45,29 @@
                   "Property": "Monthly Active Customers"
                 }
               },
-              "queryRef": "KPI_Measures.New Customers",
+              "queryRef": "KPI_Measures.Monthly Active Customers",
               "nativeQueryRef": "Monthly Active Customers"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KPI_Measures"
+                  }
+                },
+                "Property": "Monthly Active Customers"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -61,7 +79,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F2B134'"
+                      "Value": "'#3F6AD8'"
                     }
                   }
                 }
@@ -72,7 +90,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F2B134'"
+                      "Value": "'#3F6AD8'"
                     }
                   }
                 }
@@ -90,6 +108,17 @@
               "expr": {
                 "Literal": {
                   "Value": "'Monthly Active Customers'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2559'"
+                    }
+                  }
                 }
               }
             }
@@ -111,7 +140,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -135,7 +164,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#E6EAF2'"
                     }
                   }
                 }
@@ -144,7 +173,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "12D"
                 }
               }
             }

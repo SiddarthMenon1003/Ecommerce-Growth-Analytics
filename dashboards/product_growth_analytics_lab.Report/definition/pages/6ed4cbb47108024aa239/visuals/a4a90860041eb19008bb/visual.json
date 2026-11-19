@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "a4a90860041eb19008bb",
   "position": {
-    "x": 224,
-    "y": 168,
+    "x": 24,
+    "y": 192,
     "z": 10000,
     "height": 210,
-    "width": 336,
+    "width": 320,
     "tabOrder": 10000
   },
   "visual": {
@@ -26,7 +26,7 @@
                   "Property": "Product Category"
                 }
               },
-              "queryRef": "public dim_products.product_category_name",
+              "queryRef": "Dim Products.Product Category",
               "nativeQueryRef": "Product Category",
               "active": true
             }
@@ -79,7 +79,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2DD4BF'"
+                      "Value": "'#5A4FCF'"
                     }
                   }
                 }
@@ -90,7 +90,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2DD4BF'"
+                      "Value": "'#5A4FCF'"
                     }
                   }
                 }
@@ -107,7 +107,18 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue by Product Category'"
+                  "Value": "'Revenue by Category'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2559'"
+                    }
+                  }
                 }
               }
             }
@@ -129,7 +140,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -153,7 +164,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#E6EAF2'"
                     }
                   }
                 }
@@ -162,7 +173,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "12D"
                 }
               }
             }

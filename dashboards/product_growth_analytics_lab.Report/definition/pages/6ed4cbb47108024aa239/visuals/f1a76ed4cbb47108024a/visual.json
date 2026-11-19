@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f1a76ed4cbb47108024a",
   "position": {
-    "x": 230,
+    "x": 34,
     "y": 744,
     "z": 25000,
     "height": 232,
-    "width": 1034,
+    "width": 984,
     "tabOrder": 25000
   },
   "visual": {
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
-                      "color": "#FF8A4C"
+                      "color": "#E07B39"
                     }
                   }
                 ]
@@ -34,7 +34,7 @@
                     "value": "The top 20% of customers generate 53% of revenue (R$8.56M, ~R$430 each); the bottom 40% contribute just 13%.",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#C7CDD9"
+                      "color": "#4A5168"
                     }
                   }
                 ]
@@ -56,7 +56,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
-                      "color": "#2DD4BF"
+                      "color": "#5A4FCF"
                     }
                   }
                 ]
@@ -74,14 +74,14 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "14pt",
-                      "color": "#FFFFFF"
+                      "color": "#1B2559"
                     }
                   },
                   {
                     "value": "  -  one repeat purchase nearly doubles a customer's lifetime value.",
                     "textStyle": {
                       "fontSize": "11pt",
-                      "color": "#C7CDD9"
+                      "color": "#4A5168"
                     }
                   }
                 ]
@@ -107,7 +107,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -131,7 +131,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#E6EAF2'"
                     }
                   }
                 }
@@ -140,7 +140,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "12D"
                 }
               }
             }

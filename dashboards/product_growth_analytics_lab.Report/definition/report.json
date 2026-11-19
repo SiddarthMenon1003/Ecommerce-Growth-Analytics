@@ -2,19 +2,19 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
   "themeCollection": {
     "baseTheme": {
-      "name": "CY26SU05",
+      "name": "Fluent2-CY26SU04",
       "reportVersionAtImport": {
-        "visual": "2.9.0",
-        "report": "3.3.0",
+        "visual": "2.8.0",
+        "report": "3.2.0",
         "page": "2.3.1"
       },
       "type": "SharedResources"
     },
     "customTheme": {
-      "name": "Growth Lab Light",
+      "name": "BI_Template_UI_Guidelines.json",
       "reportVersionAtImport": {
-        "visual": "2.9.0",
-        "report": "3.3.0",
+        "visual": "2.10.0",
+        "report": "3.4.0",
         "page": "2.3.1"
       },
       "type": "RegisteredResources"
@@ -54,8 +54,8 @@
       "type": "SharedResources",
       "items": [
         {
-          "name": "CY26SU05",
-          "path": "BaseThemes/CY26SU05.json",
+          "name": "Fluent2-CY26SU04",
+          "path": "BaseThemes/Fluent2-CY26SU04.json",
           "type": "BaseTheme"
         }
       ]
@@ -65,9 +65,19 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "Growth Lab Light",
-          "path": "Growth Lab Light",
+          "name": "BI_Template_UI_Guidelines.json",
+          "path": "BI_Template_UI_Guidelines.json",
           "type": "CustomTheme"
+        },
+        {
+          "name": "bg_default_topbar.png",
+          "path": "bg_default_topbar.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg_default_topbar_filter-panel.png",
+          "path": "bg_default_topbar_filter-panel.png",
+          "type": "Image"
         }
       ]
     }

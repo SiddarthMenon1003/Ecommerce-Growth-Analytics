@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "12ba0f5b538e6ced8a3d",
   "position": {
-    "x": 12,
-    "y": 12,
+    "x": 24,
+    "y": 16,
     "z": 20000,
-    "height": 72,
-    "width": 1576,
+    "height": 64,
+    "width": 800,
     "tabOrder": 5000
   },
   "visual": {
@@ -22,8 +22,8 @@
                     "value": "Executive Summary",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "19pt",
-                      "color": "#1B2559"
+                      "fontSize": "22pt",
+                      "color": "#020617"
                     }
                   }
                 ]
@@ -34,7 +34,7 @@
                     "value": "Acquisition-led marketplace: R$16M revenue, but 96.9% of customers buy only once.",
                     "textStyle": {
                       "fontSize": "10pt",
-                      "color": "#6B7280"
+                      "color": "#64748B"
                     }
                   }
                 ]
@@ -44,63 +44,6 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
-    "visualContainerObjects": {
-      "background": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#EAF0FB'"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "border": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#E6EAF2'"
-                    }
-                  }
-                }
-              }
-            },
-            "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "18D"
-                }
-              }
-            }
-          }
-        }
-      ]
-    }
+    "drillFilterOtherVisuals": true
   }
 }

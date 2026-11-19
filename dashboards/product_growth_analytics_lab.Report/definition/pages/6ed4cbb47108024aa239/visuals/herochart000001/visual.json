@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "herochart000001",
   "position": {
-    "x": 36,
-    "y": 876,
+    "x": 24,
+    "y": 878,
     "z": 10000,
-    "height": 140,
-    "width": 1528,
+    "height": 150,
+    "width": 1514,
     "tabOrder": 10000
   },
   "visual": {
@@ -71,34 +71,6 @@
       }
     },
     "objects": {
-      "dataPoint": [
-        {
-          "properties": {
-            "defaultColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#5A4FCF'"
-                    }
-                  }
-                }
-              }
-            },
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#5A4FCF'"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
       "legend": [
         {
           "properties": {
@@ -211,7 +183,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1B2559'"
+                      "Value": "'#020617'"
                     }
                   }
                 }
@@ -259,7 +231,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E6EAF2'"
+                      "Value": "'#ECECE3'"
                     }
                   }
                 }
@@ -268,7 +240,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "12D"
+                  "Value": "10D"
                 }
               }
             }
@@ -313,21 +285,21 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "90D"
+                  "Value": "92D"
                 }
               }
             },
             "shadowBlur": {
               "expr": {
                 "Literal": {
-                  "Value": "14D"
+                  "Value": "12D"
                 }
               }
             },
             "shadowDistance": {
               "expr": {
                 "Literal": {
-                  "Value": "5D"
+                  "Value": "4D"
                 }
               }
             },

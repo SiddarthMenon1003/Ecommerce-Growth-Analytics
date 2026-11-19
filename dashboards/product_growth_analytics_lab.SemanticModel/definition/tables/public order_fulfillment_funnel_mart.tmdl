@@ -140,6 +140,7 @@ table 'public order_fulfillment_funnel_mart'
 	column customer_state
 		dataType: string
 		lineageTag: 776fd0c5-74a1-44ca-afe2-f2ec96932e14
+		dataCategory: StateOrProvince
 		summarizeBy: none
 		sourceColumn: customer_state
 

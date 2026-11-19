@@ -4,13 +4,13 @@
   "position": {
     "x": 24,
     "y": 286,
-    "z": 10002,
+    "z": 10000,
     "height": 360,
-    "width": 502,
-    "tabOrder": 10002
+    "width": 768,
+    "tabOrder": 10000
   },
   "visual": {
-    "visualType": "lineChart",
+    "visualType": "lineClusteredColumnComboChart",
     "query": {
       "queryState": {
         "Category": {
@@ -49,25 +49,25 @@
               "nativeQueryRef": "Total Revenue"
             }
           ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Monthly Active Customers"
+                }
+              },
+              "queryRef": "KPI_Measures.Monthly Active Customers",
+              "nativeQueryRef": "Monthly Active Customers"
+            }
+          ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "KPI_Measures"
-                  }
-                },
-                "Property": "Total Revenue"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
@@ -77,7 +77,32 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top'"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
                 }
               }
             }
@@ -167,19 +192,6 @@
           }
         }
       ],
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "dataPoint": [
         {
           "properties": {
@@ -188,7 +200,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#6E5618'"
+                      "Value": "'#927100'"
                     }
                   }
                 }
@@ -199,7 +211,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#6E5618'"
+                      "Value": "'#927100'"
                     }
                   }
                 }
@@ -216,7 +228,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Monthly Revenue Trend'"
+                  "Value": "'Revenue & Active Customers Over Time'"
                 }
               }
             },

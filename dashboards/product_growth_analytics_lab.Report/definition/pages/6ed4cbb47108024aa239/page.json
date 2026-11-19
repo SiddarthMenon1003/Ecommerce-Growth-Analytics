@@ -3,8 +3,8 @@
   "name": "6ed4cbb47108024aa239",
   "displayName": "Executive Overview",
   "displayOption": "FitToPage",
-  "height": 1000,
-  "width": 1280,
+  "height": 900,
+  "width": 1440,
   "filterConfig": {
     "filters": [
       {
@@ -98,7 +98,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#EEF1F7'"
+                    "Value": "'#E4E8F0'"
                   }
                 }
               }
@@ -122,7 +122,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#EEF1F7'"
+                    "Value": "'#E4E8F0'"
                   }
                 }
               }

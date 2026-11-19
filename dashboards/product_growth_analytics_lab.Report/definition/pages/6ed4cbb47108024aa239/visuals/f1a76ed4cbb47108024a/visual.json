@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "f1a76ed4cbb47108024a",
   "position": {
-    "x": 34,
+    "x": 48,
     "y": 744,
     "z": 25000,
-    "height": 232,
-    "width": 984,
+    "height": 128,
+    "width": 1368,
     "tabOrder": 25000
   },
   "visual": {
@@ -42,38 +42,16 @@
               {
                 "textRuns": [
                   {
-                    "value": " ",
-                    "textStyle": {
-                      "fontSize": "6pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "MY RECOMMENDATION",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "10pt",
-                      "color": "#5A4FCF"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
                     "value": "\ud83c\udfaf  ",
                     "textStyle": {
-                      "fontSize": "15pt"
+                      "fontSize": "14pt"
                     }
                   },
                   {
-                    "value": "Win the second order",
+                    "value": "My recommendation: Win the second order",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "14pt",
+                      "fontSize": "13pt",
                       "color": "#1B2559"
                     }
                   },

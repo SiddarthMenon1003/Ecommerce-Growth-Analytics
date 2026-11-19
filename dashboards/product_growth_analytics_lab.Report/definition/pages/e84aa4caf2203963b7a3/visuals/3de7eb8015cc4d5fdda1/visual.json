@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "3de7eb8015cc4d5fdda1",
   "position": {
-    "x": 571,
-    "y": 160,
-    "z": 3002,
-    "width": 337,
-    "height": 263,
-    "tabOrder": 3002
+    "x": 1069,
+    "y": 286,
+    "z": 10002,
+    "height": 363,
+    "width": 506,
+    "tabOrder": 10002
   },
   "visual": {
     "visualType": "donutChart",
@@ -70,133 +70,7 @@
         "isDefaultSort": true
       }
     },
-    "objects": {
-      "dataPoint": [
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#2E7D32'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "scopeId": {
-                  "Comparison": {
-                    "ComparisonKind": 0,
-                    "Left": {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Entity": "public customer_segmentation_mart"
-                          }
-                        },
-                        "Property": "customer_value_segment"
-                      }
-                    },
-                    "Right": {
-                      "Literal": {
-                        "Value": "'Medium Value'"
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#81C784'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "scopeId": {
-                  "Comparison": {
-                    "ComparisonKind": 0,
-                    "Left": {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Entity": "public customer_segmentation_mart"
-                          }
-                        },
-                        "Property": "customer_value_segment"
-                      }
-                    },
-                    "Right": {
-                      "Literal": {
-                        "Value": "'High Value'"
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        },
-        {
-          "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FBC02D'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "data": [
-              {
-                "scopeId": {
-                  "Comparison": {
-                    "ComparisonKind": 0,
-                    "Left": {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Entity": "public customer_segmentation_mart"
-                          }
-                        },
-                        "Property": "customer_value_segment"
-                      }
-                    },
-                    "Right": {
-                      "Literal": {
-                        "Value": "'Low Value'"
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
+    "objects": {},
     "visualContainerObjects": {
       "title": [
         {
@@ -205,6 +79,17 @@
               "expr": {
                 "Literal": {
                   "Value": "'Customer Distribution by Segment'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#020617'"
+                    }
+                  }
                 }
               }
             }
@@ -226,7 +111,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -250,7 +135,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#ECECE3'"
                     }
                   }
                 }
@@ -294,6 +179,79 @@
               "expr": {
                 "Literal": {
                   "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Outer'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2559'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "92D"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "shadowDistance": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            },
+            "shadowSpread": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "angle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
                 }
               }
             }

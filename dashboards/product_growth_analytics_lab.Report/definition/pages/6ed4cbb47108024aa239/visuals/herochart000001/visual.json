@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "herochart000001",
   "position": {
-    "x": 24,
-    "y": 878,
-    "z": 10000,
-    "height": 150,
-    "width": 1514,
-    "tabOrder": 10000
+    "x": 1069,
+    "y": 475,
+    "z": 10005,
+    "height": 173,
+    "width": 506,
+    "tabOrder": 10005
   },
   "visual": {
     "visualType": "clusteredBarChart",

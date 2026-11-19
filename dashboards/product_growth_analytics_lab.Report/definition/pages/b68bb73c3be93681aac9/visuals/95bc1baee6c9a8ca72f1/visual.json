@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "95bc1baee6c9a8ca72f1",
   "position": {
-    "x": 216,
-    "y": 441,
-    "z": 3004,
-    "width": 337,
-    "height": 263,
-    "tabOrder": 3004
+    "x": 24,
+    "y": 286,
+    "z": 10000,
+    "height": 363,
+    "width": 506,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -579,7 +579,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -603,7 +603,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#ECECE3'"
                     }
                   }
                 }
@@ -647,6 +647,79 @@
               "expr": {
                 "Literal": {
                   "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Outer'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2559'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "92D"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "shadowDistance": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            },
+            "shadowSpread": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "angle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
                 }
               }
             }

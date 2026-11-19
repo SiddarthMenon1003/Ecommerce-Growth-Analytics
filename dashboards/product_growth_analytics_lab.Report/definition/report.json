@@ -68,16 +68,6 @@
           "name": "BI_Template_UI_Guidelines.json",
           "path": "BI_Template_UI_Guidelines.json",
           "type": "CustomTheme"
-        },
-        {
-          "name": "bg_default_topbar.png",
-          "path": "bg_default_topbar.png",
-          "type": "Image"
-        },
-        {
-          "name": "bg_default_topbar_filter-panel.png",
-          "path": "bg_default_topbar_filter-panel.png",
-          "type": "Image"
         }
       ]
     }

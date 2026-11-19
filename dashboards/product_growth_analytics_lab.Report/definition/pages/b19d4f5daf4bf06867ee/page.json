@@ -1,14 +1,25 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "b19d4f5daf4bf06867ee",
-  "displayName": "──────── CASE 04 ────────",
+  "displayName": "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 CASE 04 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
   "displayOption": "FitToPage",
-  "height": 1000,
-  "width": 1280,
+  "height": 1050,
+  "width": 1600,
   "objects": {
     "background": [
       {
         "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7F5EB'"
+                  }
+                }
+              }
+            }
+          },
           "transparency": {
             "expr": {
               "Literal": {
@@ -22,6 +33,17 @@
     "outspace": [
       {
         "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#FFFFFF'"
+                  }
+                }
+              }
+            }
+          },
           "transparency": {
             "expr": {
               "Literal": {

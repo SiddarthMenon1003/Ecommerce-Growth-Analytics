@@ -3,8 +3,8 @@
   "name": "23fc8d7df6017b9cbb1c",
   "displayName": "Retention",
   "displayOption": "FitToPage",
-  "height": 1000,
-  "width": 1280,
+  "height": 1050,
+  "width": 1600,
   "pageBinding": {
     "name": "146c934a600bea89b535",
     "type": "Default",
@@ -19,7 +19,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#14161C'"
+                    "Value": "'#F7F5EB'"
                   }
                 }
               }
@@ -43,7 +43,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#14161C'"
+                    "Value": "'#FFFFFF'"
                   }
                 }
               }

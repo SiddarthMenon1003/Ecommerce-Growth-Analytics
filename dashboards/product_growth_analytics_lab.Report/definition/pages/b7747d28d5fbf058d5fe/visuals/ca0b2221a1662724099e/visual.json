@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "ca0b2221a1662724099e",
   "position": {
-    "x": 216,
-    "y": 347,
-    "z": 3004,
-    "width": 515,
-    "height": 169,
-    "tabOrder": 3004
+    "x": 1069,
+    "y": 286,
+    "z": 10002,
+    "height": 363,
+    "width": 506,
+    "tabOrder": 10002
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -70,36 +70,7 @@
         "isDefaultSort": true
       }
     },
-    "objects": {
-      "dataPoint": [
-        {
-          "properties": {
-            "defaultColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#A78BFA'"
-                    }
-                  }
-                }
-              }
-            },
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#A78BFA'"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
+    "objects": {},
     "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "background": [
@@ -117,7 +88,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -141,7 +112,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#ECECE3'"
                     }
                   }
                 }
@@ -185,6 +156,79 @@
               "expr": {
                 "Literal": {
                   "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Outer'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2559'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "92D"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "shadowDistance": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            },
+            "shadowSpread": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "angle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
                 }
               }
             }

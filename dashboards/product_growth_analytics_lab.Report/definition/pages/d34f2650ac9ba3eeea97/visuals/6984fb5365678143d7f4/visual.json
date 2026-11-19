@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "6984fb5365678143d7f4",
   "position": {
-    "x": 926,
-    "y": 160,
-    "z": 3003,
-    "width": 337,
-    "height": 263,
-    "tabOrder": 3003
+    "x": 546,
+    "y": 286,
+    "z": 10001,
+    "height": 363,
+    "width": 506,
+    "tabOrder": 10001
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -102,36 +102,7 @@
         "isDefaultSort": true
       }
     },
-    "objects": {
-      "dataPoint": [
-        {
-          "properties": {
-            "defaultColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F2B134'"
-                    }
-                  }
-                }
-              }
-            },
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#F2B134'"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
+    "objects": {},
     "visualContainerObjects": {
       "title": [
         {
@@ -140,6 +111,17 @@
               "expr": {
                 "Literal": {
                   "Value": "'Average Customer Lifetime Value Across Priority Segments'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#020617'"
+                    }
+                  }
                 }
               }
             }
@@ -161,7 +143,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1C1F27'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -185,7 +167,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2A2E38'"
+                      "Value": "'#ECECE3'"
                     }
                   }
                 }
@@ -229,6 +211,79 @@
               "expr": {
                 "Literal": {
                   "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "preset": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Custom'"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Outer'"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B2559'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "92D"
+                }
+              }
+            },
+            "shadowBlur": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "shadowDistance": {
+              "expr": {
+                "Literal": {
+                  "Value": "4D"
+                }
+              }
+            },
+            "shadowSpread": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "angle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
                 }
               }
             }

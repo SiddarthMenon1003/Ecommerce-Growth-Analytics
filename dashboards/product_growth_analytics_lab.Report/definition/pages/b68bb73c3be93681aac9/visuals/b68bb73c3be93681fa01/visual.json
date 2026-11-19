@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "b68bb73c3be93681fa01",
   "position": {
-    "x": 0,
-    "y": 0,
-    "z": 20000,
-    "width": 1280,
-    "height": 48,
-    "tabOrder": 20000
+    "x": 60,
+    "y": 24,
+    "z": 21000,
+    "height": 60,
+    "width": 560,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "15pt",
-                      "color": "#FFFFFF"
+                      "color": "#020617"
                     }
                   }
                 ]
@@ -34,45 +34,12 @@
                     "value": "Cohort engagement drops sharply after the first purchase month.",
                     "textStyle": {
                       "fontSize": "9pt",
-                      "color": "#D6DAE2"
+                      "color": "#64748B"
                     }
                   }
                 ]
               }
             ]
-          }
-        }
-      ]
-    },
-    "visualContainerObjects": {
-      "background": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#6B4EFF'"
-                    }
-                  }
-                }
-              }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
           }
         }
       ]

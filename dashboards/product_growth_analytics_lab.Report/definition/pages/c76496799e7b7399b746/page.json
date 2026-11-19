@@ -3,8 +3,8 @@
   "name": "c76496799e7b7399b746",
   "displayName": "Value Segmentation",
   "displayOption": "FitToPage",
-  "height": 1000,
-  "width": 1280,
+  "height": 1050,
+  "width": 1600,
   "objects": {
     "background": [
       {
@@ -14,7 +14,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#14161C'"
+                    "Value": "'#F7F5EB'"
                   }
                 }
               }
@@ -38,7 +38,7 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#14161C'"
+                    "Value": "'#FFFFFF'"
                   }
                 }
               }

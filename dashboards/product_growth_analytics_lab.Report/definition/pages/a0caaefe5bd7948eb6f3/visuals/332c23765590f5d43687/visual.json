@@ -55,17 +55,22 @@
           "projections": [
             {
               "field": {
-                "Column": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "public customer_value_mart"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "public customer_value_mart"
+                        }
+                      },
+                      "Property": "total_orders"
                     }
                   },
-                  "Property": "total_orders"
+                  "Function": 0
                 }
               },
-              "queryRef": "public customer_value_mart.total_orders",
-              "nativeQueryRef": "total_orders"
+              "queryRef": "Sum(public customer_value_mart.total_orders)",
+              "nativeQueryRef": "Sum of total_orders"
             }
           ]
         },
@@ -73,17 +78,22 @@
           "projections": [
             {
               "field": {
-                "Column": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "public customer_value_mart"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "public customer_value_mart"
+                        }
+                      },
+                      "Property": "total_revenue"
                     }
                   },
-                  "Property": "total_revenue"
+                  "Function": 0
                 }
               },
-              "queryRef": "public customer_value_mart.total_revenue",
-              "nativeQueryRef": "total_revenue"
+              "queryRef": "Sum(public customer_value_mart.total_revenue)",
+              "nativeQueryRef": "Sum of total_revenue"
             }
           ]
         },
@@ -91,17 +101,22 @@
           "projections": [
             {
               "field": {
-                "Column": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "public customer_value_mart"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "public customer_value_mart"
+                        }
+                      },
+                      "Property": "avg_order_value"
                     }
                   },
-                  "Property": "avg_order_value"
+                  "Function": 0
                 }
               },
-              "queryRef": "public customer_value_mart.avg_order_value",
-              "nativeQueryRef": "avg_order_value"
+              "queryRef": "Sum(public customer_value_mart.avg_order_value)",
+              "nativeQueryRef": "Sum of avg_order_value"
             }
           ]
         }

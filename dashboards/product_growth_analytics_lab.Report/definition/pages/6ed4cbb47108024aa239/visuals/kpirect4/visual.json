@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "kpirect4",
   "position": {
-    "x": 1140,
+    "x": 1236,
     "y": 100,
     "z": 3500,
-    "height": 104,
-    "width": 252,
+    "height": 108,
+    "width": 284,
     "tabOrder": 3500
   },
   "visual": {

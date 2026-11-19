@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "navMarketing",
   "position": {
-    "x": 1126,
-    "y": 22,
+    "x": 1248,
+    "y": 24,
     "z": 21000,
-    "height": 36,
-    "width": 128,
+    "height": 38,
+    "width": 150,
     "tabOrder": 21000
   },
   "visual": {
@@ -20,11 +20,18 @@
                 "horizontalTextAlignment": "center",
                 "textRuns": [
                   {
+                    "value": "\u25a0 ",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#D64D77"
+                    }
+                  },
+                  {
                     "value": "Marketing",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "10pt",
-                      "color": "#5A6480"
+                      "color": "#3A4466"
                     }
                   }
                 ]
@@ -83,7 +90,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "18D"
+                  "Value": "19D"
                 }
               }
             }

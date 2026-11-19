@@ -10,10 +10,10 @@
     "tabOrder": 10003
   },
   "visual": {
-    "visualType": "treemap",
+    "visualType": "donutChart",
     "query": {
       "queryState": {
-        "Group": {
+        "Category": {
           "projections": [
             {
               "field": {
@@ -32,7 +32,7 @@
             }
           ]
         },
-        "Tooltips": {
+        "Y": {
           "projections": [
             {
               "field": {
@@ -47,38 +47,6 @@
               },
               "queryRef": "KPI_Measures.MP Total Customers",
               "nativeQueryRef": "MP Total Customers"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
-                    }
-                  },
-                  "Property": "MP Average LTV"
-                }
-              },
-              "queryRef": "KPI_Measures.MP Average LTV",
-              "nativeQueryRef": "MP Average LTV"
-            }
-          ]
-        },
-        "Values": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
-                    }
-                  },
-                  "Property": "MP Total Revenue"
-                }
-              },
-              "queryRef": "KPI_Measures.MP Total Revenue",
-              "nativeQueryRef": "MP Total Revenue"
             }
           ]
         }
@@ -162,7 +130,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue Distribution Across Marketing Priorities'"
+                  "Value": "'Customer Mix by Priority'"
                 }
               }
             },
@@ -229,40 +197,6 @@
               "expr": {
                 "Literal": {
                   "Value": "10D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "padding": [
-        {
-          "properties": {
-            "left": {
-              "expr": {
-                "Literal": {
-                  "Value": "14D"
-                }
-              }
-            },
-            "right": {
-              "expr": {
-                "Literal": {
-                  "Value": "14D"
-                }
-              }
-            },
-            "top": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
-                }
-              }
-            },
-            "bottom": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
                 }
               }
             }

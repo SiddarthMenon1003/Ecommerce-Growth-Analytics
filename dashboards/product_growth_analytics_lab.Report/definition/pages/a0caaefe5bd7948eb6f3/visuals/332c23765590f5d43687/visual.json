@@ -10,7 +10,7 @@
     "tabOrder": 10000
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "scatterChart",
     "query": {
       "queryState": {
         "Category": {
@@ -32,52 +32,60 @@
             }
           ]
         },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "CV Average Orders Per Customer"
+                }
+              },
+              "queryRef": "KPI_Measures.CV Average Orders Per Customer",
+              "nativeQueryRef": "CV Average Orders Per Customer"
+            }
+          ]
+        },
         "Y": {
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public customer_value_mart"
-                        }
-                      },
-                      "Property": "customer_id"
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
                     }
                   },
-                  "Function": 5
+                  "Property": "CV Average Order Value"
                 }
               },
-              "queryRef": "CountNonNull(public customer_value_mart.customer_id)",
-              "nativeQueryRef": "Count of customer_id"
+              "queryRef": "KPI_Measures.CV Average Order Value",
+              "nativeQueryRef": "CV Average Order Value"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "CV Total Revenue"
+                }
+              },
+              "queryRef": "KPI_Measures.CV Total Revenue",
+              "nativeQueryRef": "CV Total Revenue"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Aggregation": {
-                "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "public customer_value_mart"
-                      }
-                    },
-                    "Property": "customer_id"
-                  }
-                },
-                "Function": 5
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
@@ -119,7 +127,7 @@
           }
         }
       ],
-      "labels": [
+      "categoryAxis": [
         {
           "properties": {
             "show": {
@@ -129,7 +137,90 @@
                 }
               }
             },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
             "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
               "solid": {
                 "color": {
                   "expr": {
@@ -158,7 +249,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Customer Distribution by Value Segment'"
+                  "Value": "'Value Map \u2014 Orders vs Order Value (bubble = revenue)'"
                 }
               }
             },
@@ -225,40 +316,6 @@
               "expr": {
                 "Literal": {
                   "Value": "10D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "padding": [
-        {
-          "properties": {
-            "left": {
-              "expr": {
-                "Literal": {
-                  "Value": "14D"
-                }
-              }
-            },
-            "right": {
-              "expr": {
-                "Literal": {
-                  "Value": "14D"
-                }
-              }
-            },
-            "top": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
-                }
-              }
-            },
-            "bottom": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
                 }
               }
             }

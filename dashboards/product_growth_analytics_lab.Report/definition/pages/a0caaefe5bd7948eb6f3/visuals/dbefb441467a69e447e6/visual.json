@@ -10,10 +10,10 @@
     "tabOrder": 10002
   },
   "visual": {
-    "visualType": "treemap",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
-        "Group": {
+        "Category": {
           "projections": [
             {
               "field": {
@@ -32,53 +32,7 @@
             }
           ]
         },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
-                    }
-                  },
-                  "Property": "CV High Value Customers"
-                }
-              },
-              "queryRef": "KPI_Measures.CV High Value Customers",
-              "nativeQueryRef": "CV High Value Customers"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
-                    }
-                  },
-                  "Property": "CV Average Order Value"
-                }
-              },
-              "queryRef": "KPI_Measures.CV Average Order Value",
-              "nativeQueryRef": "CV Average Order Value"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
-                    }
-                  },
-                  "Property": "CV Average Orders Per Customer"
-                }
-              },
-              "queryRef": "KPI_Measures.CV Average Orders Per Customer",
-              "nativeQueryRef": "CV Average Orders Per Customer"
-            }
-          ]
-        },
-        "Values": {
+        "Y": {
           "projections": [
             {
               "field": {
@@ -96,6 +50,24 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KPI_Measures"
+                  }
+                },
+                "Property": "CV Total Revenue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -105,14 +77,27 @@
             "show": {
               "expr": {
                 "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
                   "Value": "true"
                 }
               }
             },
-            "position": {
+            "showAxisTitle": {
               "expr": {
                 "Literal": {
-                  "Value": "'Right'"
+                  "Value": "false"
                 }
               }
             },
@@ -137,6 +122,19 @@
           }
         }
       ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "labels": [
         {
           "properties": {
@@ -147,7 +145,7 @@
                 }
               }
             },
-            "labelColor": {
+            "color": {
               "solid": {
                 "color": {
                   "expr": {
@@ -164,6 +162,41 @@
                   "Value": "9D"
                 }
               }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#927100'"
+                    }
+                  }
+                }
+              }
+            },
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#927100'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -176,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue Share Across Customer Segments'"
+                  "Value": "'Revenue by Segment'"
                 }
               }
             },
@@ -243,40 +276,6 @@
               "expr": {
                 "Literal": {
                   "Value": "10D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "padding": [
-        {
-          "properties": {
-            "left": {
-              "expr": {
-                "Literal": {
-                  "Value": "14D"
-                }
-              }
-            },
-            "right": {
-              "expr": {
-                "Literal": {
-                  "Value": "14D"
-                }
-              }
-            },
-            "top": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
-                }
-              }
-            },
-            "bottom": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
                 }
               }
             }

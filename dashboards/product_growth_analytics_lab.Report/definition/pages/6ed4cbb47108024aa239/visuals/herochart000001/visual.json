@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "herochart000001",
   "position": {
-    "x": 1330,
-    "y": 286,
+    "x": 24,
+    "y": 678,
     "z": 10005,
-    "height": 363,
-    "width": 245,
+    "height": 348,
+    "width": 1552,
     "tabOrder": 10005
   },
   "visual": {
@@ -181,7 +181,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#28738A'"
+                      "Value": "'#A6763B'"
                     }
                   }
                 }
@@ -192,7 +192,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#28738A'"
+                      "Value": "'#A6763B'"
                     }
                   }
                 }

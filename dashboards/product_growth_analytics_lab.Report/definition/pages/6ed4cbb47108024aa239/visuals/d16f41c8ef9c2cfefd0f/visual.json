@@ -10,10 +10,10 @@
     "tabOrder": 4000
   },
   "visual": {
-    "visualType": "cardVisual",
+    "visualType": "card",
     "query": {
       "queryState": {
-        "Data": {
+        "Values": {
           "projections": [
             {
               "field": {
@@ -34,7 +34,7 @@
       }
     },
     "objects": {
-      "calloutValue": [
+      "labels": [
         {
           "properties": {
             "color": {
@@ -47,30 +47,25 @@
                   }
                 }
               }
-            }
-          }
-        }
-      ],
-      "calloutLabel": [
-        {
-          "properties": {
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#EEF0FF'"
-                    }
-                  }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "26D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
                 }
               }
             }
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
-      "background": [
+      ],
+      "categoryLabels": [
         {
           "properties": {
             "show": {
@@ -85,9 +80,31 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#8E44C9'"
+                      "Value": "'#E6E9FF'"
                     }
                   }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

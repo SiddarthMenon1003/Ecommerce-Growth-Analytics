@@ -10,10 +10,10 @@
     "tabOrder": 4000
   },
   "visual": {
-    "visualType": "kpi",
+    "visualType": "cardVisual",
     "query": {
       "queryState": {
-        "Indicator": {
+        "Data": {
           "projections": [
             {
               "field": {
@@ -27,61 +27,87 @@
                 }
               },
               "queryRef": "KPI_Measures.Average Order Value",
-              "nativeQueryRef": "Average Order Value"
-            }
-          ]
-        },
-        "TrendAxis": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Dim Date"
-                    }
-                  },
-                  "Property": "Month Year"
-                }
-              },
-              "queryRef": "Dim Date.Month Year",
-              "nativeQueryRef": "Month Year",
-              "active": true
-            }
-          ]
-        },
-        "Goals": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
-                    }
-                  },
-                  "Property": "Average Order Value Goal"
-                }
-              },
-              "queryRef": "KPI_Measures.Average Order Value Goal",
-              "nativeQueryRef": "Average Order Value Goal"
+              "nativeQueryRef": "Average Order Value",
+              "displayName": "Average Order Value"
             }
           ]
         }
       }
     },
     "objects": {
-      "indicator": [
+      "label": [
         {
           "properties": {
-            "fontSize": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "22D"
+                  "Value": "true"
                 }
               }
             },
-            "color": {
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'aboveValue'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#475569'"
+                    }
+                  }
+                }
+              }
+            },
+            "textWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "value": [
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Semibold'', wf_segoe-ui_semibold, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "21D"
+                }
+              }
+            },
+            "fontColor": {
               "solid": {
                 "color": {
                   "expr": {
@@ -91,46 +117,17 @@
                   }
                 }
               }
-            }
-          }
-        }
-      ],
-      "trendline": [
-        {
-          "properties": {
-            "show": {
+            },
+            "textWrap": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
-          }
-        }
-      ],
-      "dataLabels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "goals": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
+          },
+          "selector": {
+            "id": "default"
           }
         }
       ]
@@ -258,37 +255,6 @@
               "expr": {
                 "Literal": {
                   "Value": "90D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Average Order Value'"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#020617'"
-                    }
-                  }
-                }
-              }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
                 }
               }
             }

@@ -10,7 +10,7 @@
     "tabOrder": 10002
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "public customer_value_mart"
+                      "Entity": "Dim Customers"
                     }
                   },
-                  "Property": "customer_value_segment"
+                  "Property": "Customer Short ID"
                 }
               },
-              "queryRef": "public customer_value_mart.customer_value_segment",
-              "nativeQueryRef": "customer_value_segment",
+              "queryRef": "Dim Customers.Customer Short ID",
+              "nativeQueryRef": "Customer Short ID",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "KPI_Measures"
                     }
                   },
-                  "Property": "CV Total Revenue"
+                  "Property": "Customer Revenue"
                 }
               },
-              "queryRef": "KPI_Measures.CV Total Revenue",
-              "nativeQueryRef": "CV Total Revenue"
+              "queryRef": "KPI_Measures.Customer Revenue",
+              "nativeQueryRef": "Customer Revenue"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "KPI_Measures"
                   }
                 },
-                "Property": "CV Total Revenue"
+                "Property": "Customer Revenue"
               }
             },
             "direction": "Descending"
@@ -209,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue by Value Segment'"
+                  "Value": "'Top 15 Customers by Lifetime Revenue'"
                 }
               }
             },
@@ -391,5 +391,111 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5e25b734f16843db8b22",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim Customers"
+              }
+            },
+            "Property": "Customer Short ID"
+          }
+        },
+        "type": "TopN",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "subquery",
+              "Expression": {
+                "Subquery": {
+                  "Query": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "Dim Customers",
+                        "Type": 0
+                      },
+                      {
+                        "Name": "k",
+                        "Entity": "KPI_Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Select": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "Customer Short ID"
+                        },
+                        "Name": "field"
+                      }
+                    ],
+                    "OrderBy": [
+                      {
+                        "Direction": 2,
+                        "Expression": {
+                          "Measure": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "k"
+                              }
+                            },
+                            "Property": "Customer Revenue"
+                          }
+                        }
+                      }
+                    ],
+                    "Top": 15
+                  }
+                }
+              },
+              "Type": 2
+            },
+            {
+              "Name": "d",
+              "Entity": "Dim Customers",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "Customer Short ID"
+                      }
+                    }
+                  ],
+                  "Table": {
+                    "SourceRef": {
+                      "Source": "subquery"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
   }
 }

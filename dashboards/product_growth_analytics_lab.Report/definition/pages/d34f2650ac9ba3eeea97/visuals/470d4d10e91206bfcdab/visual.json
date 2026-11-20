@@ -17,22 +17,18 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public marketing_roi_mart"
-                        }
-                      },
-                      "Property": "marketing_priority"
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
                     }
                   },
-                  "Function": 3
+                  "Property": "MP Convert %"
                 }
               },
-              "queryRef": "Min(public marketing_roi_mart.marketing_priority)",
-              "nativeQueryRef": "First marketing_priority"
+              "queryRef": "KPI_Measures.MP Convert %",
+              "nativeQueryRef": "MP Convert %",
+              "displayName": "MP Convert %"
             }
           ]
         }

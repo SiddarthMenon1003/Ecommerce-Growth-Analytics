@@ -42,11 +42,11 @@
                       "Entity": "public order_fulfillment_funnel_mart"
                     }
                   },
-                  "Property": "Avg Fulfillment Days"
+                  "Property": "Avg Review Score"
                 }
               },
-              "queryRef": "public order_fulfillment_funnel_mart.Avg Fulfillment Days",
-              "nativeQueryRef": "Avg Fulfillment Days"
+              "queryRef": "public order_fulfillment_funnel_mart.Avg Review Score",
+              "nativeQueryRef": "Avg Review Score"
             }
           ]
         }
@@ -209,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Avg Fulfillment Days by Speed Band'"
+                  "Value": "'Avg Review Score by Fulfillment Speed'"
                 }
               }
             },

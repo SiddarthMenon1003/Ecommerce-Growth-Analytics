@@ -10,7 +10,7 @@
     "tabOrder": 10003
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
         "Category": {
@@ -23,11 +23,11 @@
                       "Entity": "public marketing_roi_mart"
                     }
                   },
-                  "Property": "marketing_priority"
+                  "Property": "revenue_percentile"
                 }
               },
-              "queryRef": "public marketing_roi_mart.marketing_priority",
-              "nativeQueryRef": "marketing_priority",
+              "queryRef": "public marketing_roi_mart.revenue_percentile",
+              "nativeQueryRef": "revenue_percentile",
               "active": true
             }
           ]
@@ -39,14 +39,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "KPI_Measures"
+                      "Entity": "public marketing_roi_mart"
                     }
                   },
-                  "Property": "MP Total Customers"
+                  "Property": "MP Total Revenue"
                 }
               },
-              "queryRef": "KPI_Measures.MP Total Customers",
-              "nativeQueryRef": "MP Total Customers"
+              "queryRef": "public marketing_roi_mart.MP Total Revenue",
+              "nativeQueryRef": "MP Total Revenue"
             }
           ]
         }
@@ -59,14 +59,27 @@
             "show": {
               "expr": {
                 "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
                   "Value": "true"
                 }
               }
             },
-            "position": {
+            "showAxisTitle": {
               "expr": {
                 "Literal": {
-                  "Value": "'Right'"
+                  "Value": "false"
                 }
               }
             },
@@ -91,7 +104,7 @@
           }
         }
       ],
-      "labels": [
+      "valueAxis": [
         {
           "properties": {
             "show": {
@@ -101,10 +114,63 @@
                 }
               }
             },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
             "fontSize": {
               "expr": {
                 "Literal": {
                   "Value": "9D"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#927100'"
+                    }
+                  }
+                }
+              }
+            },
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#927100'"
+                    }
+                  }
                 }
               }
             }
@@ -119,7 +185,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Customer Mix by Priority'"
+                  "Value": "'Revenue Concentration by Customer Percentile'"
                 }
               }
             },

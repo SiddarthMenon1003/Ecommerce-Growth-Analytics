@@ -4,13 +4,13 @@
   "position": {
     "x": 24,
     "y": 665,
-    "z": 10001,
-    "height": 363,
-    "width": 768,
-    "tabOrder": 10001
+    "z": 10000,
+    "height": 361,
+    "width": 1552,
+    "tabOrder": 10000
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "lineClusteredColumnComboChart",
     "query": {
       "queryState": {
         "Category": {
@@ -49,29 +49,29 @@
               "nativeQueryRef": "Customers by Purchase Frequency"
             }
           ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Revenue by Purchase Frequency"
+                }
+              },
+              "queryRef": "KPI_Measures.Revenue by Purchase Frequency",
+              "nativeQueryRef": "Revenue by Purchase Frequency"
+            }
+          ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "KPI_Measures"
-                  }
-                },
-                "Property": "Customers by Purchase Frequency"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
-      "labels": [
+      "legend": [
         {
           "properties": {
             "show": {
@@ -81,12 +81,19 @@
                 }
               }
             },
-            "color": {
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top'"
+                }
+              }
+            },
+            "labelColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#020617'"
+                      "Value": "'#64748B'"
                     }
                   }
                 }
@@ -96,26 +103,6 @@
               "expr": {
                 "Literal": {
                   "Value": "9D"
-                }
-              }
-            },
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "valueAxis": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
                 }
               }
             }
@@ -160,6 +147,51 @@
           }
         }
       ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
       "dataPoint": [
         {
           "properties": {
@@ -168,7 +200,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A6763B'"
+                      "Value": "'#927100'"
                     }
                   }
                 }
@@ -179,22 +211,9 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#A6763B'"
+                      "Value": "'#927100'"
                     }
                   }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "legend": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
                 }
               }
             }
@@ -209,7 +228,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Customer Purchase Frequency Distribution'"
+                  "Value": "'Customers & Revenue by Purchase Frequency'"
                 }
               }
             },

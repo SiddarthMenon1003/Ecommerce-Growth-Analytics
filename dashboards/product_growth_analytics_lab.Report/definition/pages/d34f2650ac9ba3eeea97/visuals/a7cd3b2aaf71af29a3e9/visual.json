@@ -39,13 +39,13 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "public marketing_roi_mart"
+                      "Entity": "KPI_Measures"
                     }
                   },
                   "Property": "MP Total Revenue"
                 }
               },
-              "queryRef": "public marketing_roi_mart.MP Total Revenue",
+              "queryRef": "KPI_Measures.MP Total Revenue",
               "nativeQueryRef": "MP Total Revenue"
             }
           ]

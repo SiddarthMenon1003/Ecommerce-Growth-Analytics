@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "herochart000001",
   "position": {
-    "x": 24,
-    "y": 662,
+    "x": 808,
+    "y": 368,
     "z": 10005,
-    "height": 364,
-    "width": 1552,
+    "height": 300,
+    "width": 768,
     "tabOrder": 10005
   },
   "visual": {

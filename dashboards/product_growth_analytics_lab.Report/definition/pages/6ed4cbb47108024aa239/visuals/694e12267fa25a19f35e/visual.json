@@ -3,10 +3,10 @@
   "name": "694e12267fa25a19f35e",
   "position": {
     "x": 24,
-    "y": 286,
+    "y": 684,
     "z": 10000,
-    "height": 360,
-    "width": 768,
+    "height": 342,
+    "width": 1552,
     "tabOrder": 10000
   },
   "visual": {
@@ -52,6 +52,20 @@
         },
         "Y2": {
           "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Total Orders"
+                }
+              },
+              "queryRef": "KPI_Measures.Total Orders",
+              "nativeQueryRef": "Total Orders"
+            },
             {
               "field": {
                 "Measure": {
@@ -228,7 +242,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue & Active Customers Over Time'"
+                  "Value": "'Key Metrics Over Time'"
                 }
               }
             },

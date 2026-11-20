@@ -42,11 +42,11 @@
                       "Entity": "KPI_Measures"
                     }
                   },
-                  "Property": "CV Total Revenue"
+                  "Property": "CV Average Order Value"
                 }
               },
-              "queryRef": "KPI_Measures.CV Total Revenue",
-              "nativeQueryRef": "CV Total Revenue"
+              "queryRef": "KPI_Measures.CV Average Order Value",
+              "nativeQueryRef": "CV Average Order Value"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "KPI_Measures"
                   }
                 },
-                "Property": "CV Total Revenue"
+                "Property": "CV Average Order Value"
               }
             },
             "direction": "Descending"
@@ -209,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue by Segment'"
+                  "Value": "'Avg Order Value by Segment'"
                 }
               }
             },

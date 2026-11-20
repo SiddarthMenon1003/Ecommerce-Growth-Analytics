@@ -10,29 +10,10 @@
     "tabOrder": 10002
   },
   "visual": {
-    "visualType": "scatterChart",
+    "visualType": "clusteredColumnChart",
     "query": {
       "queryState": {
         "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "public customer_value_mart"
-                    }
-                  },
-                  "Property": "customer_unique_id"
-                }
-              },
-              "queryRef": "public customer_value_mart.customer_unique_id",
-              "nativeQueryRef": "customer_unique_id",
-              "active": true
-            }
-          ]
-        },
-        "Series": {
           "projections": [
             {
               "field": {
@@ -51,75 +32,42 @@
             }
           ]
         },
-        "X": {
-          "projections": [
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public customer_value_mart"
-                        }
-                      },
-                      "Property": "customer_lifetime_days"
-                    }
-                  },
-                  "Function": 0
-                }
-              },
-              "queryRef": "Sum(public customer_value_mart.customer_lifetime_days)",
-              "nativeQueryRef": "Sum of customer_lifetime_days"
-            }
-          ]
-        },
         "Y": {
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public customer_value_mart"
-                        }
-                      },
-                      "Property": "total_revenue"
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
                     }
                   },
-                  "Function": 0
+                  "Property": "CV Total Revenue"
                 }
               },
-              "queryRef": "Sum(public customer_value_mart.total_revenue)",
-              "nativeQueryRef": "Sum of total_revenue"
-            }
-          ]
-        },
-        "Size": {
-          "projections": [
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public customer_value_mart"
-                        }
-                      },
-                      "Property": "total_orders"
-                    }
-                  },
-                  "Function": 0
-                }
-              },
-              "queryRef": "Sum(public customer_value_mart.total_orders)",
-              "nativeQueryRef": "Sum of total_orders"
+              "queryRef": "KPI_Measures.CV Total Revenue",
+              "nativeQueryRef": "CV Total Revenue"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KPI_Measures"
+                  }
+                },
+                "Property": "CV Total Revenue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
       }
     },
     "objects": {
@@ -129,32 +77,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "position": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Right'"
-                }
-              }
-            },
-            "labelColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#64748B'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
+                  "Value": "false"
                 }
               }
             }
@@ -174,7 +97,7 @@
             "showAxisTitle": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -205,23 +128,29 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
-            },
-            "showAxisTitle": {
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
               "expr": {
                 "Literal": {
                   "Value": "true"
                 }
               }
             },
-            "labelColor": {
+            "color": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#64748B'"
+                      "Value": "'#020617'"
                     }
                   }
                 }
@@ -234,23 +163,38 @@
                 }
               }
             },
-            "gridlineShow": {
+            "labelDisplayUnits": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "0D"
                 }
               }
             }
           }
         }
       ],
-      "fillPoint": [
+      "dataPoint": [
         {
           "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#927100'"
+                    }
+                  }
+                }
+              }
+            },
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#927100'"
+                    }
+                  }
                 }
               }
             }
@@ -265,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Value vs Tenure \u2014 Lifetime Days vs Revenue (by segment)'"
+                  "Value": "'Revenue by Value Segment'"
                 }
               }
             },

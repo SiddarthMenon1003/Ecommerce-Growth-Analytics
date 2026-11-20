@@ -49,6 +49,24 @@
               "active": true
             }
           ]
+        },
+        "Goals": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Average Order Value Goal"
+                }
+              },
+              "queryRef": "KPI_Measures.Average Order Value Goal",
+              "nativeQueryRef": "Average Order Value Goal"
+            }
+          ]
         }
       }
     },
@@ -91,6 +109,19 @@
         }
       ],
       "dataLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "goals": [
         {
           "properties": {
             "show": {

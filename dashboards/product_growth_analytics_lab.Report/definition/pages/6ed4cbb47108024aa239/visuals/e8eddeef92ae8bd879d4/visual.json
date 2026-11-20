@@ -49,6 +49,24 @@
               "active": true
             }
           ]
+        },
+        "Goals": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Total Revenue Goal"
+                }
+              },
+              "queryRef": "KPI_Measures.Total Revenue Goal",
+              "nativeQueryRef": "Total Revenue Goal"
+            }
+          ]
         }
       }
     },
@@ -91,6 +109,19 @@
         }
       ],
       "dataLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "goals": [
         {
           "properties": {
             "show": {

@@ -1022,3 +1022,34 @@ table KPI_Measures
 
 	annotation PBI_ResultType = Table
 
+
+
+	/// Prior-month value of [Total Revenue] - KPI goal for month-over-month comparison.
+	measure 'Total Revenue Goal' = CALCULATE ( [Total Revenue], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
+		formatString: "R$"#,0
+		displayFolder: KPI Goals
+		lineageTag: 980e4c17-4825-4b08-a265-e6c6bcacfcf3
+
+	/// Prior-month value of [Total Orders] - KPI goal for month-over-month comparison.
+	measure 'Total Orders Goal' = CALCULATE ( [Total Orders], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
+		formatString: #,0
+		displayFolder: KPI Goals
+		lineageTag: 6c443964-b0dd-4588-8707-cd21d23951d8
+
+	/// Prior-month value of [Monthly Active Customers] - KPI goal for month-over-month comparison.
+	measure 'Active Customers Goal' = CALCULATE ( [Monthly Active Customers], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
+		formatString: #,0
+		displayFolder: KPI Goals
+		lineageTag: 89764871-e76c-4530-99ba-dcba1e90fbcd
+
+	/// Prior-month value of [Average Order Value] - KPI goal for month-over-month comparison.
+	measure 'Average Order Value Goal' = CALCULATE ( [Average Order Value], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
+		formatString: "R$"#,0.00
+		displayFolder: KPI Goals
+		lineageTag: bb8fd901-015f-4595-8213-b26cdacd74c7
+
+	/// Prior-month value of [Repeat Customer Rate (Monthly)] - KPI goal for month-over-month comparison.
+	measure 'Repeat Rate Goal' = CALCULATE ( [Repeat Customer Rate (Monthly)], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
+		formatString: 0.0%
+		displayFolder: KPI Goals
+		lineageTag: cc91e8d7-9e8a-4d07-9d87-22cdfbedc879

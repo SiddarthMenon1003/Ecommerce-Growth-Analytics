@@ -49,6 +49,24 @@
               "active": true
             }
           ]
+        },
+        "Goals": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Repeat Rate Goal"
+                }
+              },
+              "queryRef": "KPI_Measures.Repeat Rate Goal",
+              "nativeQueryRef": "Repeat Rate Goal"
+            }
+          ]
         }
       }
     },
@@ -91,6 +109,19 @@
         }
       ],
       "dataLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "goals": [
         {
           "properties": {
             "show": {

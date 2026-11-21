@@ -172,9 +172,3 @@ relationship 09b40ad4-f40b-4fa1-a667-4f8ee19bb1dd
 	fromColumn: 'public revenue_growth_mart'.revenue_month
 	toColumn: 'Dim Date'.Date
 
-relationship 3c17835f-8f51-4aca-af27-a3a989b6aac4
-	fromCardinality: many
-	toCardinality: many
-	fromColumn: 'public revenue_growth_mart'.product_category_name
-	toColumn: 'Dim Products'.'Product Category'
-

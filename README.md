@@ -2,490 +2,200 @@
 
 ## Data-Driven Growth Strategy & Decision Intelligence
 
-### Solving Real Business Growth Challenges Using SQL, Product Analytics, Experimentation, Machine Learning, and Business Strategy
+An end-to-end analytics engineering project that takes the Brazilian **Olist**
+e-commerce dataset (~99K orders, ~96K customers, R$16M revenue) from raw CSVs to a
+modeled PostgreSQL warehouse, a library of business-focused SQL analyses, and a
+consulting-grade Power BI report — framed around the growth questions a CEO would
+actually ask.
+
+The goal is not to produce queries and charts. It is to **turn data into decisions**:
+identify growth bottlenecks, quantify impact, and recommend action.
 
 ---
 
 # Project Status
 
-## Current Progress
+This is an **actively built** project. The sections below separate what is **done** from
+what is **planned** — nothing here is claimed as finished unless it ships in the repo.
 
-* [x] Environment Setup
-* [x] PostgreSQL Configuration
-* [x] Project Structure
-* [x] Data Warehouse Design
-* [x] ETL Pipeline Development
-* [x] Customer Retention Analysis
-* [x] Customer Value & Marketing Prioritisation
-* [x] Customer Segmentation
-* [x] Funnel Optimization
-* [ ] Revenue Growth Analysis
-* [ ] Experimentation Framework
-* [ ] Churn Prediction Modeling
-* [ ] Executive Growth Strategy Report
+| Area | Status |
+|---|---|
+| Environment, PostgreSQL warehouse, ETL pipeline | ✅ Built |
+| Dimensional model (star schema) + data validation | ✅ Built |
+| 4 analytics marts | ✅ Built |
+| **Case 1 — Customer Retention** | ✅ Built (SQL + dashboard) |
+| **Case 2 — Customer Value & Marketing Prioritisation** | ✅ Built (SQL + dashboard) |
+| **Case 3 — Customer Segmentation (value-tier, rule-based)** | ✅ Built (SQL + dashboard) |
+| **Case 4 — Order Fulfillment Funnel** | ✅ Built (SQL + dashboard) |
+| Power BI report (6 pages, 42 tables, 112 measures) | ✅ Built |
+| Case 3 upgrade — RFM + K-Means segmentation | 🔜 Planned |
+| **Case 5 — Revenue Growth Analysis** | 🔜 Planned |
+| **Case 6 — Experimentation / A/B Testing Framework** | 🔜 Planned |
+| Churn prediction model (classification + SHAP) | 🔜 Planned |
+| Executive Growth Strategy Report | 🔜 Planned |
+
+> **Honesty note.** The Python ML layer (`src/ml`) and the experimentation work are
+> scaffolded but **not yet implemented**. Where the README describes RFM, K-Means,
+> churn modeling, or A/B testing, treat it as the **roadmap**, not delivered work.
 
 ---
 
-# Executive Summary
+# What's Built (the real deliverables)
 
-Businesses rarely fail because they lack data.
+### Data engineering
+- **PostgreSQL data warehouse** built from the Olist CSVs via a Python ETL pipeline
+  (`src/etl`, `src/database`): extract → stage → transform → load, with a warehouse
+  validation step.
+- **Dimensional model (star schema):** `Dim Customers`, `Dim Date`, `Dim Products`,
+  `Dim Sellers` around `Fact Orders`, `Fact Order Items`, `Fact Payments`, `Fact Reviews`.
 
-They fail because they cannot transform data into decisions.
+### SQL analytics
+- **33 SQL files**: 4 analytics marts (~685 lines), 4 executive cases × 6 analyses each,
+  plus setup / transform / validation scripts.
+- Each case ships `07_business_findings.md`, `08_recommendations.md`, and
+  `09_dashboard_notes.md` — analysis tied to **decisions**, not just query output.
+- SQL depth: CTEs, window & ranking functions (`ROW_NUMBER`, `RANK`, `NTILE`, `LAG`/`LEAD`),
+  subqueries, multi-table joins.
 
-This project simulates the role of a Product & Growth Analyst hired by a rapidly growing e-commerce company experiencing slowing growth, declining retention, stagnant conversion rates, and increasing acquisition costs.
-
-The CEO presents a series of critical growth challenges.
-
-The objective is not to build dashboards.
-
-The objective is to identify growth bottlenecks, quantify business impact, recommend strategic interventions, and create an actionable growth roadmap.
-
-The project combines analytics, machine learning, experimentation, and business strategy to answer executive-level growth questions.
+### Business intelligence
+- **Power BI report (PBIP format)** with a semantic model of **42 tables and 112 DAX
+  measures**, and a **6-page narrative**: Overview · Retention · CLV · Segmentation ·
+  Marketing · Fulfillment — styled on the Microsoft Fluent2 design system.
 
 ---
 
 # Business Context
 
-A mid-sized e-commerce company has experienced rapid growth over the past two years.
+A mid-sized e-commerce company has grown fast but is now slowing: retention is declining,
+repeat purchasing is weak, acquisition is getting more expensive, and marketing ROI is
+deteriorating. Leadership needs a **data-driven growth strategy**, not another report.
 
-Recent indicators suggest growth is beginning to slow.
-
-Leadership has identified several concerns:
-
-* Customer retention is declining
-* Repeat purchase behavior is weakening
-* Customer acquisition costs are increasing
-* Marketing ROI is deteriorating
-* Revenue growth is slowing
-* Product teams require a structured experimentation process
-
-Leadership needs a data-driven growth strategy.
-
-This project serves as the analytical foundation for that strategy.
+This project is the analytical foundation for that strategy, worked case by case.
 
 ---
 
-# Strategic Questions
+# The Cases
 
-The project is designed to answer a series of executive-level business questions through data analysis, experimentation, and machine learning.
+### Case 1 — Why is customer retention declining? ✅ Built
+Cohort analysis, retention curves, repeat-purchase and customer-lifetime SQL feed a
+**Retention** dashboard page. **Headline finding:** the marketplace is acquisition-led —
+**96.9% of customers buy only once**, and repeat buyers (worth ~2× a one-time buyer:
+R$315 vs R$162) are only **5.9% of revenue**.
 
----
+### Case 2 — Which customers should marketing prioritise? ✅ Built
+Value-based prioritisation (Convert / Nurture / Low Priority tiers), value concentration
+(Pareto), and segment profitability feed a **Marketing** page. **Headline finding:** the
+**top 20% of customers drive 53% of revenue** (R$8.56M, ~R$430 each).
 
-# Case 1
+> **Data limitation (stated honestly):** Olist has no marketing spend, channel, or
+> attribution data, so true **CAC / ROAS / payback cannot be computed**. This case is
+> scoped to *value-based prioritisation*. See
+> `sql/executive_cases/case_02_marketing_roi/07_business_findings.md` for the framing and
+> the instrumentation needed to measure real marketing ROI later.
 
-## Why Is Customer Retention Declining?
+### Case 3 — Which customers matter most? ✅ Built (rule-based) · 🔜 ML upgrade planned
+**What's built:** a **rule-based High / Medium / Low value segmentation** with behavioural
+profiling and a personalization strategy, feeding a **Segmentation** page (customer value
+map, per-segment order value and frequency, top customers).
+**Planned:** upgrade to **RFM + K-Means clustering** with named segments (Champions, Loyal,
+At-Risk, Lost). *Not yet built.*
 
-### Business Problem
+### Case 4 — Order fulfillment: is delivery helping or hurting growth? ✅ Built
+> **Scope note:** Olist has **no clickstream** (no page views, carts, or checkout events),
+> so a true *conversion* funnel (Visit→View→Cart→Checkout→Purchase) is not possible with
+> this data. Case 4 is therefore an **order-fulfillment funnel**: Created → Approved →
+> Shipped → Delivered.
 
-Retention has steadily declined over time.
+The **Fulfillment** page covers delivery completion, late-delivery rate, and the review
+impact of timing. **Headline finding:** **8.1% of orders arrive late**, and late orders
+score **2.57★ vs 4.29★ on-time** — a 1.73★ hit; the warehouse-to-carrier handoff (~2.8
+days) is the main controllable delay, and high-value orders get no priority.
 
-Acquiring customers is becoming increasingly expensive, making retention a strategic priority.
+### Case 5 — Where will future revenue come from? 🔜 Planned
+Revenue trends, category performance, repeat behaviour, and a growth portfolio matrix.
 
-### Planned Analysis
-
-#### SQL Analytics
-
-* Repeat Purchase Rates
-* Revenue Retention
-* Customer Lifetime Metrics
-
-#### Product Analytics
-
-* Customer Journey Analysis
-* Customer Lifecycle Analysis
-
-#### Growth Analytics
-
-* Cohort Analysis
-* Retention Matrices
-* Retention Curves
-
-### Deliverables
-
-* Retention Dashboard
-* Cohort Analysis Report
-* Retention Strategy Recommendations
-
-### Expected Outcome
-
-* Identify retention drivers
-* Quantify revenue impact of churn
-* Recommend retention initiatives
+### Case 6 — Which experiment should we run next? 🔜 Planned
+A/B test design, sample-size estimation, hypothesis testing, significance and uplift —
+delivered as an experimentation framework. *Not yet built.*
 
 ---
 
-# Case 2
-
-## Which Customers Should Marketing Prioritise?
-
-### Business Problem
-
-Marketing budget is limited.
-
-Leadership must direct spend toward the customers that generate the most value.
-
-> **Data limitation:** the Olist dataset has no marketing spend, channel, or attribution
-> data, so true CAC / ROAS / payback **cannot** be computed. This case is scoped to
-> value-based customer prioritisation. See
-> `sql/executive_cases/case_02_marketing_roi/07_business_findings.md` for the honest
-> framing and the instrumentation needed to measure real marketing ROI later.
-
-### Planned Analysis
-
-* Customer Value Segmentation (High / Medium / Low)
-* Value Concentration (Pareto)
-* Marketing Priority Assignment (Convert / Nurture / Low Priority)
-* Segment Profitability
-* Estimated Lifetime Value (proxy — pending customer-grain fix)
-
-### Deliverables
-
-* Customer Value & Prioritisation Dashboard
-* Value-based Budget Allocation Strategy
-
-### Expected Outcome
-
-* Direct spend to high-value customers
-* Optimize budget allocation by value tier
-* Define the data required to measure true marketing ROI
-
----
-
-# Case 3
-
-## Which Customers Matter Most?
-
-### Business Problem
-
-Marketing currently treats all customers equally.
-
-The objective is to identify the highest-value customer segments.
-
-### Planned Analysis
-
-#### RFM Analysis
-
-* Recency
-* Frequency
-* Monetary Value
-
-#### Machine Learning
-
-* K-Means Clustering
-* Segment Profiling
-
-### Customer Segments
-
-* Champions
-* Loyal Customers
-* Potential Loyalists
-* At-Risk Customers
-* Lost Customers
-
-### Deliverables
-
-* Customer Segmentation Dashboard
-* Segment Growth Strategy
-
-### Expected Outcome
-
-* Improve retention
-* Increase customer lifetime value
-* Improve targeting efficiency
-
----
-
-# Case 4
-
-## Why Are Users Not Purchasing?
-
-### Business Problem
-
-Traffic continues to increase while revenue remains flat.
-
-### Planned Analysis
-
-Product Funnel:
-
-Visit
-↓
-Product View
-↓
-Add To Cart
-↓
-Checkout
-↓
-Purchase
-
-### Metrics
-
-* Conversion Rate
-* Funnel Drop-Off Rate
-* Cart Abandonment
-* Checkout Completion Rate
-
-### Deliverables
-
-* Funnel Dashboard
-* Conversion Optimization Report
-
-### Expected Outcome
-
-* Identify conversion bottlenecks
-* Improve purchase completion rates
-
----
-
-# Case 5
-
-## Where Will Future Revenue Come From?
-
-### Business Problem
-
-Revenue growth is slowing.
-
-Leadership requires new growth opportunities.
-
-### Planned Analysis
-
-* Revenue Trends
-* Product Category Performance
-* Repeat Purchase Behavior
-* Customer Lifetime Value
-* Product Portfolio Analysis
-
-### Deliverables
-
-* Revenue Opportunity Assessment
-* Growth Portfolio Matrix
-
-### Expected Outcome
-
-* Identify growth opportunities
-* Improve capital allocation
-* Support long-term growth
-
----
-
-# Case 6
-
-## Which Experiment Should We Run Next?
-
-### Business Problem
-
-Product teams need evidence before implementing changes.
-
-### Planned Analysis
-
-#### Experiment Design
-
-* Control Group
-* Treatment Group
-
-#### Statistical Analysis
-
-* Sample Size Estimation
-* Confidence Intervals
-* Hypothesis Testing
-* Statistical Significance
-* Uplift Measurement
-
-### Deliverables
-
-* A/B Testing Framework
-* Experiment Evaluation Dashboard
-
-### Expected Outcome
-
-* Reduce product decision risk
-* Establish experimentation culture
-
----
-
-# Advanced Growth Initiatives
-
-## Churn Prediction
-
-### Objective
-
-Predict customer churn risk and identify key drivers of attrition.
-
-### Techniques
-
-* Feature Engineering
-* Classification Modeling
-* SHAP Explainability
-
-### Deliverables
-
-* Churn Risk Scores
-* Churn Driver Analysis
-
----
-
-## Growth Prioritization Framework
-
-All recommendations will be evaluated using:
-
-### Impact vs Effort Matrix
-
-| Initiative            | Impact | Effort | Priority |
-| --------------------- | ------ | ------ | -------- |
-| Checkout Optimization | High   | Low    | P1       |
-| Loyalty Program       | High   | Medium | P1       |
-| Referral Expansion    | Medium | Low    | P2       |
-| Category Expansion    | Medium | High   | P3       |
-
-### Financial Impact Framework
-
-Recommendation
-↓
-Assumptions
-↓
-Revenue Impact
-↓
-Cost Impact
-↓
-ROI Estimate
-↓
-Payback Period
+# Roadmap (planned, not yet built)
+
+- **Case 3 ML upgrade:** RFM scoring + K-Means clustering + segment profiling.
+- **Case 5:** Revenue Growth Analysis + Growth Portfolio Matrix.
+- **Case 6:** Experimentation / A/B testing framework.
+- **Churn prediction:** feature engineering, classification modeling, SHAP explainability,
+  churn risk scores.
+- **Executive Growth Strategy Report:** current performance → root cause → recommendations
+  → 90-day roadmap → financial impact, using an Impact-vs-Effort prioritisation.
 
 ---
 
 # Technical Architecture
 
-## Data Engineering
+**Built**
+- **PostgreSQL** data warehouse (star schema) with validation.
+- **Python ETL** (`src/`): extract / transform / load, staging, warehouse build & validate.
+- **Advanced SQL:** CTEs, window functions, ranking functions, subqueries, complex joins.
+- **Power BI (DAX):** 112 measures, 6-page report, Fluent2 design system.
 
-* PostgreSQL Data Warehouse
-* ETL Pipelines
-* Data Validation
-* Data Quality Monitoring
+**Planned**
+- **Machine learning (Python):** RFM, K-Means, churn classification, SHAP.
+- **Statistics:** A/B testing, hypothesis testing, confidence intervals, uplift.
+- Additional visualization (Plotly / Streamlit) if needed.
 
-## Advanced SQL
+---
 
-Topics Demonstrated:
+# Skills Demonstrated vs Planned
 
-* CTEs
-* Window Functions
-* Ranking Functions
-* Subqueries
-* Complex Joins
+**Demonstrated in this repo today**
+- PostgreSQL · advanced SQL (CTEs, window/ranking functions) · ETL pipelines ·
+  dimensional data modeling · data validation
+- Power BI / DAX · BI data modeling (112 measures) · dashboard design & data storytelling
+- Cohort, retention, value-segmentation and fulfillment analysis · executive-style
+  findings & recommendations
 
-Functions Used:
+**Planned (not yet demonstrated)**
+- Machine learning: RFM, K-Means, churn prediction, SHAP
+- Statistics & experimentation: A/B testing, hypothesis testing, confidence intervals
+- Cases 5–6 and the executive strategy report
 
-```sql
-ROW_NUMBER()
-RANK()
-DENSE_RANK()
-LAG()
-LEAD()
-NTILE()
+---
+
+# Repository Structure
+
+```
+data/            Raw Olist CSVs (gitignored) + processed data
+src/             Python: config, database build, ETL, utils  (ml/ai_advisor scaffolded)
+sql/
+  setup/         Table + staging DDL
+  transform/     Dimension + fact population
+  validation/    Warehouse validation
+  analytics_marts/   4 analytical marts (retention, marketing, segmentation, fulfillment)
+  executive_cases/   Cases 01–04: 6 analyses each + findings/recommendations/dashboard notes
+dashboards/      Power BI project (.pbip): report + semantic model
+powerbi/         Theme files
+docs/            Data dictionary, warehouse design, model/dashboard notes
+notebooks/       Data understanding (01)
 ```
 
-40+ business-focused SQL analyses will be developed throughout the project.
+---
 
-## Machine Learning
+# Data Source
 
-* RFM Analysis
-* K-Means Clustering
-* Churn Prediction
-* Customer Segmentation
+[Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+— ~99K orders (2016–2018), ~96K customers, order items, payments, reviews, geolocation.
 
-## Statistics
-
-* A/B Testing
-* Hypothesis Testing
-* Confidence Intervals
-* Uplift Analysis
-
-## Visualization
-
-* Power BI
-* Plotly
-* Streamlit
+**Known limitations** (and why they shape the cases): no marketing spend/attribution (so
+no true CAC/ROAS), and no clickstream (so no conversion funnel). The analysis is scoped
+honestly around what the data can support.
 
 ---
 
-# Final Deliverable
+# Project Intent
 
-## Executive Growth Strategy Report
-
-### Section 1
-
-Current Business Performance
-
-### Section 2
-
-Key Growth Challenges
-
-### Section 3
-
-Root Cause Analysis
-
-### Section 4
-
-Strategic Recommendations
-
-### Section 5
-
-90-Day Growth Roadmap
-
-### Section 6
-
-Financial Impact Assessment
-
-### Section 7
-
-Leadership Decision Framework
-
----
-
-# Skills Demonstrated
-
-## Business
-
-* Growth Strategy
-* Product Strategy
-* Revenue Optimization
-* Customer Intelligence
-* Executive Decision Support
-
-## Analytics
-
-* Product Analytics
-* Growth Analytics
-* Cohort Analysis
-* Retention Analysis
-* Funnel Analysis
-* Revenue Analytics
-
-## Statistics
-
-* Experimentation
-* A/B Testing
-* Hypothesis Testing
-* Confidence Intervals
-
-## Data
-
-* PostgreSQL
-* Advanced SQL
-* ETL Pipelines
-* Data Modeling
-
-## Machine Learning
-
-* Customer Segmentation
-* RFM Analysis
-* K-Means Clustering
-* Churn Prediction
-
----
-
-# Project Outcome
-
-This project demonstrates the ability to move beyond reporting and dashboards to solve executive-level business problems through analytics, experimentation, machine learning, and strategic decision-making.
-
-The goal is not simply to analyze data.
-
-The goal is to influence decisions, drive growth, and create measurable business impact.
+The aim is to move beyond reporting toward **executive decision support** — identifying
+growth bottlenecks, quantifying their impact, and recommending action. The warehouse,
+SQL case library, and BI report are the foundation; the ML, experimentation, and strategy
+layers are the roadmap being built on top of it.

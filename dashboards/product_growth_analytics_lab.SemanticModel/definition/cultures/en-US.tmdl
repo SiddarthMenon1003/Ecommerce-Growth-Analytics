@@ -78,7 +78,7 @@ cultureInfo en-US
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "Repeat Purchase Rate": {
+			          "Repeat Rate": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -100,6 +100,132 @@ cultureInfo en-US
 			      "Terms": [
 			        {
 			          "Total Revenue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.repeat_customers": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "Repeat Customers"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Repeat Customers": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.onetime_customers": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "One-Time Customers"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "One-Time Customers": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.revenue_per_customer": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "Revenue per Customer"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Revenue per Customer": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.repeat_revenue_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "Repeat Revenue %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Repeat Revenue %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.average_purchase_frequency": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "Average Purchase Frequency"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Average Purchase Frequency": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.mp_convert_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "MP Convert %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "MP Convert %": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",

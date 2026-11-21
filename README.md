@@ -22,14 +22,14 @@ what is **planned** — nothing here is claimed as finished unless it ships in t
 |---|---|
 | Environment, PostgreSQL warehouse, ETL pipeline | ✅ Built |
 | Dimensional model (star schema) + data validation | ✅ Built |
-| 4 analytics marts | ✅ Built |
+| 5 analytics marts | ✅ Built |
 | **Case 1 — Customer Retention** | ✅ Built (SQL + dashboard) |
 | **Case 2 — Customer Value & Marketing Prioritisation** | ✅ Built (SQL + dashboard) |
 | **Case 3 — Customer Segmentation (value-tier, rule-based)** | ✅ Built (SQL + dashboard) |
 | **Case 4 — Order Fulfillment Funnel** | ✅ Built (SQL + dashboard) |
+| **Case 5 — Revenue Growth Analysis** | ✅ Built (SQL + mart) · dashboard page pending |
 | Power BI report (6 pages, 42 tables, 112 measures) | ✅ Built |
 | Case 3 upgrade — RFM + K-Means segmentation | 🔜 Planned |
-| **Case 5 — Revenue Growth Analysis** | 🔜 Planned |
 | **Case 6 — Experimentation / A/B Testing Framework** | 🔜 Planned |
 | Churn prediction model (classification + SHAP) | 🔜 Planned |
 | Executive Growth Strategy Report | 🔜 Planned |
@@ -50,7 +50,7 @@ what is **planned** — nothing here is claimed as finished unless it ships in t
   `Dim Sellers` around `Fact Orders`, `Fact Order Items`, `Fact Payments`, `Fact Reviews`.
 
 ### SQL analytics
-- **33 SQL files**: 4 analytics marts (~685 lines), 4 executive cases × 6 analyses each,
+- **40 SQL files**: 5 analytics marts, executive Cases 1–5 with 6 analyses each,
   plus setup / transform / validation scripts.
 - Each case ships `07_business_findings.md`, `08_recommendations.md`, and
   `09_dashboard_notes.md` — analysis tied to **decisions**, not just query output.
@@ -111,8 +111,14 @@ impact of timing. **Headline finding:** **8.1% of orders arrive late**, and late
 score **2.57★ vs 4.29★ on-time** — a 1.73★ hit; the warehouse-to-carrier handoff (~2.8
 days) is the main controllable delay, and high-value orders get no priority.
 
-### Case 5 — Where will future revenue come from? 🔜 Planned
-Revenue trends, category performance, repeat behaviour, and a growth portfolio matrix.
+### Case 5 — Where will future revenue come from? ✅ Built (SQL) · dashboard page pending
+Revenue-trend, category-performance, growth-portfolio and business-impact SQL on a
+category × month `revenue_growth_mart`. **Headline finding:** revenue is growing
+year-on-year (R$6.16M 2017 → R$7.39M 2018-to-Oct, peaking Nov-2017) but **concentrated**
+(top 10 categories = 62% of revenue; 18 of 74 categories = 80%) — and the biggest
+categories are also the **fastest growing** (*beleza_saude* +71%, *informatica* +65%).
+Growth remains acquisition-led, so repeat purchasing is the largest untapped lever. The
+dashboard page is not yet added to the report.
 
 ### Case 6 — Which experiment should we run next? 🔜 Planned
 A/B test design, sample-size estimation, hypothesis testing, significance and uplift —
@@ -123,7 +129,7 @@ delivered as an experimentation framework. *Not yet built.*
 # Roadmap (planned, not yet built)
 
 - **Case 3 ML upgrade:** RFM scoring + K-Means clustering + segment profiling.
-- **Case 5:** Revenue Growth Analysis + Growth Portfolio Matrix.
+- **Case 5 dashboard page:** wire `revenue_growth_mart` into the Power BI report.
 - **Case 6:** Experimentation / A/B testing framework.
 - **Churn prediction:** feature engineering, classification modeling, SHAP explainability,
   churn risk scores.
@@ -173,7 +179,7 @@ sql/
   transform/     Dimension + fact population
   validation/    Warehouse validation
   analytics_marts/   4 analytical marts (retention, marketing, segmentation, fulfillment)
-  executive_cases/   Cases 01–04: 6 analyses each + findings/recommendations/dashboard notes
+  executive_cases/   Cases 01–05: 6 analyses each + findings/recommendations/dashboard notes
 dashboards/      Power BI project (.pbip): report + semantic model
 powerbi/         Theme files
 docs/            Data dictionary, warehouse design, model/dashboard notes

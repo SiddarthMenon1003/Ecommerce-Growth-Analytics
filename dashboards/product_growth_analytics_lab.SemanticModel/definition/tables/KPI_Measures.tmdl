@@ -997,33 +997,6 @@ table KPI_Measures
 		displayFolder: Customer Segmentation Metrics
 		lineageTag: aa539da6-f6b5-4026-9089-fbde5a1d183e
 
-	column _Measures
-		dataType: string
-		isHidden
-		lineageTag: 72adaabc-e80b-4d95-80f5-f0218c94fc11
-		summarizeBy: none
-		sourceColumn: _Measures
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = Automatic
-
-	partition KPI_Measures = m
-		mode: import
-		source =
-				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "_Measures"}})
-				in
-				    #"Renamed Columns"
-
-	changedProperty = IsHidden
-
-	annotation PBI_ResultType = Table
-
-
-
 	/// Prior-month value of [Total Revenue] - KPI goal for month-over-month comparison.
 	measure 'Total Revenue Goal' = CALCULATE ( [Total Revenue], DATEADD ( 'Dim Date'[Date], -1, MONTH ) )
 		formatString: "R$"#,0
@@ -1053,3 +1026,29 @@ table KPI_Measures
 		formatString: 0.0%
 		displayFolder: KPI Goals
 		lineageTag: cc91e8d7-9e8a-4d07-9d87-22cdfbedc879
+
+	column _Measures
+		dataType: string
+		isHidden
+		lineageTag: 72adaabc-e80b-4d95-80f5-f0218c94fc11
+		summarizeBy: none
+		sourceColumn: _Measures
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI_Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "_Measures"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

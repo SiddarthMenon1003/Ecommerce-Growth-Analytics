@@ -1,0 +1,135 @@
+table 'public revenue_growth_mart'
+	lineageTag: 6ebeb3d4-9395-4f62-98a8-5442af7cb268
+
+	column product_category_name
+		dataType: string
+		lineageTag: c4c74821-7d84-4888-81bb-7cafac0a7f74
+		summarizeBy: none
+		sourceColumn: product_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_month
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8e16a14d-c14b-4ddc-87ac-1f72af41e896
+		summarizeBy: none
+		sourceColumn: revenue_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 81bdb9c9-7b11-4f9a-ad33-b177f0486534
+		summarizeBy: none
+		sourceColumn: revenue_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_month_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a5b710d-1b44-4541-9fd4-d02629275789
+		summarizeBy: none
+		sourceColumn: revenue_month_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column monthly_revenue
+		dataType: double
+		lineageTag: df891757-fb7d-4ff3-a142-bf80716f2cdf
+		summarizeBy: sum
+		sourceColumn: monthly_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monthly_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e487fc2-4775-4f3d-9537-67c011af2a88
+		summarizeBy: sum
+		sourceColumn: monthly_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column monthly_items
+		dataType: int64
+		formatString: 0
+		lineageTag: ee1d9475-77dd-4396-bbdf-0c7f119ed5fd
+		summarizeBy: sum
+		sourceColumn: monthly_items
+
+		annotation SummarizationSetBy = Automatic
+
+	column prev_month_revenue
+		dataType: double
+		lineageTag: 9dbda6d1-b438-49b4-836e-be75c9ef4f49
+		summarizeBy: none
+		sourceColumn: prev_month_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column mom_growth_pct
+		dataType: double
+		lineageTag: 3a17590e-6911-4007-8b0a-e8e2c6ae3b25
+		summarizeBy: none
+		sourceColumn: mom_growth_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column prev_year_revenue
+		dataType: double
+		lineageTag: 71ff2ac4-31cf-477f-916e-c6a809f57d94
+		summarizeBy: none
+		sourceColumn: prev_year_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column yoy_growth_pct
+		dataType: double
+		lineageTag: 188ccb00-24c2-4d11-8e58-3fb7690f0a5e
+		summarizeBy: none
+		sourceColumn: yoy_growth_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column category_total_revenue
+		dataType: double
+		lineageTag: 3b5d7828-01ae-42b8-aa68-e7692a6b6b19
+		summarizeBy: none
+		sourceColumn: category_total_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column category_revenue_rank
+		dataType: int64
+		formatString: 0
+		lineageTag: b3935d26-6b56-4f9a-80a2-25fe4c086902
+		summarizeBy: none
+		sourceColumn: category_revenue_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public revenue_growth_mart' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_revenue_growth_mart = Source{[Schema="public",Item="revenue_growth_mart"]}[Data]
+				in
+				    public_revenue_growth_mart
+
+	annotation PBI_ResultType = Table

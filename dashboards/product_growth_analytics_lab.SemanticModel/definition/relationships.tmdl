@@ -168,3 +168,13 @@ relationship 6553a763-c1cc-4dfe-8ab8-996cf41c2de5
 	fromColumn: 'public order_fulfillment_funnel_mart'.review_answer_timestamp
 	toColumn: LocalDateTable_d8fbf01b-7034-4670-aa4f-d220cf28542b.Date
 
+relationship 09b40ad4-f40b-4fa1-a667-4f8ee19bb1dd
+	fromColumn: 'public revenue_growth_mart'.revenue_month
+	toColumn: 'Dim Date'.Date
+
+relationship 3c17835f-8f51-4aca-af27-a3a989b6aac4
+	fromCardinality: many
+	toCardinality: many
+	fromColumn: 'public revenue_growth_mart'.product_category_name
+	toColumn: 'Dim Products'.'Product Category'
+

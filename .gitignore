@@ -22,3 +22,5 @@ Thumbs.db
 *.abf
 **/.pbi/cache.abf
 **/.pbi/localSettings.json
+# Power BI compiled binary (use the PBIP folders as source of truth)
+*.pbix

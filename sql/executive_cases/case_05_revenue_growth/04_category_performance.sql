@@ -65,18 +65,29 @@ SELECT
 FROM cumulative;
 
 ----------------------------------------------------------------------------
--- SECTION C : CATEGORY MOMENTUM (recent half vs prior half)
+-- SECTION C : CATEGORY MOMENTUM (same-period year-over-year)
 ----------------------------------------------------------------------------
--- Compares each category's revenue in the most recent 6 months of data against
--- the prior 6 months, to flag accelerating vs declining categories.
+-- Compares each category's current-year revenue to the prior year over the
+-- SAME calendar months, ending at the last COMPLETE month in the data. This
+-- avoids two traps that distort a naive trailing-6-month view: seasonality
+-- (the Nov Black Friday peak) and the partial final month of the dataset.
 
-WITH bounds AS (
-    SELECT MAX(order_purchase_timestamp)::date AS max_date FROM fact_orders
+WITH cur_year AS (
+    SELECT MAX(EXTRACT(YEAR FROM order_purchase_timestamp))::int AS yr
+    FROM fact_orders
+),
+cutoff AS (
+    -- last complete month of the current year = max month present minus 1
+    SELECT MAX(EXTRACT(MONTH FROM fo.order_purchase_timestamp))::int - 1 AS mo
+    FROM fact_orders fo
+    CROSS JOIN cur_year cy
+    WHERE EXTRACT(YEAR FROM fo.order_purchase_timestamp) = cy.yr
 ),
 item_rev AS (
     SELECT
         COALESCE(dp.product_category_name, '(unknown)') AS product_category_name,
-        fo.order_purchase_timestamp::date AS d,
+        EXTRACT(YEAR  FROM fo.order_purchase_timestamp)::int AS yr,
+        EXTRACT(MONTH FROM fo.order_purchase_timestamp)::int AS mo,
         oi.price
     FROM fact_order_items oi
     JOIN fact_orders fo ON oi.order_id = fo.order_id
@@ -85,23 +96,17 @@ item_rev AS (
 SELECT
     ir.product_category_name,
     ROUND(SUM(ir.price) FILTER (
-        WHERE ir.d > b.max_date - INTERVAL '6 months')::numeric, 2) AS recent_6m_revenue,
+        WHERE ir.yr = cy.yr     AND ir.mo <= co.mo)::numeric, 2) AS current_ytd_revenue,
     ROUND(SUM(ir.price) FILTER (
-        WHERE ir.d <= b.max_date - INTERVAL '6 months'
-          AND ir.d >  b.max_date - INTERVAL '12 months')::numeric, 2) AS prior_6m_revenue,
-    ROUND(
-        CASE WHEN SUM(ir.price) FILTER (
-                WHERE ir.d <= b.max_date - INTERVAL '6 months'
-                  AND ir.d >  b.max_date - INTERVAL '12 months') > 0
-             THEN (SUM(ir.price) FILTER (WHERE ir.d > b.max_date - INTERVAL '6 months')
-                 - SUM(ir.price) FILTER (WHERE ir.d <= b.max_date - INTERVAL '6 months'
-                                           AND ir.d >  b.max_date - INTERVAL '12 months'))
-                 / SUM(ir.price) FILTER (WHERE ir.d <= b.max_date - INTERVAL '6 months'
-                                           AND ir.d >  b.max_date - INTERVAL '12 months') * 100
-        END, 1
-    ) AS growth_pct
+        WHERE ir.yr = cy.yr - 1 AND ir.mo <= co.mo)::numeric, 2) AS prior_ytd_revenue,
+    ROUND((
+        100.0 * (SUM(ir.price) FILTER (WHERE ir.yr = cy.yr     AND ir.mo <= co.mo)
+               - SUM(ir.price) FILTER (WHERE ir.yr = cy.yr - 1 AND ir.mo <= co.mo))
+        / NULLIF(SUM(ir.price) FILTER (WHERE ir.yr = cy.yr - 1 AND ir.mo <= co.mo), 0)
+    )::numeric, 1) AS yoy_growth_pct
 FROM item_rev ir
-CROSS JOIN bounds b
-GROUP BY ir.product_category_name
-HAVING SUM(ir.price) > 50000          -- focus on material categories
-ORDER BY growth_pct DESC NULLS LAST;
+CROSS JOIN cur_year cy
+CROSS JOIN cutoff co
+GROUP BY ir.product_category_name, cy.yr, co.mo
+HAVING SUM(ir.price) FILTER (WHERE ir.yr = cy.yr - 1 AND ir.mo <= co.mo) > 30000
+ORDER BY yoy_growth_pct DESC NULLS LAST;

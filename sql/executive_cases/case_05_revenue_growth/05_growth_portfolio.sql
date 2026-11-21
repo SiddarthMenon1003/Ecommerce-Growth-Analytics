@@ -8,6 +8,10 @@ Objective:
 Place each material category on a revenue (size) x growth (momentum) grid and
 assign a portfolio role, to guide where to invest, defend, or divest.
 
+Momentum = same-period year-over-year (current year vs prior year over the same
+calendar months, ending at the last complete month) - this avoids seasonality
+and partial-month distortion from a naive trailing-window comparison.
+
 Quadrants (growth-share style):
   STAR         - high revenue, high growth   -> invest / scale
   CASH COW     - high revenue, low growth    -> defend / harvest
@@ -16,13 +20,21 @@ Quadrants (growth-share style):
 ===============================================================================
 */
 
-WITH bounds AS (
-    SELECT MAX(order_purchase_timestamp)::date AS max_date FROM fact_orders
+WITH cur_year AS (
+    SELECT MAX(EXTRACT(YEAR FROM order_purchase_timestamp))::int AS yr
+    FROM fact_orders
+),
+cutoff AS (
+    SELECT MAX(EXTRACT(MONTH FROM fo.order_purchase_timestamp))::int - 1 AS mo
+    FROM fact_orders fo
+    CROSS JOIN cur_year cy
+    WHERE EXTRACT(YEAR FROM fo.order_purchase_timestamp) = cy.yr
 ),
 item_rev AS (
     SELECT
         COALESCE(dp.product_category_name, '(unknown)') AS product_category_name,
-        fo.order_purchase_timestamp::date AS d,
+        EXTRACT(YEAR  FROM fo.order_purchase_timestamp)::int AS yr,
+        EXTRACT(MONTH FROM fo.order_purchase_timestamp)::int AS mo,
         oi.price
     FROM fact_order_items oi
     JOIN fact_orders fo ON oi.order_id = fo.order_id
@@ -32,34 +44,33 @@ cat AS (
     SELECT
         ir.product_category_name,
         SUM(ir.price) AS total_revenue,
-        SUM(ir.price) FILTER (
-            WHERE ir.d > b.max_date - INTERVAL '6 months') AS recent_6m,
-        SUM(ir.price) FILTER (
-            WHERE ir.d <= b.max_date - INTERVAL '6 months'
-              AND ir.d >  b.max_date - INTERVAL '12 months') AS prior_6m
+        SUM(ir.price) FILTER (WHERE ir.yr = cy.yr     AND ir.mo <= co.mo) AS current_ytd,
+        SUM(ir.price) FILTER (WHERE ir.yr = cy.yr - 1 AND ir.mo <= co.mo) AS prior_ytd
     FROM item_rev ir
-    CROSS JOIN bounds b
+    CROSS JOIN cur_year cy
+    CROSS JOIN cutoff co
     GROUP BY ir.product_category_name
 ),
 scored AS (
     SELECT
         product_category_name,
         ROUND(total_revenue::numeric, 2) AS total_revenue,
-        ROUND(
-            CASE WHEN prior_6m > 0
-                 THEN (recent_6m - prior_6m) / prior_6m * 100 END, 1
-        ) AS growth_pct,
+        ROUND((
+            CASE WHEN prior_ytd > 0
+                 THEN (current_ytd - prior_ytd) / prior_ytd * 100 END
+        )::numeric, 1) AS yoy_growth_pct,
         PERCENT_RANK() OVER (ORDER BY total_revenue) AS revenue_pctile,
         PERCENT_RANK() OVER (ORDER BY
-            CASE WHEN prior_6m > 0 THEN (recent_6m - prior_6m) / prior_6m END
+            CASE WHEN prior_ytd > 0 THEN (current_ytd - prior_ytd) / prior_ytd END
         ) AS growth_pctile
     FROM cat
     WHERE total_revenue > 50000
+      AND prior_ytd > 0           -- need a prior-year base to score momentum
 )
 SELECT
     product_category_name,
     total_revenue,
-    growth_pct,
+    yoy_growth_pct,
     CASE
         WHEN revenue_pctile >= 0.5 AND growth_pctile >= 0.5 THEN 'STAR'
         WHEN revenue_pctile >= 0.5 AND growth_pctile <  0.5 THEN 'CASH COW'

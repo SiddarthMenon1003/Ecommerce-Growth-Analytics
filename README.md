@@ -116,7 +116,8 @@ Revenue-trend, category-performance, growth-portfolio and business-impact SQL on
 category × month `revenue_growth_mart`. **Headline finding:** revenue is growing
 year-on-year (R$6.16M 2017 → R$7.39M 2018-to-Oct, peaking Nov-2017) but **concentrated**
 (top 10 categories = 62% of revenue; 18 of 74 categories = 80%) — and the biggest
-categories are also the **fastest growing** (*beleza_saude* +71%, *informatica* +65%).
+categories are also the **fastest growing** on a same-period YoY basis
+(*relogios* +175%, *beleza_saude* +158%, *informatica* +102%).
 Growth remains acquisition-led, so repeat purchasing is the largest untapped lever. The
 dashboard page is not yet added to the report.
 

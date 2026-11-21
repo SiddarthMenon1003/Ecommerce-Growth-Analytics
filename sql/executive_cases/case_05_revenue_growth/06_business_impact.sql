@@ -36,9 +36,9 @@ SELECT
         WHERE orr.order_purchase_timestamp = cf.first_purchase)::numeric, 2) AS new_revenue,
     ROUND(SUM(order_revenue) FILTER (
         WHERE orr.order_purchase_timestamp > cf.first_purchase)::numeric, 2) AS returning_revenue,
-    ROUND(100.0 * SUM(order_revenue) FILTER (
+    ROUND((100.0 * SUM(order_revenue) FILTER (
         WHERE orr.order_purchase_timestamp > cf.first_purchase)
-        / SUM(order_revenue), 1) AS returning_share_pct
+        / SUM(order_revenue))::numeric, 1) AS returning_share_pct
 FROM order_revenue orr
 JOIN customer_first cf ON orr.customer_unique_id = cf.customer_unique_id;
 
@@ -100,6 +100,6 @@ ranked AS (
     FROM category_rev
 )
 SELECT
-    ROUND(100.0 * SUM(category_revenue) FILTER (WHERE rn <= 5)  / MAX(total), 1) AS top5_share_pct,
-    ROUND(100.0 * SUM(category_revenue) FILTER (WHERE rn <= 10) / MAX(total), 1) AS top10_share_pct
+    ROUND((100.0 * SUM(category_revenue) FILTER (WHERE rn <= 5)  / MAX(total))::numeric, 1) AS top5_share_pct,
+    ROUND((100.0 * SUM(category_revenue) FILTER (WHERE rn <= 10) / MAX(total))::numeric, 1) AS top10_share_pct
 FROM ranked;

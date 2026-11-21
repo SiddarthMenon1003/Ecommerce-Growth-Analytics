@@ -28,10 +28,11 @@ still **acquisition-led rather than retention-led**. Annual revenue rose from **
 partial), so the apparent late-period softening is partly a data-coverage artifact.
 
 Growth is carried by a **small set of large, fast-growing categories**. The **top 10
-categories hold 62% of revenue** and just **18 of 74 categories make up 80%**. Crucially,
-the biggest categories are also the fastest growing — *beleza_saude* (+71%),
-*informatica_acessorios* (+65%), *relogios_presentes* (+52%) when comparing the most
-recent half-year to the prior one — so the portfolio's "stars" and "cash cows" overlap.
+categories hold 62% of revenue** and just **18 of 74 categories make up 80%**. On a
+same-period year-over-year basis (current year vs prior year over the same months), the
+biggest categories are also among the fastest growing — *relogios_presentes* **+175%**,
+*utilidades_domesticas* **+159%**, *beleza_saude* **+158%**, *informatica_acessorios*
+**+102%** — so the portfolio's "Stars" and "Cash Cows" overlap at the top.
 
 The largest structural risk to future revenue is the same one surfaced in Cases 1–2:
 the business **re-acquires rather than retains**, so revenue growth depends on an
@@ -64,9 +65,16 @@ a few categories carry the business, so their health is a material revenue risk.
 
 # Key Finding 3 — The biggest categories are also the fastest growing
 
-Comparing the most recent six months to the prior six, several of the largest categories
-are **accelerating**: *beleza_saude* **+71%**, *informatica_acessorios* **+65%**,
-*relogios_presentes* **+52%**, *esporte_lazer* **+40%**, *moveis_decoracao* **+38%**.
+On a **same-period year-over-year** basis (current-year-to-date vs the same months of the
+prior year, ending at the last complete month — which removes seasonality and partial-tail
+distortion), the whole business is up roughly **+140%** YoY, and several of the largest
+categories are **accelerating fastest**: *relogios_presentes* **+175%**,
+*utilidades_domesticas* **+159%**, *beleza_saude* **+158%**, *informatica_acessorios*
+**+102%**, *esporte_lazer* **+92%**.
+
+> **Method note.** A naive trailing-6-month comparison is misleading here because the
+> Nov Black Friday peak and the dataset's partial final month skew it negative. The
+> same-period YoY measure (used in `04` Section C and `05`) is the honest read.
 
 **Implication:** the growth portfolio's **Stars** (high revenue + high growth) are clear.
 Investment should concentrate where size and momentum already coincide, rather than being

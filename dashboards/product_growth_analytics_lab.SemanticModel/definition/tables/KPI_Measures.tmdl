@@ -1052,3 +1052,59 @@ table KPI_Measures
 
 	annotation PBI_ResultType = Table
 
+
+
+	measure 'RG Total Revenue' = SUM('public revenue_growth_mart'[monthly_revenue])
+		formatString: "R$"#,0
+		displayFolder: Revenue Growth
+		lineageTag: a505d2d2-6efc-4222-a530-5b98a08d851f
+
+	measure 'RG Total Orders' = SUM('public revenue_growth_mart'[monthly_orders])
+		formatString: #,0
+		displayFolder: Revenue Growth
+		lineageTag: c510f718-1f0b-4a03-bde3-55681f7fbf77
+
+	measure 'RG Total Items' = SUM('public revenue_growth_mart'[monthly_items])
+		formatString: #,0
+		displayFolder: Revenue Growth
+		lineageTag: 18b70cf3-47e0-4b8c-861b-35ed865d5fd6
+
+	measure 'RG Categories' = DISTINCTCOUNT('public revenue_growth_mart'[product_category_name])
+		formatString: 0
+		displayFolder: Revenue Growth
+		lineageTag: 3e26fa6a-2d23-4b8c-ade9-b8356f21514b
+
+	measure 'RG Avg Monthly Revenue' = AVERAGEX ( VALUES ( 'public revenue_growth_mart'[revenue_month] ), [RG Total Revenue] )
+		formatString: "R$"#,0
+		displayFolder: Revenue Growth
+		lineageTag: 50b9b7cb-9fd5-41dc-89ed-0a3b118c8d8b
+
+	measure 'RG YoY %' =
+			VAR ly = MAX ( 'public revenue_growth_mart'[revenue_year] )
+			VAR cur = CALCULATE ( [RG Total Revenue], 'public revenue_growth_mart'[revenue_year] = ly )
+			VAR prev = CALCULATE ( [RG Total Revenue], 'public revenue_growth_mart'[revenue_year] = ly - 1 )
+			RETURN DIVIDE ( cur - prev, prev )
+		formatString: 0.0%
+		displayFolder: Revenue Growth
+		lineageTag: b210bd4c-ce34-42a1-8057-48c7a4a1a9fa
+
+	measure 'RG Top Category Share %' =
+			VAR total = CALCULATE ( [RG Total Revenue], ALL ( 'public revenue_growth_mart'[product_category_name] ) )
+			VAR topcat = MAXX ( VALUES ( 'public revenue_growth_mart'[product_category_name] ), CALCULATE ( [RG Total Revenue] ) )
+			RETURN DIVIDE ( topcat, total )
+		formatString: 0.0%
+		displayFolder: Revenue Growth
+		lineageTag: 458185c7-0044-430f-a7a5-512c124cec2a
+
+	measure 'RG Cumulative Revenue %' =
+			VAR catrev = [RG Total Revenue]
+			VAR total = CALCULATE ( [RG Total Revenue], ALLSELECTED ( 'public revenue_growth_mart'[product_category_name] ) )
+			VAR cumulative =
+			    CALCULATE (
+			        [RG Total Revenue],
+			        FILTER ( ALLSELECTED ( 'public revenue_growth_mart'[product_category_name] ), [RG Total Revenue] >= catrev )
+			    )
+			RETURN DIVIDE ( cumulative, total )
+		formatString: 0.0%
+		displayFolder: Revenue Growth
+		lineageTag: 373d84c0-f944-483e-835c-570885c0073c

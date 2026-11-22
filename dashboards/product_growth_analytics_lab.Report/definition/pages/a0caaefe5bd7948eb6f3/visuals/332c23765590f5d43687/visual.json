@@ -23,11 +23,11 @@
                       "Entity": "public customer_rfm_segments"
                     }
                   },
-                  "Property": "customer_unique_id"
+                  "Property": "segment_name"
                 }
               },
-              "queryRef": "public customer_rfm_segments.customer_unique_id",
-              "nativeQueryRef": "customer_unique_id",
+              "queryRef": "public customer_rfm_segments.segment_name",
+              "nativeQueryRef": "segment_name",
               "active": true
             }
           ]
@@ -55,22 +55,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public customer_rfm_segments"
-                        }
-                      },
-                      "Property": "recency"
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
                     }
                   },
-                  "Function": 0
+                  "Property": "RFM Avg Recency"
                 }
               },
-              "queryRef": "Sum(public customer_rfm_segments.recency)",
-              "nativeQueryRef": "Sum of recency"
+              "queryRef": "KPI_Measures.RFM Avg Recency",
+              "nativeQueryRef": "RFM Avg Recency"
             }
           ]
         },
@@ -78,22 +73,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public customer_rfm_segments"
-                        }
-                      },
-                      "Property": "monetary"
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
                     }
                   },
-                  "Function": 0
+                  "Property": "RFM Avg Monetary"
                 }
               },
-              "queryRef": "Sum(public customer_rfm_segments.monetary)",
-              "nativeQueryRef": "Sum of monetary"
+              "queryRef": "KPI_Measures.RFM Avg Monetary",
+              "nativeQueryRef": "RFM Avg Monetary"
             }
           ]
         },
@@ -101,22 +91,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "public customer_rfm_segments"
-                        }
-                      },
-                      "Property": "monetary"
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
                     }
                   },
-                  "Function": 0
+                  "Property": "RFM Customers"
                 }
               },
-              "queryRef": "Sum(public customer_rfm_segments.monetary)",
-              "nativeQueryRef": "Sum of monetary"
+              "queryRef": "KPI_Measures.RFM Customers",
+              "nativeQueryRef": "RFM Customers"
             }
           ]
         }
@@ -422,6 +407,37 @@
             ]
           }
         }
+      ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#020617'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "visualContainerObjects": {
@@ -431,7 +447,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Customer RFM Map \u2014 Recency vs Monetary (by segment)'"
+                  "Value": "'Segment Map \u2014 Avg Recency vs Avg Spend (bubble = customers)'"
                 }
               }
             },

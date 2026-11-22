@@ -1027,33 +1027,6 @@ table KPI_Measures
 		displayFolder: KPI Goals
 		lineageTag: cc91e8d7-9e8a-4d07-9d87-22cdfbedc879
 
-	column _Measures
-		dataType: string
-		isHidden
-		lineageTag: 72adaabc-e80b-4d95-80f5-f0218c94fc11
-		summarizeBy: none
-		sourceColumn: _Measures
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = Automatic
-
-	partition KPI_Measures = m
-		mode: import
-		source =
-				let
-				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
-				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
-				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "_Measures"}})
-				in
-				    #"Renamed Columns"
-
-	changedProperty = IsHidden
-
-	annotation PBI_ResultType = Table
-
-
-
 	measure 'RG Total Revenue' = SUM('public revenue_growth_mart'[monthly_revenue])
 		formatString: "R$"#,0
 		displayFolder: Revenue Growth
@@ -1081,8 +1054,9 @@ table KPI_Measures
 
 	measure 'RG YoY %' =
 			VAR ly = MAX ( 'public revenue_growth_mart'[revenue_year] )
-			VAR cur = CALCULATE ( [RG Total Revenue], 'public revenue_growth_mart'[revenue_year] = ly )
-			VAR prev = CALCULATE ( [RG Total Revenue], 'public revenue_growth_mart'[revenue_year] = ly - 1 )
+			VAR cutoff = CALCULATE ( MAX ( 'public revenue_growth_mart'[revenue_month_num] ), 'public revenue_growth_mart'[revenue_year] = ly )
+			VAR cur = CALCULATE ( [RG Total Revenue], 'public revenue_growth_mart'[revenue_year] = ly, 'public revenue_growth_mart'[revenue_month_num] <= cutoff )
+			VAR prev = CALCULATE ( [RG Total Revenue], 'public revenue_growth_mart'[revenue_year] = ly - 1, 'public revenue_growth_mart'[revenue_month_num] <= cutoff )
 			RETURN DIVIDE ( cur - prev, prev )
 		formatString: 0.0%
 		displayFolder: Revenue Growth
@@ -1108,3 +1082,29 @@ table KPI_Measures
 		formatString: 0.0%
 		displayFolder: Revenue Growth
 		lineageTag: 373d84c0-f944-483e-835c-570885c0073c
+
+	column _Measures
+		dataType: string
+		isHidden
+		lineageTag: 72adaabc-e80b-4d95-80f5-f0218c94fc11
+		summarizeBy: none
+		sourceColumn: _Measures
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI_Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "_Measures"}})
+				in
+				    #"Renamed Columns"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

@@ -14,7 +14,6 @@ annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
 
 ref table 'Dim Customers'
 ref table 'Dim Products'
-ref table 'public revenue_growth_mart'
 ref table 'Dim Sellers'
 ref table 'Fact Order Items'
 ref table DateTableTemplate_d32126a4-6804-43e8-9d67-067e5ac6b6d6
@@ -55,6 +54,7 @@ ref table LocalDateTable_322477d6-c18f-4fc4-a961-7c73c9e2b66c
 ref table LocalDateTable_e6f66951-77c8-4721-b5fc-743e3253e90e
 ref table LocalDateTable_7ea01aee-436b-4c77-b805-4abf8e58b283
 ref table LocalDateTable_d8fbf01b-7034-4670-aa4f-d220cf28542b
+ref table 'public revenue_growth_mart'
 
 ref cultureInfo en-US
 

@@ -235,6 +235,111 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "kpi_measures.rg_total_revenue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RG Total Revenue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total Revenue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.rg_total_orders": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RG Total Orders"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total Orders": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.rg_categories": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RG Categories"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Categories": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.rg_top_category_share_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RG Top Category Share %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Top Category Share": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.rg_yoy_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RG YoY %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Revenue YoY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  }
 			}

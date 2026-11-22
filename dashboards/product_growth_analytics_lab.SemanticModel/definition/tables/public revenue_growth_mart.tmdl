@@ -133,3 +133,4 @@ table 'public revenue_growth_mart'
 				    public_revenue_growth_mart
 
 	annotation PBI_ResultType = Table
+

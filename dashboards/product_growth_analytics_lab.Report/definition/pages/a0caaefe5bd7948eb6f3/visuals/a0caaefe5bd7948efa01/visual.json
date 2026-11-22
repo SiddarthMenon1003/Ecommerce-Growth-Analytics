@@ -19,10 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Customer Value Analysis",
+                    "value": "Segmentation",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "15pt",
+                      "fontSize": "19pt",
                       "color": "#020617"
                     }
                   }
@@ -31,9 +31,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "Segmenting customers by value shows where revenue truly comes from.",
+                    "value": "ML segments (RFM + K-Means): Big Spenders are ~30% of customers but 57% of revenue \u2014 and buy once.",
                     "textStyle": {
-                      "fontSize": "9pt",
+                      "fontSize": "10pt",
                       "color": "#64748B"
                     }
                   }

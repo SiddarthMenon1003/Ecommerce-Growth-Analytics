@@ -1,0 +1,66 @@
+table 'public customer_rfm_segments'
+	lineageTag: 353b6bf7-1725-4369-9674-bdc68ecf740f
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 4bbd4bd9-6fef-4a19-b519-9a594a589b73
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column recency
+		dataType: int64
+		formatString: 0
+		lineageTag: e2e2d92f-3839-49d4-a2a4-9b38fe249880
+		summarizeBy: none
+		sourceColumn: recency
+
+		annotation SummarizationSetBy = Automatic
+
+	column frequency
+		dataType: int64
+		formatString: 0
+		lineageTag: 212b0860-f118-4913-a5e2-d904ec773459
+		summarizeBy: none
+		sourceColumn: frequency
+
+		annotation SummarizationSetBy = Automatic
+
+	column monetary
+		dataType: double
+		lineageTag: acdf0c48-6ad5-4261-8686-77b60f9d5b34
+		summarizeBy: sum
+		sourceColumn: monetary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cluster
+		dataType: int64
+		formatString: 0
+		lineageTag: fd3ef067-d15f-456b-bc56-eda3864f44a5
+		summarizeBy: none
+		sourceColumn: cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_name
+		dataType: string
+		lineageTag: e6bb7a18-3270-4097-b8af-a2894c0f611f
+		summarizeBy: none
+		sourceColumn: segment_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public customer_rfm_segments' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_customer_rfm_segments = Source{[Schema="public",Item="customer_rfm_segments"]}[Data]
+				in
+				    public_customer_rfm_segments
+
+	annotation PBI_ResultType = Table

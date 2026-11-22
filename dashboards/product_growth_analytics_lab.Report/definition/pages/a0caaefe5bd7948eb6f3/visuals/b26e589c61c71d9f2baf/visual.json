@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "public customer_value_mart"
+                      "Entity": "public customer_rfm_segments"
                     }
                   },
-                  "Property": "customer_value_segment"
+                  "Property": "segment_name"
                 }
               },
-              "queryRef": "public customer_value_mart.customer_value_segment",
-              "nativeQueryRef": "customer_value_segment",
+              "queryRef": "public customer_rfm_segments.segment_name",
+              "nativeQueryRef": "segment_name",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "KPI_Measures"
                     }
                   },
-                  "Property": "CV Average Orders Per Customer"
+                  "Property": "RFM Customers"
                 }
               },
-              "queryRef": "KPI_Measures.CV Average Orders Per Customer",
-              "nativeQueryRef": "CV Average Orders Per Customer"
+              "queryRef": "KPI_Measures.RFM Customers",
+              "nativeQueryRef": "RFM Customers"
             }
           ]
         }
@@ -61,7 +61,7 @@
                     "Entity": "KPI_Measures"
                   }
                 },
-                "Property": "CV Average Orders Per Customer"
+                "Property": "RFM Customers"
               }
             },
             "direction": "Descending"
@@ -209,7 +209,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Avg Orders per Customer by Segment'"
+                  "Value": "'Customers by Segment'"
                 }
               }
             },

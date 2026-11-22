@@ -29,14 +29,15 @@ what is **planned** — nothing here is claimed as finished unless it ships in t
 | **Case 4 — Order Fulfillment Funnel** | ✅ Built (SQL + dashboard) |
 | **Case 5 — Revenue Growth Analysis** | ✅ Built (SQL + mart + dashboard page) |
 | **Case 6 — Experimentation / A/B Testing** | ✅ Built (toolkit + worked test) |
-| Power BI report (7 pages, 43 tables, 120 measures) | ✅ Built |
-| Case 3 upgrade — RFM + K-Means segmentation | 🔜 Planned |
+| Power BI report (7 pages, 44 tables, 125 measures) | ✅ Built |
+| **Case 3 upgrade — RFM + K-Means segmentation** | ✅ Built (`src/ml` + dashboard page) |
 | Churn prediction model (classification + SHAP) | 🔜 Planned |
 | Executive Growth Strategy Report | 🔜 Planned |
 
-> **Honesty note.** The Python ML layer (`src/ml`) and the experimentation work are
-> scaffolded but **not yet implemented**. Where the README describes RFM, K-Means,
-> churn modeling, or A/B testing, treat it as the **roadmap**, not delivered work.
+> **Honesty note.** Churn modeling (classification + SHAP) and the executive strategy
+> report are still **roadmap**, not delivered work. Everything else above — including
+> the RFM + K-Means ML layer (`src/ml`) and the A/B testing toolkit (`src/experimentation`)
+> — is implemented and runs against the live database.
 
 ---
 
@@ -58,9 +59,9 @@ what is **planned** — nothing here is claimed as finished unless it ships in t
   subqueries, multi-table joins.
 
 ### Business intelligence
-- **Power BI report (PBIP format)** with a semantic model of **42 tables and 112 DAX
-  measures**, and a **6-page narrative**: Overview · Retention · CLV · Segmentation ·
-  Marketing · Fulfillment — styled on the Microsoft Fluent2 design system.
+- **Power BI report (PBIP format)** with a semantic model of **44 tables and 125 DAX
+  measures**, and a **7-page narrative**: Overview · Retention · CLV · Segmentation ·
+  Marketing · Fulfillment · Revenue Growth — styled on the Microsoft Fluent2 design system.
 
 ---
 
@@ -93,12 +94,16 @@ Value-based prioritisation (Convert / Nurture / Low Priority tiers), value conce
 > `sql/executive_cases/case_02_marketing_roi/07_business_findings.md` for the framing and
 > the instrumentation needed to measure real marketing ROI later.
 
-### Case 3 — Which customers matter most? ✅ Built (rule-based) · 🔜 ML upgrade planned
-**What's built:** a **rule-based High / Medium / Low value segmentation** with behavioural
-profiling and a personalization strategy, feeding a **Segmentation** page (customer value
-map, per-segment order value and frequency, top customers).
-**Planned:** upgrade to **RFM + K-Means clustering** with named segments (Champions, Loyal,
-At-Risk, Lost). *Not yet built.*
+### Case 3 — Which customers matter most? ✅ Built (rule-based + ML upgrade)
+**What's built:** a **rule-based High / Medium / Low value segmentation** (SQL) *plus* an
+**ML upgrade** — **RFM + K-Means clustering** at the true `customer_unique_id` grain
+(`src/ml/rfm_segmentation.py`, `python -m src.ml.rfm_segmentation`), writing a named
+`customer_rfm_segments` table back to Postgres (96,095 customers, k=4 chosen via elbow +
+silhouette): **Big Spenders · Hibernating · Recent · Champions**.
+**Key finding:** Big Spenders are ~30% of customers but **57% of revenue — and buy only
+once**, the single biggest growth lever. The **Segmentation** page is built on these ML
+segments (segment distribution, revenue by segment, RFM profile, recency×monetary map).
+See `sql/executive_cases/case_03_customer_segmentation/10_rfm_ml_segmentation.md`.
 
 ### Case 4 — Order fulfillment: is delivery helping or hurting growth? ✅ Built
 > **Scope note:** Olist has **no clickstream** (no page views, carts, or checkout events),

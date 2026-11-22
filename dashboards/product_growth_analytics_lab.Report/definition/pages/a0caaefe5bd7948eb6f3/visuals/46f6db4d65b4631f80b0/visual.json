@@ -23,32 +23,15 @@
                       "Entity": "KPI_Measures"
                     }
                   },
-                  "Property": "CV Average Order Value"
+                  "Property": "RFM Revenue"
                 }
               },
-              "queryRef": "KPI_Measures.CV Average Order Value",
-              "nativeQueryRef": "CV Average Order Value"
+              "queryRef": "KPI_Measures.RFM Revenue",
+              "nativeQueryRef": "RFM Revenue",
+              "displayName": "Total Revenue"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "KPI_Measures"
-                  }
-                },
-                "Property": "CV Average Order Value"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "visualContainerObjects": {

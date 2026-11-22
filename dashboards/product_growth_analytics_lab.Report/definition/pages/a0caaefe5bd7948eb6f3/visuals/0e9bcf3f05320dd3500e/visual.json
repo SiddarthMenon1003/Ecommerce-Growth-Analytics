@@ -23,32 +23,15 @@
                       "Entity": "KPI_Measures"
                     }
                   },
-                  "Property": "CV Total Revenue"
+                  "Property": "RFM Customers"
                 }
               },
-              "queryRef": "KPI_Measures.CV Total Revenue",
-              "nativeQueryRef": "CV Total Revenue"
+              "queryRef": "KPI_Measures.RFM Customers",
+              "nativeQueryRef": "RFM Customers",
+              "displayName": "Customers"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "KPI_Measures"
-                  }
-                },
-                "Property": "CV Total Revenue"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "visualContainerObjects": {

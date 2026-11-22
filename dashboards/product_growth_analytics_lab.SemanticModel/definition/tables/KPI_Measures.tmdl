@@ -1108,3 +1108,29 @@ table KPI_Measures
 
 	annotation PBI_ResultType = Table
 
+
+
+	measure 'RFM Customers' = COUNTROWS ( 'public customer_rfm_segments' )
+		formatString: #,0
+		displayFolder: RFM Segments
+		lineageTag: 2d922915-0594-414c-8eee-76d3737bbb16
+
+	measure 'RFM Revenue' = SUM ( 'public customer_rfm_segments'[monetary] )
+		formatString: "R$"#,0
+		displayFolder: RFM Segments
+		lineageTag: 5d7f3d29-9d73-412c-9afd-30b2abd0f7e5
+
+	measure 'RFM Avg Recency' = AVERAGE ( 'public customer_rfm_segments'[recency] )
+		formatString: #,0
+		displayFolder: RFM Segments
+		lineageTag: a4bcf1da-5295-4d98-bb95-9eabba6c5e53
+
+	measure 'RFM Avg Frequency' = AVERAGE ( 'public customer_rfm_segments'[frequency] )
+		formatString: 0.00
+		displayFolder: RFM Segments
+		lineageTag: ef5e7fc2-6257-45c8-9ee3-272f1ad9cbfd
+
+	measure 'RFM Avg Monetary' = AVERAGE ( 'public customer_rfm_segments'[monetary] )
+		formatString: "R$"#,0
+		displayFolder: RFM Segments
+		lineageTag: d1ecef37-9cc5-471d-9999-bd4cc3e73664

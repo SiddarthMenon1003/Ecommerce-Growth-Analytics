@@ -8,11 +8,12 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Dim Customers","Dim Products","Dim Sellers","Fact Order Items","Fact Orders","Fact Payments","Fact Reviews","KPI_Measures","public customer_cohorts","public customer_value_mart","public marketing_roi_mart","public customer_segmentation_mart","public order_fulfillment_funnel_mart","public revenue_growth_mart"]
+annotation PBI_QueryOrder = ["Dim Customers","Dim Products","Dim Sellers","Fact Order Items","Fact Orders","Fact Payments","Fact Reviews","KPI_Measures","public customer_cohorts","public customer_value_mart","public marketing_roi_mart","public customer_segmentation_mart","public order_fulfillment_funnel_mart","public revenue_growth_mart","public customer_rfm_segments"]
 
 annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
 
 ref table 'Dim Customers'
+ref table 'public customer_rfm_segments'
 ref table 'Dim Products'
 ref table 'Dim Sellers'
 ref table 'Fact Order Items'

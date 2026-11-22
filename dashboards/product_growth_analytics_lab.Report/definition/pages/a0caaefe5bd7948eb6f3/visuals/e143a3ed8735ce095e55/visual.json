@@ -10,7 +10,7 @@
     "tabOrder": 10003
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "lineClusteredColumnComboChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Dim Customers"
+                      "Entity": "public customer_rfm_segments"
                     }
                   },
-                  "Property": "Customer Short ID"
+                  "Property": "segment_name"
                 }
               },
-              "queryRef": "Dim Customers.Customer Short ID",
-              "nativeQueryRef": "Customer Short ID",
+              "queryRef": "public customer_rfm_segments.segment_name",
+              "nativeQueryRef": "segment_name",
               "active": true
             }
           ]
@@ -42,32 +42,32 @@
                       "Entity": "KPI_Measures"
                     }
                   },
-                  "Property": "Customer Revenue"
+                  "Property": "RFM Avg Monetary"
                 }
               },
-              "queryRef": "KPI_Measures.Customer Revenue",
-              "nativeQueryRef": "Customer Revenue"
+              "queryRef": "KPI_Measures.RFM Avg Monetary",
+              "nativeQueryRef": "RFM Avg Monetary"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "RFM Avg Recency"
+                }
+              },
+              "queryRef": "KPI_Measures.RFM Avg Recency",
+              "nativeQueryRef": "RFM Avg Recency"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "KPI_Measures"
-                  }
-                },
-                "Property": "Customer Revenue"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
@@ -77,7 +77,32 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top'"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
                 }
               }
             }
@@ -128,29 +153,23 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
                   "Value": "true"
                 }
               }
             },
-            "color": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelColor": {
               "solid": {
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#020617'"
+                      "Value": "'#64748B'"
                     }
                   }
                 }
@@ -163,10 +182,10 @@
                 }
               }
             },
-            "labelDisplayUnits": {
+            "gridlineShow": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "false"
                 }
               }
             }
@@ -209,7 +228,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Top 10 Customers by Revenue'"
+                  "Value": "'Segment Profile: Avg Spend & Recency'"
                 }
               }
             },
@@ -357,111 +376,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "a5698ecef3fe484eae14",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Dim Customers"
-              }
-            },
-            "Property": "Customer Short ID"
-          }
-        },
-        "type": "TopN",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "subquery",
-              "Expression": {
-                "Subquery": {
-                  "Query": {
-                    "Version": 2,
-                    "From": [
-                      {
-                        "Name": "d",
-                        "Entity": "Dim Customers",
-                        "Type": 0
-                      },
-                      {
-                        "Name": "k",
-                        "Entity": "KPI_Measures",
-                        "Type": 0
-                      }
-                    ],
-                    "Select": [
-                      {
-                        "Column": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Source": "d"
-                            }
-                          },
-                          "Property": "Customer Short ID"
-                        },
-                        "Name": "field"
-                      }
-                    ],
-                    "OrderBy": [
-                      {
-                        "Direction": 2,
-                        "Expression": {
-                          "Measure": {
-                            "Expression": {
-                              "SourceRef": {
-                                "Source": "k"
-                              }
-                            },
-                            "Property": "Customer Revenue"
-                          }
-                        }
-                      }
-                    ],
-                    "Top": 10
-                  }
-                }
-              },
-              "Type": 2
-            },
-            {
-              "Name": "d",
-              "Entity": "Dim Customers",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "d"
-                          }
-                        },
-                        "Property": "Customer Short ID"
-                      }
-                    }
-                  ],
-                  "Table": {
-                    "SourceRef": {
-                      "Source": "subquery"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User"
-      }
-    ]
   }
 }

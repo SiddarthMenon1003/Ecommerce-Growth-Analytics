@@ -172,3 +172,7 @@ relationship 09b40ad4-f40b-4fa1-a667-4f8ee19bb1dd
 	fromColumn: 'public revenue_growth_mart'.revenue_month
 	toColumn: 'Dim Date'.Date
 
+relationship 48e806d5-2d57-49c4-b938-1efd12dff7cb
+	fromColumn: 'Dim Customers'.customer_unique_id
+	toColumn: 'public customer_rfm_segments'.customer_unique_id
+

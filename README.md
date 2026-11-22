@@ -27,10 +27,10 @@ what is **planned** — nothing here is claimed as finished unless it ships in t
 | **Case 2 — Customer Value & Marketing Prioritisation** | ✅ Built (SQL + dashboard) |
 | **Case 3 — Customer Segmentation (value-tier, rule-based)** | ✅ Built (SQL + dashboard) |
 | **Case 4 — Order Fulfillment Funnel** | ✅ Built (SQL + dashboard) |
-| **Case 5 — Revenue Growth Analysis** | ✅ Built (SQL + mart) · dashboard page pending |
-| Power BI report (6 pages, 42 tables, 112 measures) | ✅ Built |
+| **Case 5 — Revenue Growth Analysis** | ✅ Built (SQL + mart + dashboard page) |
+| **Case 6 — Experimentation / A/B Testing** | ✅ Built (toolkit + worked test) |
+| Power BI report (7 pages, 43 tables, 120 measures) | ✅ Built |
 | Case 3 upgrade — RFM + K-Means segmentation | 🔜 Planned |
-| **Case 6 — Experimentation / A/B Testing Framework** | 🔜 Planned |
 | Churn prediction model (classification + SHAP) | 🔜 Planned |
 | Executive Growth Strategy Report | 🔜 Planned |
 
@@ -50,8 +50,8 @@ what is **planned** — nothing here is claimed as finished unless it ships in t
   `Dim Sellers` around `Fact Orders`, `Fact Order Items`, `Fact Payments`, `Fact Reviews`.
 
 ### SQL analytics
-- **40 SQL files**: 5 analytics marts, executive Cases 1–5 with 6 analyses each,
-  plus setup / transform / validation scripts.
+- **40+ SQL files**: 5 analytics marts, executive Cases 1–5 with 6 analyses each
+  (Case 6 adds observational-data SQL), plus setup / transform / validation scripts.
 - Each case ships `07_business_findings.md`, `08_recommendations.md`, and
   `09_dashboard_notes.md` — analysis tied to **decisions**, not just query output.
 - SQL depth: CTEs, window & ranking functions (`ROW_NUMBER`, `RANK`, `NTILE`, `LAG`/`LEAD`),
@@ -111,27 +111,34 @@ impact of timing. **Headline finding:** **8.1% of orders arrive late**, and late
 score **2.57★ vs 4.29★ on-time** — a 1.73★ hit; the warehouse-to-carrier handoff (~2.8
 days) is the main controllable delay, and high-value orders get no priority.
 
-### Case 5 — Where will future revenue come from? ✅ Built (SQL) · dashboard page pending
+### Case 5 — Where will future revenue come from? ✅ Built (SQL + dashboard page)
 Revenue-trend, category-performance, growth-portfolio and business-impact SQL on a
 category × month `revenue_growth_mart`. **Headline finding:** revenue is growing
 year-on-year (R$6.16M 2017 → R$7.39M 2018-to-Oct, peaking Nov-2017) but **concentrated**
 (top 10 categories = 62% of revenue; 18 of 74 categories = 80%) — and the biggest
 categories are also the **fastest growing** on a same-period YoY basis
 (*relogios* +175%, *beleza_saude* +158%, *informatica* +102%).
-Growth remains acquisition-led, so repeat purchasing is the largest untapped lever. The
-dashboard page is not yet added to the report.
+Growth remains acquisition-led, so repeat purchasing is the largest untapped lever. A
+dedicated **Revenue Growth** page (area trend, category Pareto, growth-portfolio scatter,
+waterfall) is wired into the report.
 
-### Case 6 — Which experiment should we run next? 🔜 Planned
-A/B test design, sample-size estimation, hypothesis testing, significance and uplift —
-delivered as an experimentation framework. *Not yet built.*
+### Case 6 — Which experiment should we run next? ✅ Built (framework + worked test)
+> **Scope note:** Olist has **no randomized-experiment data**, so a true A/B test can't be
+> run on it. Case 6 delivers a reusable **statistics toolkit** + a **worked test on real
+> observational data** + **design templates** — honestly scoped.
+
+A/B design/evaluation toolkit (`src/experimentation/ab_toolkit.py`: sample size, power,
+MDE, Welch t-test, two-proportion z-test) and a runnable worked analysis
+(`experiment_analysis.py`). **Headline finding:** late delivery is associated with a
+**~2-star lower review** (4.29★→2.27★; Welch t≈−101, p≈0, Cohen's d≈−1.71 — large). Design
+sizing: a fulfillment review-lift test is cheap (~2.5K/arm for 0.1★); the second-purchase
+nudge is expensive (~20K/arm for +0.5pp on a 3.1% base).
 
 ---
 
 # Roadmap (planned, not yet built)
 
 - **Case 3 ML upgrade:** RFM scoring + K-Means clustering + segment profiling.
-- **Case 5 dashboard page:** wire `revenue_growth_mart` into the Power BI report.
-- **Case 6:** Experimentation / A/B testing framework.
 - **Churn prediction:** feature engineering, classification modeling, SHAP explainability,
   churn risk scores.
 - **Executive Growth Strategy Report:** current performance → root cause → recommendations
@@ -145,11 +152,12 @@ delivered as an experimentation framework. *Not yet built.*
 - **PostgreSQL** data warehouse (star schema) with validation.
 - **Python ETL** (`src/`): extract / transform / load, staging, warehouse build & validate.
 - **Advanced SQL:** CTEs, window functions, ranking functions, subqueries, complex joins.
-- **Power BI (DAX):** 112 measures, 6-page report, Fluent2 design system.
+- **Power BI (DAX):** 120 measures, 7-page report, Fluent2 design system.
+- **Statistics (Python):** A/B test design (power, sample size, MDE) + evaluation
+  (Welch t-test, two-proportion z-test, confidence intervals, effect size) — scipy/statsmodels.
 
 **Planned**
 - **Machine learning (Python):** RFM, K-Means, churn classification, SHAP.
-- **Statistics:** A/B testing, hypothesis testing, confidence intervals, uplift.
 - Additional visualization (Plotly / Streamlit) if needed.
 
 ---
@@ -163,10 +171,12 @@ delivered as an experimentation framework. *Not yet built.*
 - Cohort, retention, value-segmentation and fulfillment analysis · executive-style
   findings & recommendations
 
+- Statistics & experimentation: A/B test design (power/sample size/MDE) and evaluation
+  (Welch t-test, two-proportion z-test, confidence intervals, effect size)
+
 **Planned (not yet demonstrated)**
 - Machine learning: RFM, K-Means, churn prediction, SHAP
-- Statistics & experimentation: A/B testing, hypothesis testing, confidence intervals
-- Cases 5–6 and the executive strategy report
+- The executive strategy report
 
 ---
 
@@ -174,13 +184,14 @@ delivered as an experimentation framework. *Not yet built.*
 
 ```
 data/            Raw Olist CSVs (gitignored) + processed data
-src/             Python: config, database build, ETL, utils  (ml/ai_advisor scaffolded)
+src/             Python: config, database build, ETL, utils, experimentation (Case 6)  (ml/ai_advisor scaffolded)
 sql/
   setup/         Table + staging DDL
   transform/     Dimension + fact population
   validation/    Warehouse validation
   analytics_marts/   4 analytical marts (retention, marketing, segmentation, fulfillment)
   executive_cases/   Cases 01–05: 6 analyses each + findings/recommendations/dashboard notes
+                     Case 06: observational-data SQL + findings (code lives in src/experimentation)
 dashboards/      Power BI project (.pbip): report + semantic model
 powerbi/         Theme files
 docs/            Data dictionary, warehouse design, model/dashboard notes

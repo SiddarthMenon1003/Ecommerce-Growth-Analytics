@@ -6,7 +6,7 @@
     "y": 24,
     "z": 21000,
     "height": 60,
-    "width": 560,
+    "width": 480,
     "tabOrder": 5000
   },
   "visual": {
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Value is concentrated: repeat customers are worth ~2x a one-time buyer (R$315 vs R$162).",
+                    "value": "Repeat customers are worth ~2x a one-timer: R$315 vs R$162.",
                     "textStyle": {
                       "fontSize": "9pt",
                       "color": "#64748B"

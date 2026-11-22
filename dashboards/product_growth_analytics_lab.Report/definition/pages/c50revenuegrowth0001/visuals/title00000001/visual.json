@@ -22,7 +22,7 @@
                     "value": "Revenue Growth",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "19pt",
+                      "fontSize": "15pt",
                       "color": "#020617"
                     }
                   }
@@ -31,9 +31,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "Where future revenue comes from: growing YoY, but concentrated in a few fast-growing categories.",
+                    "value": "Growing YoY, but concentrated in a few fast-growing categories.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#64748B"
                     }
                   }

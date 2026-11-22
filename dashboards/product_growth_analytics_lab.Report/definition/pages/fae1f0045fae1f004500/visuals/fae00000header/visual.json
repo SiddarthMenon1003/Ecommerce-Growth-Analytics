@@ -6,7 +6,7 @@
     "y": 24,
     "z": 21000,
     "height": 60,
-    "width": 560,
+    "width": 480,
     "tabOrder": 5000
   },
   "visual": {
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "97% of orders arrive, but 8.1% are late - and late delivery is the single biggest driver of bad reviews.",
+                    "value": "8.1% of orders are late \u2014 the single biggest driver of bad reviews.",
                     "textStyle": {
                       "fontSize": "9pt",
                       "color": "#64748B"

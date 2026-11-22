@@ -6,7 +6,7 @@
     "y": 24,
     "z": 21000,
     "height": 60,
-    "width": 560,
+    "width": 480,
     "tabOrder": 5000
   },
   "visual": {
@@ -22,7 +22,7 @@
                     "value": "Segmentation",
                     "textStyle": {
                       "fontWeight": "bold",
-                      "fontSize": "19pt",
+                      "fontSize": "15pt",
                       "color": "#020617"
                     }
                   }
@@ -31,9 +31,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "ML segments (RFM + K-Means): Big Spenders are ~30% of customers but 57% of revenue \u2014 and buy once.",
+                    "value": "RFM + K-Means: Big Spenders are 30% of customers but 57% of revenue.",
                     "textStyle": {
-                      "fontSize": "10pt",
+                      "fontSize": "9pt",
                       "color": "#64748B"
                     }
                   }

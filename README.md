@@ -8,6 +8,13 @@ growth questions a leadership team would actually ask.
 The goal is decision support, not a wall of charts: find where growth stalls, size the
 impact, and say what to do next.
 
+**📊 The dashboard** — the eight-page Power BI report lives in
+[`dashboards/`](dashboards/) as a PBIP project. Open
+[`product_growth_analytics_lab.pbip`](dashboards/product_growth_analytics_lab.pbip) in
+[Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free) and refresh against a
+local copy of the warehouse. The capstone read is the
+[**Executive Growth Strategy**](docs/executive_growth_strategy.md).
+
 Scope is kept honest. Where the data cannot answer a question, the project says so and
 frames the analysis around what the data does support.
 

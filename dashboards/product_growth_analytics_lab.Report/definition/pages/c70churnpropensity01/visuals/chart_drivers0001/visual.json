@@ -226,7 +226,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'What Predicts a Second Purchase \u2014 Top Drivers (mean |SHAP|)'"
+                  "Value": "'What Predicts a Second Purchase — Top Drivers (mean |SHAP|)'"
                 }
               }
             },

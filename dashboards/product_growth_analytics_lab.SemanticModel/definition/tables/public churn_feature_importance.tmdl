@@ -46,3 +46,4 @@ table 'public churn_feature_importance'
 				    data
 
 	annotation PBI_ResultType = Table
+

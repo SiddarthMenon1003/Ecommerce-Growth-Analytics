@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "ROC-AUC \u2014 ranking quality",
+                    "value": "ROC-AUC — ranking quality",
                     "textStyle": {
                       "fontSize": "9pt",
                       "color": "#64748B"

@@ -1,43 +1,3 @@
-relationship 224f7b60-44f8-4eb9-a679-2575a1278ad1
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Order Items'.'Shipping Deadline'
-	toColumn: LocalDateTable_89e1e87f-4bb3-4971-ae80-0d69028e02ad.Date
-
-relationship b9397af5-8569-4264-820f-846be10cde3c
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Orders'.order_purchase_timestamp
-	toColumn: LocalDateTable_a6e299c5-3a98-41d4-9d86-b9f23f29e178.Date
-
-relationship c7b98426-a6fa-4b15-b7e5-2032f8571f39
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Orders'.'Order Approved Date'
-	toColumn: LocalDateTable_9c82418a-0dcd-4942-bbe1-f5ed036d1ef3.Date
-
-relationship eb17968e-3ff2-44e3-a591-209c36343251
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Orders'.order_delivered_carrier_date
-	toColumn: LocalDateTable_923f44b3-a4c7-43f0-b302-f4092c0d7ddd.Date
-
-relationship b88b9d1f-4c00-4207-9f3a-39815f00f294
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Orders'.'Delivery Date'
-	toColumn: LocalDateTable_62502698-68ee-4b15-bb2c-2681f2deb11c.Date
-
-relationship 56c98044-68d4-4b75-b345-348c94f88428
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Orders'.'Estimated Delivery Date'
-	toColumn: LocalDateTable_c1091816-7217-4957-ab9a-c8da48c704f3.Date
-
-relationship 8f344a50-6779-4ca3-95fc-110a3df4a536
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Reviews'.'Review Date'
-	toColumn: LocalDateTable_8fb1d1ba-67e0-4677-b614-5c7d0b75525d.Date
-
-relationship 3fa4e1d7-03c4-4326-ae41-01459ce7746d
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Fact Reviews'.review_answer_timestamp
-	toColumn: LocalDateTable_3e1d9940-a86d-4800-a0e9-5eba103ebbe9.Date
-
 relationship 6a71a775-0c19-488d-a17b-19b8f1273e92
 	fromColumn: 'Fact Order Items'.product_id
 	toColumn: 'Dim Products'.product_id
@@ -76,97 +36,17 @@ relationship 9b464f6a-b859-40e0-83b3-c68472424621
 
 	annotation PBI_IsFromSource = FS
 
-relationship 7083a8f7-ad09-4574-b6ce-dacdd3955803
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'Dim Date'.Date
-	toColumn: LocalDateTable_bb8f912a-9332-4d26-b3b9-460bb6552226.Date
-
 relationship ac687331-4ef2-bd2a-45d4-44b59ce52745
 	fromColumn: 'Fact Orders'.'Order Date'
 	toColumn: 'Dim Date'.Date
-
-relationship 6ede47f7-08e1-42f8-b8b3-00f3d9b247b7
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public customer_cohorts'.cohort_month
-	toColumn: LocalDateTable_7d40558d-1f73-45fa-9415-0f990d496f30.Date
-
-relationship 058d808e-f7e8-4d2f-954b-e44fa137f661
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public customer_value_mart'.first_purchase_date
-	toColumn: LocalDateTable_e4300712-1655-4216-8c4c-de23b73c884f.Date
-
-relationship b3e60b8a-3332-45ed-925a-319151a9a6c7
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public customer_value_mart'.last_purchase_date
-	toColumn: LocalDateTable_47a49fb3-21ca-4343-8ac0-2c594cf9af0d.Date
 
 relationship 5a121b9d-64ab-2c56-eff8-8b4e7196875b
 	fromColumn: 'public customer_value_mart'.customer_id
 	toColumn: 'Dim Customers'.customer_id
 
-relationship 32a703f5-a294-4fc9-9d80-1e5fa5cc0f17
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public marketing_roi_mart'.first_purchase_date
-	toColumn: LocalDateTable_174acd95-e2f6-4f13-8074-66d8782bc3e2.Date
-
-relationship 22623243-ff2b-472c-bf76-588f617b9c37
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public marketing_roi_mart'.last_purchase_date
-	toColumn: LocalDateTable_12355f95-fde2-4978-8c7d-a8d7705b7b13.Date
-
 relationship 520a42e1-6181-d60f-3707-782b2268e2c5
 	fromColumn: 'public marketing_roi_mart'.customer_id
 	toColumn: 'Dim Customers'.customer_id
-
-relationship 8ac4ff29-9a09-4d3b-8937-32d904204b90
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public customer_segmentation_mart'.first_purchase_date
-	toColumn: LocalDateTable_d936851d-2803-45be-876e-8ea95bf0b559.Date
-
-relationship 3e9a946c-4a69-491b-9240-88e2a1412d87
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public customer_segmentation_mart'.last_purchase_date
-	toColumn: LocalDateTable_cde96fda-14cd-4f4a-8a4e-600c48488259.Date
-
-relationship 6cc164e7-6267-4ba0-bc62-6e7d88755208
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.dataset_refresh_date
-	toColumn: LocalDateTable_4212d5ee-0551-475f-8f5a-e94d970dbee6.Date
-
-relationship faa26949-b85e-44f1-9415-aa5bb07f207f
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.order_purchase_timestamp
-	toColumn: LocalDateTable_5fd40094-ff36-4043-864e-d2af0567df73.Date
-
-relationship f8ba4964-f3d6-46a0-a4a7-5a5f968612df
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.order_approved_at
-	toColumn: LocalDateTable_7e7e041b-ecdc-408f-b2ee-6393b8087240.Date
-
-relationship ef16846b-a4ac-4056-9701-474d4dd10824
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.order_delivered_carrier_date
-	toColumn: LocalDateTable_4c1ba30d-e68d-4e4a-9395-f474aeccc865.Date
-
-relationship 6b0d62ad-8ec5-4329-b0a8-1eec9300bad4
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.order_delivered_customer_date
-	toColumn: LocalDateTable_322477d6-c18f-4fc4-a961-7c73c9e2b66c.Date
-
-relationship a5461dce-9fb1-4482-8c67-91ebe8e81746
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.order_estimated_delivery_date
-	toColumn: LocalDateTable_e6f66951-77c8-4721-b5fc-743e3253e90e.Date
-
-relationship 002bf306-5257-4b6a-b842-acc7fd23e7b9
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.review_creation_date
-	toColumn: LocalDateTable_7ea01aee-436b-4c77-b805-4abf8e58b283.Date
-
-relationship 6553a763-c1cc-4dfe-8ab8-996cf41c2de5
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'public order_fulfillment_funnel_mart'.review_answer_timestamp
-	toColumn: LocalDateTable_d8fbf01b-7034-4670-aa4f-d220cf28542b.Date
 
 relationship 09b40ad4-f40b-4fa1-a667-4f8ee19bb1dd
 	fromColumn: 'public revenue_growth_mart'.revenue_month

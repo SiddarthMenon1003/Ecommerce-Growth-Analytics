@@ -37,11 +37,6 @@ table 'Fact Orders'
 		summarizeBy: none
 		sourceColumn: order_purchase_timestamp
 
-		variation Variation
-			isDefault
-			relationship: b9397af5-8569-4264-820f-846be10cde3c
-			defaultHierarchy: LocalDateTable_a6e299c5-3a98-41d4-9d86-b9f23f29e178.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column 'Order Approved Date'
@@ -50,11 +45,6 @@ table 'Fact Orders'
 		lineageTag: 6c350967-f129-4dc1-aa07-83afaebe91b6
 		summarizeBy: none
 		sourceColumn: Order Approved Date
-
-		variation Variation
-			isDefault
-			relationship: c7b98426-a6fa-4b15-b7e5-2032f8571f39
-			defaultHierarchy: LocalDateTable_9c82418a-0dcd-4942-bbe1-f5ed036d1ef3.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -65,11 +55,6 @@ table 'Fact Orders'
 		summarizeBy: none
 		sourceColumn: order_delivered_carrier_date
 
-		variation Variation
-			isDefault
-			relationship: eb17968e-3ff2-44e3-a591-209c36343251
-			defaultHierarchy: LocalDateTable_923f44b3-a4c7-43f0-b302-f4092c0d7ddd.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column 'Delivery Date'
@@ -79,11 +64,6 @@ table 'Fact Orders'
 		summarizeBy: none
 		sourceColumn: Delivery Date
 
-		variation Variation
-			isDefault
-			relationship: b88b9d1f-4c00-4207-9f3a-39815f00f294
-			defaultHierarchy: LocalDateTable_62502698-68ee-4b15-bb2c-2681f2deb11c.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column 'Estimated Delivery Date'
@@ -92,11 +72,6 @@ table 'Fact Orders'
 		lineageTag: ddeec2fb-7f1b-44ba-92aa-06472fe7dad2
 		summarizeBy: none
 		sourceColumn: Estimated Delivery Date
-
-		variation Variation
-			isDefault
-			relationship: 56c98044-68d4-4b75-b345-348c94f88428
-			defaultHierarchy: LocalDateTable_c1091816-7217-4957-ab9a-c8da48c704f3.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

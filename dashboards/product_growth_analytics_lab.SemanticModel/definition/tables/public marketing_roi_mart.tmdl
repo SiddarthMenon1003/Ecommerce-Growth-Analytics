@@ -53,11 +53,6 @@ table 'public marketing_roi_mart'
 		summarizeBy: none
 		sourceColumn: first_purchase_date
 
-		variation Variation
-			isDefault
-			relationship: 32a703f5-a294-4fc9-9d80-1e5fa5cc0f17
-			defaultHierarchy: LocalDateTable_174acd95-e2f6-4f13-8074-66d8782bc3e2.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column last_purchase_date
@@ -66,11 +61,6 @@ table 'public marketing_roi_mart'
 		lineageTag: e7583cf3-98cd-446f-b09d-f06016991142
 		summarizeBy: none
 		sourceColumn: last_purchase_date
-
-		variation Variation
-			isDefault
-			relationship: 22623243-ff2b-472c-bf76-588f617b9c37
-			defaultHierarchy: LocalDateTable_12355f95-fde2-4978-8c7d-a8d7705b7b13.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

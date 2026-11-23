@@ -64,3 +64,4 @@ table 'public customer_rfm_segments'
 				    public_customer_rfm_segments
 
 	annotation PBI_ResultType = Table
+

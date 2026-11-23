@@ -53,11 +53,6 @@ table 'Fact Order Items'
 		summarizeBy: none
 		sourceColumn: Shipping Deadline
 
-		variation Variation
-			isDefault
-			relationship: 224f7b60-44f8-4eb9-a679-2575a1278ad1
-			defaultHierarchy: LocalDateTable_89e1e87f-4bb3-4971-ae80-0d69028e02ad.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column 'Product Price'

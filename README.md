@@ -1,224 +1,204 @@
 # Product Growth Analytics Lab
 
-## Data-Driven Growth Strategy & Decision Intelligence
+A data analytics project built on the Brazilian Olist e-commerce dataset. It carries
+raw order data through a PostgreSQL warehouse, a library of SQL analyses, a Python ML
+and statistics layer, and a seven-page Power BI report. The work is organised around the
+growth questions a leadership team would actually ask.
 
-An end-to-end analytics engineering project that takes the Brazilian **Olist**
-e-commerce dataset (~99K orders, ~96K customers, R$16M revenue) from raw CSVs to a
-modeled PostgreSQL warehouse, a library of business-focused SQL analyses, and a
-consulting-grade Power BI report — framed around the growth questions a CEO would
-actually ask.
+The goal is decision support, not a wall of charts: find where growth stalls, size the
+impact, and say what to do next.
 
-The goal is not to produce queries and charts. It is to **turn data into decisions**:
-identify growth bottlenecks, quantify impact, and recommend action.
-
----
-
-# Project Status
-
-This is an **actively built** project. The sections below separate what is **done** from
-what is **planned** — nothing here is claimed as finished unless it ships in the repo.
-
-| Area | Status |
-|---|---|
-| Environment, PostgreSQL warehouse, ETL pipeline | ✅ Built |
-| Dimensional model (star schema) + data validation | ✅ Built |
-| 5 analytics marts | ✅ Built |
-| **Case 1 — Customer Retention** | ✅ Built (SQL + dashboard) |
-| **Case 2 — Customer Value & Marketing Prioritisation** | ✅ Built (SQL + dashboard) |
-| **Case 3 — Customer Segmentation (value-tier, rule-based)** | ✅ Built (SQL + dashboard) |
-| **Case 4 — Order Fulfillment Funnel** | ✅ Built (SQL + dashboard) |
-| **Case 5 — Revenue Growth Analysis** | ✅ Built (SQL + mart + dashboard page) |
-| **Case 6 — Experimentation / A/B Testing** | ✅ Built (toolkit + worked test) |
-| Power BI report (7 pages, 44 tables, 125 measures) | ✅ Built |
-| **Case 3 upgrade — RFM + K-Means segmentation** | ✅ Built (`src/ml` + dashboard page) |
-| Churn prediction model (classification + SHAP) | 🔜 Planned |
-| Executive Growth Strategy Report | 🔜 Planned |
-
-> **Honesty note.** Churn modeling (classification + SHAP) and the executive strategy
-> report are still **roadmap**, not delivered work. Everything else above — including
-> the RFM + K-Means ML layer (`src/ml`) and the A/B testing toolkit (`src/experimentation`)
-> — is implemented and runs against the live database.
+Scope is kept honest. Where the data cannot answer a question, the project says so and
+frames the analysis around what the data does support.
 
 ---
 
-# What's Built (the real deliverables)
-
-### Data engineering
-- **PostgreSQL data warehouse** built from the Olist CSVs via a Python ETL pipeline
-  (`src/etl`, `src/database`): extract → stage → transform → load, with a warehouse
-  validation step.
-- **Dimensional model (star schema):** `Dim Customers`, `Dim Date`, `Dim Products`,
-  `Dim Sellers` around `Fact Orders`, `Fact Order Items`, `Fact Payments`, `Fact Reviews`.
-
-### SQL analytics
-- **40+ SQL files**: 5 analytics marts, executive Cases 1–5 with 6 analyses each
-  (Case 6 adds observational-data SQL), plus setup / transform / validation scripts.
-- Each case ships `07_business_findings.md`, `08_recommendations.md`, and
-  `09_dashboard_notes.md` — analysis tied to **decisions**, not just query output.
-- SQL depth: CTEs, window & ranking functions (`ROW_NUMBER`, `RANK`, `NTILE`, `LAG`/`LEAD`),
-  subqueries, multi-table joins.
-
-### Business intelligence
-- **Power BI report (PBIP format)** with a semantic model of **44 tables and 125 DAX
-  measures**, and a **7-page narrative**: Overview · Retention · CLV · Segmentation ·
-  Marketing · Fulfillment · Revenue Growth — styled on the Microsoft Fluent2 design system.
-
----
-
-# Business Context
-
-A mid-sized e-commerce company has grown fast but is now slowing: retention is declining,
-repeat purchasing is weak, acquisition is getting more expensive, and marketing ROI is
-deteriorating. Leadership needs a **data-driven growth strategy**, not another report.
-
-This project is the analytical foundation for that strategy, worked case by case.
-
----
-
-# The Cases
-
-### Case 1 — Why is customer retention declining? ✅ Built
-Cohort analysis, retention curves, repeat-purchase and customer-lifetime SQL feed a
-**Retention** dashboard page. **Headline finding:** the marketplace is acquisition-led —
-**96.9% of customers buy only once**, and repeat buyers (worth ~2× a one-time buyer:
-R$315 vs R$162) are only **5.9% of revenue**.
-
-### Case 2 — Which customers should marketing prioritise? ✅ Built
-Value-based prioritisation (Convert / Nurture / Low Priority tiers), value concentration
-(Pareto), and segment profitability feed a **Marketing** page. **Headline finding:** the
-**top 20% of customers drive 53% of revenue** (R$8.56M, ~R$430 each).
-
-> **Data limitation (stated honestly):** Olist has no marketing spend, channel, or
-> attribution data, so true **CAC / ROAS / payback cannot be computed**. This case is
-> scoped to *value-based prioritisation*. See
-> `sql/executive_cases/case_02_marketing_roi/07_business_findings.md` for the framing and
-> the instrumentation needed to measure real marketing ROI later.
-
-### Case 3 — Which customers matter most? ✅ Built (rule-based + ML upgrade)
-**What's built:** a **rule-based High / Medium / Low value segmentation** (SQL) *plus* an
-**ML upgrade** — **RFM + K-Means clustering** at the true `customer_unique_id` grain
-(`src/ml/rfm_segmentation.py`, `python -m src.ml.rfm_segmentation`), writing a named
-`customer_rfm_segments` table back to Postgres (96,095 customers, k=4 chosen via elbow +
-silhouette): **Big Spenders · Hibernating · Recent · Champions**.
-**Key finding:** Big Spenders are ~30% of customers but **57% of revenue — and buy only
-once**, the single biggest growth lever. The **Segmentation** page is built on these ML
-segments (segment distribution, revenue by segment, RFM profile, recency×monetary map).
-See `sql/executive_cases/case_03_customer_segmentation/10_rfm_ml_segmentation.md`.
-
-### Case 4 — Order fulfillment: is delivery helping or hurting growth? ✅ Built
-> **Scope note:** Olist has **no clickstream** (no page views, carts, or checkout events),
-> so a true *conversion* funnel (Visit→View→Cart→Checkout→Purchase) is not possible with
-> this data. Case 4 is therefore an **order-fulfillment funnel**: Created → Approved →
-> Shipped → Delivered.
-
-The **Fulfillment** page covers delivery completion, late-delivery rate, and the review
-impact of timing. **Headline finding:** **8.1% of orders arrive late**, and late orders
-score **2.57★ vs 4.29★ on-time** — a 1.73★ hit; the warehouse-to-carrier handoff (~2.8
-days) is the main controllable delay, and high-value orders get no priority.
-
-### Case 5 — Where will future revenue come from? ✅ Built (SQL + dashboard page)
-Revenue-trend, category-performance, growth-portfolio and business-impact SQL on a
-category × month `revenue_growth_mart`. **Headline finding:** revenue is growing
-year-on-year (R$6.16M 2017 → R$7.39M 2018-to-Oct, peaking Nov-2017) but **concentrated**
-(top 10 categories = 62% of revenue; 18 of 74 categories = 80%) — and the biggest
-categories are also the **fastest growing** on a same-period YoY basis
-(*relogios* +175%, *beleza_saude* +158%, *informatica* +102%).
-Growth remains acquisition-led, so repeat purchasing is the largest untapped lever. A
-dedicated **Revenue Growth** page (area trend, category Pareto, growth-portfolio scatter,
-waterfall) is wired into the report.
-
-### Case 6 — Which experiment should we run next? ✅ Built (framework + worked test)
-> **Scope note:** Olist has **no randomized-experiment data**, so a true A/B test can't be
-> run on it. Case 6 delivers a reusable **statistics toolkit** + a **worked test on real
-> observational data** + **design templates** — honestly scoped.
-
-A/B design/evaluation toolkit (`src/experimentation/ab_toolkit.py`: sample size, power,
-MDE, Welch t-test, two-proportion z-test) and a runnable worked analysis
-(`experiment_analysis.py`). **Headline finding:** late delivery is associated with a
-**~2-star lower review** (4.29★→2.27★; Welch t≈−101, p≈0, Cohen's d≈−1.71 — large). Design
-sizing: a fulfillment review-lift test is cheap (~2.5K/arm for 0.1★); the second-purchase
-nudge is expensive (~20K/arm for +0.5pp on a 3.1% base).
-
----
-
-# Roadmap (planned, not yet built)
-
-- **Case 3 ML upgrade:** RFM scoring + K-Means clustering + segment profiling.
-- **Churn prediction:** feature engineering, classification modeling, SHAP explainability,
-  churn risk scores.
-- **Executive Growth Strategy Report:** current performance → root cause → recommendations
-  → 90-day roadmap → financial impact, using an Impact-vs-Effort prioritisation.
-
----
-
-# Technical Architecture
-
-**Built**
-- **PostgreSQL** data warehouse (star schema) with validation.
-- **Python ETL** (`src/`): extract / transform / load, staging, warehouse build & validate.
-- **Advanced SQL:** CTEs, window functions, ranking functions, subqueries, complex joins.
-- **Power BI (DAX):** 120 measures, 7-page report, Fluent2 design system.
-- **Statistics (Python):** A/B test design (power, sample size, MDE) + evaluation
-  (Welch t-test, two-proportion z-test, confidence intervals, effect size) — scipy/statsmodels.
-
-**Planned**
-- **Machine learning (Python):** RFM, K-Means, churn classification, SHAP.
-- Additional visualization (Plotly / Streamlit) if needed.
-
----
-
-# Skills Demonstrated vs Planned
-
-**Demonstrated in this repo today**
-- PostgreSQL · advanced SQL (CTEs, window/ranking functions) · ETL pipelines ·
-  dimensional data modeling · data validation
-- Power BI / DAX · BI data modeling (112 measures) · dashboard design & data storytelling
-- Cohort, retention, value-segmentation and fulfillment analysis · executive-style
-  findings & recommendations
-
-- Statistics & experimentation: A/B test design (power/sample size/MDE) and evaluation
-  (Welch t-test, two-proportion z-test, confidence intervals, effect size)
-
-**Planned (not yet demonstrated)**
-- Machine learning: RFM, K-Means, churn prediction, SHAP
-- The executive strategy report
-
----
-
-# Repository Structure
-
-```
-data/            Raw Olist CSVs (gitignored) + processed data
-src/             Python: config, database build, ETL, utils, experimentation (Case 6)  (ml/ai_advisor scaffolded)
-sql/
-  setup/         Table + staging DDL
-  transform/     Dimension + fact population
-  validation/    Warehouse validation
-  analytics_marts/   4 analytical marts (retention, marketing, segmentation, fulfillment)
-  executive_cases/   Cases 01–05: 6 analyses each + findings/recommendations/dashboard notes
-                     Case 06: observational-data SQL + findings (code lives in src/experimentation)
-dashboards/      Power BI project (.pbip): report + semantic model
-powerbi/         Theme files
-docs/            Data dictionary, warehouse design, model/dashboard notes
-notebooks/       Data understanding (01)
-```
-
----
-
-# Data Source
+## Dataset
 
 [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-— ~99K orders (2016–2018), ~96K customers, order items, payments, reviews, geolocation.
+(Kaggle): roughly 99K orders from 2016–2018, 96K customers, and R$16M in revenue, plus
+order items, payments, reviews, and geolocation.
 
-**Known limitations** (and why they shape the cases): no marketing spend/attribution (so
-no true CAC/ROAS), and no clickstream (so no conversion funnel). The analysis is scoped
-honestly around what the data can support.
+Two gaps shape the analysis:
+
+- No marketing spend, channel, or attribution data, so CAC, ROAS, and payback cannot be
+  computed.
+- No clickstream, so a visit-to-purchase conversion funnel is not possible.
 
 ---
 
-# Project Intent
+## Tech stack
 
-The aim is to move beyond reporting toward **executive decision support** — identifying
-growth bottlenecks, quantifying their impact, and recommending action. The warehouse,
-SQL case library, and BI report are the foundation; the ML, experimentation, and strategy
-layers are the roadmap being built on top of it.
+| Layer | Tools |
+|---|---|
+| Storage and data prep | PostgreSQL |
+| ETL, ML, statistics | Python (pandas, scikit-learn, scipy, statsmodels) |
+| Analysis and validation | SQL (CTEs, window and ranking functions, multi-table joins) |
+| Reporting | Power BI (PBIP), styled on the Microsoft Fluent 2 design system |
+| Calculation layer | DAX |
+
+---
+
+## Repository structure
+
+```
+data/         Raw Olist CSVs (gitignored) and processed output
+src/          Python: config, database build, ETL, ML, experimentation, utils
+sql/
+  setup/            Table and staging DDL
+  transform/        Dimension and fact population
+  validation/       Warehouse checks
+  analytics_marts/  Marts: retention, marketing, segmentation, fulfillment, revenue growth
+  executive_cases/  Cases 01–06: analysis, findings, recommendations, dashboard notes
+dashboards/   Power BI project (.pbip): report and semantic model
+powerbi/      Theme files
+docs/         Data dictionary, warehouse design, model and dashboard notes
+notebooks/    Data understanding
+```
+
+---
+
+## Architecture
+
+Raw CSVs load into a PostgreSQL star schema: dimension tables for customers, dates,
+products, and sellers around fact tables for orders, order items, payments, and reviews.
+SQL builds analytical marts on top, each shaped for one business question. Power BI
+connects to the prepared data, and DAX measures drive the report.
+
+Each case maps to one mart and one report page. A reader can open a page and follow a
+single story instead of hunting through unrelated metrics.
+
+---
+
+## The cases
+
+### Case 1 — Customer retention
+
+Cohort analysis, retention curves, and repeat-purchase SQL feed the Retention page.
+
+Finding: the marketplace is acquisition-led. 96.9% of customers buy once. Repeat buyers
+are worth about twice a one-time buyer (R$315 vs R$162) but account for only 5.9% of
+revenue.
+
+### Case 2 — Marketing prioritisation
+
+Value-based tiers (Convert, Nurture, Low Priority), Pareto concentration, and segment
+profitability feed the Marketing page.
+
+Finding: the top 20% of customers drive 53% of revenue (R$8.56M, about R$430 each).
+
+Scope: with no spend or attribution data, this case covers value-based prioritisation,
+not true marketing ROI. The instrumentation needed to measure real ROI later is written
+up in the case findings.
+
+### Case 3 — Customer segmentation
+
+Two approaches. A rule-based High/Medium/Low value segmentation in SQL, and an ML layer
+that scores customers on RFM (recency, frequency, monetary) and clusters them with
+K-Means at the true customer grain (`customer_unique_id`). k=4 was chosen using the elbow
+method and silhouette score, giving four segments: Big Spenders, Hibernating, Recent, and
+Champions. Results are written back to Postgres (`src/ml/rfm_segmentation.py`) and drive
+the Segmentation page.
+
+Finding: Big Spenders are about 30% of customers and 57% of revenue, and nearly all of
+them buy only once. Converting that group into repeat buyers is the largest growth lever
+in the data.
+
+### Case 4 — Order fulfillment
+
+The Fulfillment page covers delivery completion, late-delivery rate, and the effect of
+delivery timing on reviews.
+
+Finding: 8.1% of orders arrive late. Late orders score 2.57 stars against 4.29 for
+on-time, a 1.73-star gap. The warehouse-to-carrier handoff (about 2.8 days) is the main
+controllable delay, and high-value orders get no delivery priority.
+
+Scope: with no clickstream, this is an order-fulfillment funnel (Created, Approved,
+Shipped, Delivered), not a conversion funnel.
+
+### Case 5 — Revenue growth
+
+Revenue-trend, category-performance, and growth-portfolio SQL on a category-by-month mart
+feed the Revenue Growth page.
+
+Finding: revenue grew year on year (R$6.16M in 2017 to R$7.39M through October 2018) but
+is concentrated. The top 10 categories account for 62% of revenue, and the largest
+categories are also among the fastest growing on a same-period basis (relogios +175%,
+beleza_saude +158%, informatica +102%).
+
+### Case 6 — Experimentation
+
+An A/B design and evaluation toolkit (`src/experimentation/ab_toolkit.py`: sample size,
+power, minimum detectable effect, Welch's t-test, two-proportion z-test) with a worked
+analysis on real observational data.
+
+Finding: late delivery is associated with a review score about two stars lower (4.29 to
+2.27; Welch t ≈ −101, Cohen's d ≈ −1.71). A fulfillment review-lift test would be cheap
+to run (~2,500 per arm for a 0.1-star effect); a second-purchase nudge would be expensive
+(~20,000 per arm for +0.5 points on a 3.1% base).
+
+Scope: with no randomised-experiment data, Case 6 is a reusable toolkit, a worked
+observational test, and design templates, not a live A/B test.
+
+---
+
+## Power BI report
+
+A PBIP project with a star-schema semantic model and 125 DAX measures across a seven-page
+report: Overview, Retention, CLV, Segmentation, Marketing, Fulfillment, and Revenue
+Growth. Each page carries KPI cards, the main analysis, and a short read of what the
+numbers mean.
+
+---
+
+## Running it
+
+Requires Python 3 and a local PostgreSQL instance.
+
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Configure database access
+cp .env.example .env          # then set your PostgreSQL credentials
+
+# 3. Create tables and load the Olist CSVs into staging
+#    (DDL in sql/setup, staging loaders in src/etl)
+
+# 4. Build the dimensional warehouse (populate dimensions and facts)
+python -m src.database.build_warehouse
+
+# 5. Build the RFM + K-Means segments
+python -m src.ml.rfm_segmentation
+
+# 6. Run the worked A/B analysis
+python -m src.experimentation.experiment_analysis
+```
+
+Open `dashboards/product_growth_analytics_lab.pbip` in Power BI Desktop to view the
+report.
+
+---
+
+## Roadmap
+
+Two pieces are scoped but not yet built (`src/ai_advisor` is a placeholder):
+
+- Churn prediction: feature engineering, a classification model, and SHAP explainability
+  to produce per-customer churn-risk scores.
+- Executive growth strategy report: current performance, root cause, recommendations, a
+  90-day plan, and expected financial impact, prioritised by impact against effort.
+
+---
+
+## What this project demonstrates
+
+- Data engineering: a PostgreSQL warehouse, a Python ETL pipeline, a dimensional star
+  schema, and warehouse validation.
+- SQL: analytical marts and six executive cases using CTEs, window and ranking functions,
+  and complex joins, each tied to findings and recommendations.
+- Business intelligence: Power BI data modelling, 125 DAX measures, and dashboard design.
+- Machine learning: RFM scoring and K-Means segmentation at the correct customer grain.
+- Statistics: A/B test design (power, sample size, MDE) and evaluation (Welch's t-test,
+  two-proportion z-test, confidence intervals, effect size).
+- Business analysis: identifying bottlenecks, quantifying impact, and recommending action.

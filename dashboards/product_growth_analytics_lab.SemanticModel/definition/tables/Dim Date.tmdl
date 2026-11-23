@@ -8,11 +8,6 @@ table 'Dim Date'
 		isNameInferred
 		sourceColumn: [Date]
 
-		variation Variation
-			isDefault
-			relationship: 7083a8f7-ad09-4574-b6ce-dacdd3955803
-			defaultHierarchy: LocalDateTable_bb8f912a-9332-4d26-b3b9-460bb6552226.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column Year =

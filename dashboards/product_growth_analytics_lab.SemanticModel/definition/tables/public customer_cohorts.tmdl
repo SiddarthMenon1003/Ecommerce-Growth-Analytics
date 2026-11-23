@@ -19,11 +19,6 @@ table 'public customer_cohorts'
 		summarizeBy: none
 		sourceColumn: cohort_month
 
-		variation Variation
-			isDefault
-			relationship: 6ede47f7-08e1-42f8-b8b3-00f3d9b247b7
-			defaultHierarchy: LocalDateTable_7d40558d-1f73-45fa-9415-0f990d496f30.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column month_number

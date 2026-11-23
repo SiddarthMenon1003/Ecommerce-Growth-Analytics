@@ -55,11 +55,6 @@ table 'Fact Reviews'
 		summarizeBy: none
 		sourceColumn: Review Date
 
-		variation Variation
-			isDefault
-			relationship: 8f344a50-6779-4ca3-95fc-110a3df4a536
-			defaultHierarchy: LocalDateTable_8fb1d1ba-67e0-4677-b614-5c7d0b75525d.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column review_answer_timestamp
@@ -68,11 +63,6 @@ table 'Fact Reviews'
 		lineageTag: 5794d016-8f4e-4e6e-9ca6-30f217f5bbce
 		summarizeBy: none
 		sourceColumn: review_answer_timestamp
-
-		variation Variation
-			isDefault
-			relationship: 3fa4e1d7-03c4-4326-ae41-01459ce7746d
-			defaultHierarchy: LocalDateTable_3e1d9940-a86d-4800-a0e9-5eba103ebbe9.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

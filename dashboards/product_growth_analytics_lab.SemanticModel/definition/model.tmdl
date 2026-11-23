@@ -6,56 +6,31 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation __PBI_TimeIntelligenceEnabled = 1
+annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["Dim Customers","Dim Products","Dim Sellers","Fact Order Items","Fact Orders","Fact Payments","Fact Reviews","KPI_Measures","public customer_cohorts","public customer_value_mart","public marketing_roi_mart","public customer_segmentation_mart","public order_fulfillment_funnel_mart","public revenue_growth_mart","public customer_rfm_segments"]
 
 annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
 
 ref table 'Dim Customers'
-ref table 'public customer_rfm_segments'
 ref table 'Dim Products'
 ref table 'Dim Sellers'
 ref table 'Fact Order Items'
-ref table DateTableTemplate_d32126a4-6804-43e8-9d67-067e5ac6b6d6
-ref table LocalDateTable_89e1e87f-4bb3-4971-ae80-0d69028e02ad
 ref table 'Fact Orders'
-ref table LocalDateTable_a6e299c5-3a98-41d4-9d86-b9f23f29e178
-ref table LocalDateTable_9c82418a-0dcd-4942-bbe1-f5ed036d1ef3
-ref table LocalDateTable_923f44b3-a4c7-43f0-b302-f4092c0d7ddd
-ref table LocalDateTable_62502698-68ee-4b15-bb2c-2681f2deb11c
-ref table LocalDateTable_c1091816-7217-4957-ab9a-c8da48c704f3
 ref table 'Fact Payments'
 ref table 'Fact Reviews'
-ref table LocalDateTable_8fb1d1ba-67e0-4677-b614-5c7d0b75525d
-ref table LocalDateTable_3e1d9940-a86d-4800-a0e9-5eba103ebbe9
 ref table KPI_Measures
 ref table 'Dim Date'
-ref table LocalDateTable_bb8f912a-9332-4d26-b3b9-460bb6552226
 ref table 'Revenue Share'
 ref table 'Purchase Frequency'
 ref table 'Customer Type'
 ref table 'public customer_cohorts'
-ref table LocalDateTable_7d40558d-1f73-45fa-9415-0f990d496f30
 ref table 'public customer_value_mart'
-ref table LocalDateTable_e4300712-1655-4216-8c4c-de23b73c884f
-ref table LocalDateTable_47a49fb3-21ca-4343-8ac0-2c594cf9af0d
 ref table 'public marketing_roi_mart'
-ref table LocalDateTable_174acd95-e2f6-4f13-8074-66d8782bc3e2
-ref table LocalDateTable_12355f95-fde2-4978-8c7d-a8d7705b7b13
 ref table 'public customer_segmentation_mart'
-ref table LocalDateTable_d936851d-2803-45be-876e-8ea95bf0b559
-ref table LocalDateTable_cde96fda-14cd-4f4a-8a4e-600c48488259
 ref table 'public order_fulfillment_funnel_mart'
-ref table LocalDateTable_4212d5ee-0551-475f-8f5a-e94d970dbee6
-ref table LocalDateTable_5fd40094-ff36-4043-864e-d2af0567df73
-ref table LocalDateTable_7e7e041b-ecdc-408f-b2ee-6393b8087240
-ref table LocalDateTable_4c1ba30d-e68d-4e4a-9395-f474aeccc865
-ref table LocalDateTable_322477d6-c18f-4fc4-a961-7c73c9e2b66c
-ref table LocalDateTable_e6f66951-77c8-4721-b5fc-743e3253e90e
-ref table LocalDateTable_7ea01aee-436b-4c77-b805-4abf8e58b283
-ref table LocalDateTable_d8fbf01b-7034-4670-aa4f-d220cf28542b
 ref table 'public revenue_growth_mart'
+ref table 'public customer_rfm_segments'
 
 ref cultureInfo en-US
 

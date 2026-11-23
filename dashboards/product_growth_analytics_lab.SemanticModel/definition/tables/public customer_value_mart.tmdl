@@ -53,11 +53,6 @@ table 'public customer_value_mart'
 		summarizeBy: none
 		sourceColumn: first_purchase_date
 
-		variation Variation
-			isDefault
-			relationship: 058d808e-f7e8-4d2f-954b-e44fa137f661
-			defaultHierarchy: LocalDateTable_e4300712-1655-4216-8c4c-de23b73c884f.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column last_purchase_date
@@ -66,11 +61,6 @@ table 'public customer_value_mart'
 		lineageTag: 8d973f59-adf8-487c-ac68-a8fac457594f
 		summarizeBy: none
 		sourceColumn: last_purchase_date
-
-		variation Variation
-			isDefault
-			relationship: b3e60b8a-3332-45ed-925a-319151a9a6c7
-			defaultHierarchy: LocalDateTable_47a49fb3-21ca-4343-8ac0-2c594cf9af0d.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

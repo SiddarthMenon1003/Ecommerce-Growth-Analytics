@@ -23,11 +23,11 @@
                       "Entity": "public customer_rfm_segments"
                     }
                   },
-                  "Property": "segment_name"
+                  "Property": "customer_unique_id"
                 }
               },
-              "queryRef": "public customer_rfm_segments.segment_name",
-              "nativeQueryRef": "segment_name",
+              "queryRef": "public customer_rfm_segments.customer_unique_id",
+              "nativeQueryRef": "customer_unique_id",
               "active": true
             }
           ]
@@ -51,21 +51,50 @@
             }
           ]
         },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "public customer_rfm_segments"
+                        }
+                      },
+                      "Property": "monetary"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(public customer_rfm_segments.monetary)",
+              "nativeQueryRef": "Sum of monetary"
+            }
+          ]
+        },
         "X": {
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "public customer_rfm_segments"
+                        }
+                      },
+                      "Property": "recency"
                     }
                   },
-                  "Property": "RFM Avg Recency"
+                  "Function": 0
                 }
               },
-              "queryRef": "KPI_Measures.RFM Avg Recency",
-              "nativeQueryRef": "RFM Avg Recency"
+              "queryRef": "Sum(public customer_rfm_segments.recency)",
+              "nativeQueryRef": "Sum of recency",
+              "active": true
             }
           ]
         },
@@ -73,35 +102,22 @@
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Aggregation": {
                   "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "public customer_rfm_segments"
+                        }
+                      },
+                      "Property": "monetary"
                     }
                   },
-                  "Property": "RFM Avg Monetary"
+                  "Function": 0
                 }
               },
-              "queryRef": "KPI_Measures.RFM Avg Monetary",
-              "nativeQueryRef": "RFM Avg Monetary"
-            }
-          ]
-        },
-        "Size": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "KPI_Measures"
-                    }
-                  },
-                  "Property": "RFM Customers"
-                }
-              },
-              "queryRef": "KPI_Measures.RFM Customers",
-              "nativeQueryRef": "RFM Customers"
+              "queryRef": "Sum(public customer_rfm_segments.monetary)",
+              "nativeQueryRef": "Sum of monetary"
             }
           ]
         }
@@ -231,15 +247,7 @@
       ],
       "fillPoint": [
         {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
+          "properties": {}
         }
       ],
       "dataPoint": [
@@ -407,37 +415,6 @@
             ]
           }
         }
-      ],
-      "categoryLabels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#020617'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
-            }
-          }
-        }
       ]
     },
     "visualContainerObjects": {
@@ -447,7 +424,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Segment Map \u2014 Avg Recency vs Avg Spend (bubble = customers)'"
+                  "Value": "'Customer RFM Map — Recency vs Monetary (by segment)'"
                 }
               }
             },

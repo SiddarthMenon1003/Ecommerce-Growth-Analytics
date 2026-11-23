@@ -23,11 +23,11 @@
                       "Entity": "public revenue_growth_mart"
                     }
                   },
-                  "Property": "revenue_month"
+                  "Property": "product_category_name"
                 }
               },
-              "queryRef": "public revenue_growth_mart.revenue_month",
-              "nativeQueryRef": "revenue_month",
+              "queryRef": "public revenue_growth_mart.product_category_name",
+              "nativeQueryRef": "product_category_name",
               "active": true
             }
           ]
@@ -55,16 +55,16 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "public revenue_growth_mart"
+                    "Entity": "KPI_Measures"
                   }
                 },
-                "Property": "revenue_month"
+                "Property": "RG Total Revenue"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ],
         "isDefaultSort": true
@@ -93,6 +93,19 @@
                       "Value": "'#020617'"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "breakdown": [
+        {
+          "properties": {
+            "maxBreakdowns": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
                 }
               }
             }
@@ -363,7 +376,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenue Bridge \u2014 Monthly Build to Period Total'"
+                  "Value": "'Revenue Contribution by Category (Top 15 + Other)'"
                 }
               }
             },
@@ -380,21 +393,114 @@
             }
           }
         }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "275c957a73a54e15bb8b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "public revenue_growth_mart"
+              }
+            },
+            "Property": "product_category_name"
+          }
+        },
+        "type": "TopN",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "subquery",
+              "Expression": {
+                "Subquery": {
+                  "Query": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "public revenue_growth_mart",
+                        "Type": 0
+                      },
+                      {
+                        "Name": "k",
+                        "Entity": "KPI_Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Select": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "d"
+                            }
+                          },
+                          "Property": "product_category_name"
+                        },
+                        "Name": "field"
+                      }
+                    ],
+                    "OrderBy": [
+                      {
+                        "Direction": 2,
+                        "Expression": {
+                          "Measure": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "k"
+                              }
+                            },
+                            "Property": "RG Total Revenue"
+                          }
+                        }
+                      }
+                    ],
+                    "Top": 15
+                  }
+                }
+              },
+              "Type": 2
+            },
+            {
+              "Name": "d",
+              "Entity": "public revenue_growth_mart",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "product_category_name"
+                      }
+                    }
+                  ],
+                  "Table": {
+                    "SourceRef": {
+                      "Source": "subquery"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
   }
 }

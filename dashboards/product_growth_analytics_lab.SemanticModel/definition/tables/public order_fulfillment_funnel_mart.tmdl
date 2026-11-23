@@ -153,11 +153,6 @@ table 'public order_fulfillment_funnel_mart'
 		summarizeBy: none
 		sourceColumn: dataset_refresh_date
 
-		variation Variation
-			isDefault
-			relationship: 6cc164e7-6267-4ba0-bc62-6e7d88755208
-			defaultHierarchy: LocalDateTable_4212d5ee-0551-475f-8f5a-e94d970dbee6.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -252,11 +247,6 @@ table 'public order_fulfillment_funnel_mart'
 		summarizeBy: none
 		sourceColumn: order_purchase_timestamp
 
-		variation Variation
-			isDefault
-			relationship: faa26949-b85e-44f1-9415-aa5bb07f207f
-			defaultHierarchy: LocalDateTable_5fd40094-ff36-4043-864e-d2af0567df73.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column order_approved_at
@@ -265,11 +255,6 @@ table 'public order_fulfillment_funnel_mart'
 		lineageTag: d2a9270d-1f38-4d93-af39-722b2d63b53f
 		summarizeBy: none
 		sourceColumn: order_approved_at
-
-		variation Variation
-			isDefault
-			relationship: f8ba4964-f3d6-46a0-a4a7-5a5f968612df
-			defaultHierarchy: LocalDateTable_7e7e041b-ecdc-408f-b2ee-6393b8087240.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -280,11 +265,6 @@ table 'public order_fulfillment_funnel_mart'
 		summarizeBy: none
 		sourceColumn: order_delivered_carrier_date
 
-		variation Variation
-			isDefault
-			relationship: ef16846b-a4ac-4056-9701-474d4dd10824
-			defaultHierarchy: LocalDateTable_4c1ba30d-e68d-4e4a-9395-f474aeccc865.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column order_delivered_customer_date
@@ -293,11 +273,6 @@ table 'public order_fulfillment_funnel_mart'
 		lineageTag: 8bad12e8-cc30-433e-a333-9e4fdca0ea81
 		summarizeBy: none
 		sourceColumn: order_delivered_customer_date
-
-		variation Variation
-			isDefault
-			relationship: 6b0d62ad-8ec5-4329-b0a8-1eec9300bad4
-			defaultHierarchy: LocalDateTable_322477d6-c18f-4fc4-a961-7c73c9e2b66c.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -308,11 +283,6 @@ table 'public order_fulfillment_funnel_mart'
 		summarizeBy: none
 		sourceColumn: order_estimated_delivery_date
 
-		variation Variation
-			isDefault
-			relationship: a5461dce-9fb1-4482-8c67-91ebe8e81746
-			defaultHierarchy: LocalDateTable_e6f66951-77c8-4721-b5fc-743e3253e90e.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column review_creation_date
@@ -322,11 +292,6 @@ table 'public order_fulfillment_funnel_mart'
 		summarizeBy: none
 		sourceColumn: review_creation_date
 
-		variation Variation
-			isDefault
-			relationship: 002bf306-5257-4b6a-b842-acc7fd23e7b9
-			defaultHierarchy: LocalDateTable_7ea01aee-436b-4c77-b805-4abf8e58b283.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 	column review_answer_timestamp
@@ -335,11 +300,6 @@ table 'public order_fulfillment_funnel_mart'
 		lineageTag: 3660cd03-4b92-4cdd-a663-a9cfcb9a187a
 		summarizeBy: none
 		sourceColumn: review_answer_timestamp
-
-		variation Variation
-			isDefault
-			relationship: 6553a763-c1cc-4dfe-8ab8-996cf41c2de5
-			defaultHierarchy: LocalDateTable_d8fbf01b-7034-4670-aa4f-d220cf28542b.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "insights00000001",
   "position": {
-    "x": 1048,
-    "y": 652,
+    "x": 24,
+    "y": 946,
     "z": 21000,
-    "height": 360,
-    "width": 528,
+    "height": 84,
+    "width": 1552,
     "tabOrder": 8000
   },
   "visual": {
@@ -19,56 +19,18 @@
               {
                 "textRuns": [
                   {
-                    "value": "Reading this page",
+                    "value": "ACTION   ",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "11pt",
-                      "color": "#020617"
+                      "color": "#FFFFFF"
                     }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
+                  },
                   {
-                    "value": "Model \u2014 second-purchase propensity: probability a first-time buyer places a 2nd order within 180 days. Churn risk = the Low band.",
+                    "value": "Aim the second-purchase nudge at the High band (same spend, ~2\u20142.3\u00d7 the return) and protect the first-order delivery experience \u2014 it compounds the late-delivery penalty in Fulfillment (Case 4) and Experimentation (Case 6).",
                     "textStyle": {
-                      "fontSize": "9pt",
-                      "color": "#475569"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "A ranker, not a classifier (ROC-AUC \u2014 0.58). 97% buy once, so signal is faint, but the ranking holds: High-propensity buyers return at 4.9% vs 2.1% for Low (2.3x) against a 3.0% base.",
-                    "textStyle": {
-                      "fontSize": "9pt",
-                      "color": "#475569"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Top drivers (SHAP): product category, delivery-vs-estimate gap, installments, first-order value, purchase month \u2014 first-order experience and basket economics carry what signal exists.",
-                    "textStyle": {
-                      "fontSize": "9pt",
-                      "color": "#475569"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Action: aim the second-purchase nudge at the High band (same spend, ~2x return rate) and protect first-order delivery \u2014 it ties to the late-delivery penalty in Fulfillment (Case 4) and Experimentation (Case 6).",
-                    "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "9pt",
-                      "color": "#020617"
+                      "fontSize": "10pt",
+                      "color": "#FDF6E3"
                     }
                   }
                 ]
@@ -94,7 +56,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#FFFFFF'"
+                      "Value": "'#927100'"
                     }
                   }
                 }
@@ -118,7 +80,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#ECECE3'"
+                      "Value": "'#927100'"
                     }
                   }
                 }
@@ -201,6 +163,40 @@
               "expr": {
                 "Literal": {
                   "Value": "90D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
                 }
               }
             }

@@ -3,10 +3,10 @@
   "name": "chart_drivers0001",
   "position": {
     "x": 24,
-    "y": 652,
+    "y": 600,
     "z": 4000,
-    "height": 360,
-    "width": 1000,
+    "height": 330,
+    "width": 1016,
     "tabOrder": 9000
   },
   "visual": {

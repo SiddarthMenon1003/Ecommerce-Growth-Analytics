@@ -122,5 +122,9 @@ order is associated with a modestly higher chance of a second.
 - `src/ml/churn_model.py` — pipeline (load → engineer → train → evaluate →
   score → write back).
 - `customer_churn_scores` (Postgres) — `customer_unique_id`,
-  `repeat_probability`, `churn_risk`, `risk_band` (96,096 rows).
+  `repeat_probability`, `churn_risk`, `risk_band`, `cohort_eligible`,
+  `repeat_label` (96,096 rows).
+- `churn_feature_importance` (Postgres) — aggregated mean|SHAP| driver ranking
+  (one-hot dummies folded back to base feature + readable labels), charted as
+  the "Top Drivers" bar on the Churn page.
 - `reports/churn_shap_summary.png` — SHAP global summary.

@@ -2,7 +2,7 @@
 
 A data analytics project built on the Brazilian Olist e-commerce dataset. It carries
 raw order data through a PostgreSQL warehouse, a library of SQL analyses, a Python ML
-and statistics layer, and a seven-page Power BI report. The work is organised around the
+and statistics layer, and an eight-page Power BI report. The work is organised around the
 growth questions a leadership team would actually ask.
 
 The goal is decision support, not a wall of charts: find where growth stalls, size the
@@ -52,7 +52,7 @@ sql/
   executive_cases/  Cases 01–06: analysis, findings, recommendations, dashboard notes
 dashboards/   Power BI project (.pbip): report and semantic model
 powerbi/      Theme files
-docs/         Data dictionary, warehouse design, model and dashboard notes
+docs/         Data dictionary, warehouse design, notes, and the executive growth strategy
 notebooks/    Data understanding
 ```
 
@@ -79,6 +79,13 @@ Cohort analysis, retention curves, and repeat-purchase SQL feed the Retention pa
 Finding: the marketplace is acquisition-led. 96.9% of customers buy once. Repeat buyers
 are worth about twice a one-time buyer (R$315 vs R$162) but account for only 5.9% of
 revenue.
+
+ML extension — churn / second-purchase propensity (`src/ml/churn_model.py`): scores every
+customer on the probability of a second order within 180 days (logistic + XGBoost, a
+time-aware split, SHAP for explainability), writes `customer_churn_scores`, and feeds the
+Churn page. The model is a ranker, not a classifier (ROC-AUC ≈ 0.58 on a 97%-one-time
+base): the High-propensity band returns at 4.9% vs 2.1% for Low (2.3×). Top drivers are the
+delivery-vs-estimate gap, payment installments, and first-order value.
 
 ### Case 2 — Marketing prioritisation
 
@@ -144,10 +151,10 @@ observational test, and design templates, not a live A/B test.
 
 ## Power BI report
 
-A PBIP project with a star-schema semantic model and 125 DAX measures across a seven-page
-report: Overview, Retention, CLV, Segmentation, Marketing, Fulfillment, and Revenue
-Growth. Each page carries KPI cards, the main analysis, and a short read of what the
-numbers mean.
+A PBIP project with a star-schema semantic model and 130 DAX measures across an eight-page
+report: Overview, Retention, CLV, Segmentation, Marketing, Fulfillment, Revenue Growth, and
+Churn. Each page carries KPI cards, the main analysis, and a short read of what the numbers
+mean.
 
 ---
 
@@ -180,14 +187,13 @@ report.
 
 ---
 
-## Roadmap
+## Capstone — Executive Growth Strategy
 
-Two pieces are scoped but not yet built (`src/ai_advisor` is a placeholder):
-
-- Churn prediction: feature engineering, a classification model, and SHAP explainability
-  to produce per-customer churn-risk scores.
-- Executive growth strategy report: current performance, root cause, recommendations, a
-  90-day plan, and expected financial impact, prioritised by impact against effort.
+`docs/executive_growth_strategy.md` synthesises all six cases and the ML layer into one
+decision document: performance snapshot, root-cause of the stall, recommendations
+prioritised by impact × effort, a 90-day plan, and a transparent (assumption-stated)
+financial-impact estimate. It is written to be tested, tying each recommendation back to the
+Case 6 experimentation toolkit.
 
 ---
 
@@ -197,8 +203,10 @@ Two pieces are scoped but not yet built (`src/ai_advisor` is a placeholder):
   schema, and warehouse validation.
 - SQL: analytical marts and six executive cases using CTEs, window and ranking functions,
   and complex joins, each tied to findings and recommendations.
-- Business intelligence: Power BI data modelling, 125 DAX measures, and dashboard design.
-- Machine learning: RFM scoring and K-Means segmentation at the correct customer grain.
+- Business intelligence: Power BI data modelling, 130 DAX measures, and dashboard design.
+- Machine learning: RFM + K-Means segmentation at the correct customer grain, and a
+  second-purchase (churn) propensity model with a time-aware split and SHAP explainability.
 - Statistics: A/B test design (power, sample size, MDE) and evaluation (Welch's t-test,
   two-proportion z-test, confidence intervals, effect size).
-- Business analysis: identifying bottlenecks, quantifying impact, and recommending action.
+- Business analysis: identifying bottlenecks, quantifying impact, and recommending action,
+  synthesised into an executive growth strategy.

@@ -33,9 +33,7 @@ checks in [`sql/validation/`](../sql/validation).
 
 > **Known grain caveat:** Olist `customer_id` is unique per order; the stable customer
 > key is `customer_unique_id`. `dim_customers` is therefore effectively at order grain.
-> Customer-level metrics use `DISTINCTCOUNT(customer_unique_id)`. A true customer
-> dimension deduplicated on `customer_unique_id` is tracked in
-> [`model_remediation_checklist.md`](model_remediation_checklist.md) (P5).
+> Customer-level metrics use `DISTINCTCOUNT(customer_unique_id)`. The ML layer (RFM, churn) rebuilds customer-grain features directly on `customer_unique_id`.
 
 ---
 

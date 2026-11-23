@@ -27,7 +27,6 @@ remediation P2), related to `Dim Customers` and `Dim Date`.
 > live import still shows the old order-grain — refresh before relying on repeat/LTV visuals.
 
 Theme: apply [`powerbi/product_growth_executive_theme.json`](../../../powerbi/product_growth_executive_theme.json).
-Follow the shell in [`docs/dashboard_ui_overhaul.md`](../../../docs/dashboard_ui_overhaul.md).
 
 ---
 

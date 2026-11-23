@@ -340,6 +340,174 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "kpi_measures.rfm_customers": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RFM Customers"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Customers": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.rfm_revenue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RFM Revenue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total Revenue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.rfm_avg_monetary": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RFM Avg Monetary"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Avg Spend": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.rfm_avg_recency": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "RFM Avg Recency"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Avg Recency (days)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.churn_eligible_customers": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "Churn Eligible Customers"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Eligible (180d window)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.high_propensity_repeat_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "High Propensity Repeat Rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "High-Propensity Repeat Rate": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.low_propensity_customers": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "Low Propensity Customers"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Low-Propensity (Churn-Risk)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "kpi_measures.churn_customers_scored": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "KPI_Measures",
+			          "ConceptualProperty": "Churn Customers Scored"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Customers Scored": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  }
 			}

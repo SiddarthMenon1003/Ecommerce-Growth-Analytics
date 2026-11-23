@@ -1,0 +1,67 @@
+table 'public customer_churn_scores'
+	lineageTag: 7c1a9e40-c401-4a01-9b10-0001a0000001
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001a0000002
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column repeat_probability
+		dataType: double
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001a0000003
+		summarizeBy: none
+		sourceColumn: repeat_probability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column churn_risk
+		dataType: double
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001a0000004
+		summarizeBy: none
+		sourceColumn: churn_risk
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column risk_band
+		dataType: string
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001a0000005
+		summarizeBy: none
+		sourceColumn: risk_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column cohort_eligible
+		dataType: boolean
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001a0000006
+		summarizeBy: none
+		sourceColumn: cohort_eligible
+
+		annotation SummarizationSetBy = Automatic
+
+	column repeat_label
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001a0000007
+		summarizeBy: none
+		sourceColumn: repeat_label
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public customer_churn_scores' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "growth_lab"),
+				    public_customer_churn_scores = Source{[Schema="public",Item="customer_churn_scores"]}[Data]
+				in
+				    public_customer_churn_scores
+
+	annotation PBI_ResultType = Table
+

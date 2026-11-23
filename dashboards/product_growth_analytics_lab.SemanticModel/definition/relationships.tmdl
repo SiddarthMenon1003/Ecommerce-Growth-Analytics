@@ -56,3 +56,7 @@ relationship 48e806d5-2d57-49c4-b938-1efd12dff7cb
 	fromColumn: 'Dim Customers'.customer_unique_id
 	toColumn: 'public customer_rfm_segments'.customer_unique_id
 
+relationship 7c1a9e40-c401-4a01-9b10-0001b0000001
+	fromColumn: 'Dim Customers'.customer_unique_id
+	toColumn: 'public customer_churn_scores'.customer_unique_id
+

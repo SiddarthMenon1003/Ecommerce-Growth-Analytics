@@ -1108,6 +1108,31 @@ table KPI_Measures
 		displayFolder: RFM Segments
 		lineageTag: d1ecef37-9cc5-471d-9999-bd4cc3e73664
 
+	measure 'Churn Customers Scored' = COUNTROWS ( 'public customer_churn_scores' )
+		formatString: #,0
+		displayFolder: Churn
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001c0000001
+
+	measure 'Churn Eligible Customers' = COUNT ( 'public customer_churn_scores'[repeat_label] )
+		formatString: #,0
+		displayFolder: Churn
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001c0000002
+
+	measure 'Actual Repeat Rate' = AVERAGE ( 'public customer_churn_scores'[repeat_label] )
+		formatString: 0.0%
+		displayFolder: Churn
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001c0000003
+
+	measure 'High Propensity Repeat Rate' = CALCULATE ( [Actual Repeat Rate], 'public customer_churn_scores'[risk_band] = "High" )
+		formatString: 0.0%
+		displayFolder: Churn
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001c0000004
+
+	measure 'Low Propensity Customers' = CALCULATE ( COUNTROWS ( 'public customer_churn_scores' ), 'public customer_churn_scores'[risk_band] = "Low" )
+		formatString: #,0
+		displayFolder: Churn
+		lineageTag: 7c1a9e40-c401-4a01-9b10-0001c0000005
+
 	column _Measures
 		dataType: string
 		isHidden

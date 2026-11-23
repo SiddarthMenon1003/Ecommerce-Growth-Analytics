@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "churntitle00000001",
+  "position": {
+    "x": 60,
+    "y": 24,
+    "z": 21000,
+    "height": 60,
+    "width": 490,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Churn — Repeat Propensity",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "15pt",
+                      "color": "#020617"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Second-purchase model: High-propensity buyers return at 4.9% vs 2.2% (Low).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#64748B"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

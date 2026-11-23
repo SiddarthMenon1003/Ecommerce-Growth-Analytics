@@ -269,12 +269,22 @@ def risk_bands(proba):
 
 def write_back(conn, df, proba):
     band, _, _ = risk_bands(proba)
-    out = pd.DataFrame({
-        "customer_unique_id": df["customer_unique_id"].values,
-        "repeat_probability": np.round(proba, 6),
-        "churn_risk": np.round(1 - proba, 6),
-        "risk_band": band,
-    })
+    elig = df["cohort_eligible"].astype(bool).tolist()
+    # Actual label only has meaning inside the full window; NULL for the
+    # censored tail so dashboard rates average over eligible customers only.
+    # Build native Python types (str/float/bool/int/None) so psycopg2 adapts
+    # cleanly - routing None through a DataFrame coerces the column to float.
+    rows = [
+        (str(c), float(p), float(1 - p), str(b), bool(e),
+         (int(r) if e else None))
+        for c, p, b, e, r in zip(
+            df["customer_unique_id"].tolist(),
+            np.round(proba, 6).tolist(),
+            band.tolist(),
+            elig,
+            df["repeat_180"].tolist(),
+        )
+    ]
     cur = conn.cursor()
     cur.execute("DROP TABLE IF EXISTS customer_churn_scores")
     cur.execute("""
@@ -282,13 +292,67 @@ def write_back(conn, df, proba):
             customer_unique_id text,
             repeat_probability numeric,
             churn_risk numeric,
-            risk_band text)""")
+            risk_band text,
+            cohort_eligible boolean,
+            repeat_label integer)""")
     cur.executemany(
-        "INSERT INTO customer_churn_scores VALUES (%s,%s,%s,%s)",
-        list(out.itertuples(index=False, name=None)))
+        "INSERT INTO customer_churn_scores VALUES (%s,%s,%s,%s,%s,%s)", rows)
     conn.commit()
     cur.close()
+    out = pd.DataFrame(rows, columns=["customer_unique_id", "repeat_probability",
+                                      "churn_risk", "risk_band",
+                                      "cohort_eligible", "repeat_label"])
     return out
+
+
+PRETTY = {
+    "estimated_gap_days": "Delivery vs. estimate gap",
+    "delivery_days": "Delivery time (days)",
+    "late": "Late delivery",
+    "delivered": "Order delivered",
+    "approval_hours": "Payment approval time",
+    "purchase_month": "Purchase month",
+    "purchase_dow": "Purchase day of week",
+    "items_count": "Items in first order",
+    "total_price": "First-order value",
+    "total_freight": "Freight paid",
+    "freight_ratio": "Freight as % of basket",
+    "n_sellers": "Distinct sellers",
+    "n_categories": "Distinct categories",
+    "payment_value": "Payment value",
+    "installments": "Payment installments",
+    "review_score": "Review score",
+    "customer_state": "Customer state",
+    "payment_type": "Payment type",
+    "top_category": "Product category",
+}
+
+
+def write_importance(conn, imp, top_n=12):
+    """Fold one-hot dummies back to their base feature, label, and persist the
+    mean|SHAP| driver ranking so the dashboard can chart it."""
+    def base(name):
+        for c in CATEGORICAL:
+            if name.startswith(c + "_"):
+                return c
+        return name
+    agg = {}
+    for feat, val in imp.items():
+        b = base(feat)
+        agg[b] = agg.get(b, 0.0) + float(val)
+    ranked = sorted(agg.items(), key=lambda kv: kv[1], reverse=True)[:top_n]
+    rows = [(f, PRETTY.get(f, f), float(v), i + 1)
+            for i, (f, v) in enumerate(ranked)]
+    cur = conn.cursor()
+    cur.execute("DROP TABLE IF EXISTS churn_feature_importance")
+    cur.execute("""
+        CREATE TABLE churn_feature_importance (
+            feature text, label text, mean_abs_shap numeric, rank integer)""")
+    cur.executemany(
+        "INSERT INTO churn_feature_importance VALUES (%s,%s,%s,%s)", rows)
+    conn.commit()
+    cur.close()
+    print(f"\nWrote table: churn_feature_importance ({len(rows)} drivers).")
 
 
 def main():
@@ -341,7 +405,9 @@ def main():
 
         # Explainability: read feature signal from the gradient-boosted model.
         samp = Xte.sample(min(4000, len(Xte)), random_state=RANDOM_STATE)
-        shap_summary(xgb, samp)
+        imp = shap_summary(xgb, samp)
+        if imp is not None:
+            write_importance(conn, imp)
 
         # Score EVERYONE (eligible + censored tail) with the winner and persist
         proba_all = models[winner].predict_proba(X_all)[:, 1]

@@ -128,6 +128,20 @@
           "selector": {
             "id": "fae1f0045fae1f004500"
           }
+        },
+        {
+          "properties": {
+            "showPage": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "c70churnpropensity01"
+          }
         }
       ],
       "fill": [

@@ -1,4 +1,4 @@
-# Product Growth Analytics Lab
+# E-commerce Growth Analytics
 
 A data analytics project built on the Brazilian Olist e-commerce dataset. It carries
 raw order data through a PostgreSQL warehouse, a library of SQL analyses, a Python ML

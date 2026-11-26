@@ -15,6 +15,20 @@ impact, and say what to do next.
 local copy of the warehouse. The capstone read is the
 [**Executive Growth Strategy**](docs/executive_growth_strategy.md).
 
+## Dashboard
+
+An eight-page narrative styled on the Microsoft Fluent 2 design system — Overview ·
+Retention · CLV · Segmentation · Marketing · Fulfillment · Revenue Growth · Churn.
+
+| | |
+|:---:|:---:|
+| ![Overview](dashboards/dashboard_screenshots/01_overview.png) | ![Segmentation](dashboards/dashboard_screenshots/04_segmentation.png) |
+| **Overview** — KPIs, trend, and the growth problem at a glance | **Segmentation** — ML (RFM + K-Means) segments; Big Spenders drive 57% of revenue |
+| ![Revenue Growth](dashboards/dashboard_screenshots/07_revenue_growth.png) | ![Churn](dashboards/dashboard_screenshots/08_churn.png) |
+| **Revenue Growth** — trend, category Pareto, and a monthly revenue bridge | **Churn** — second-purchase propensity bands and SHAP drivers |
+
+**[📄 View the full dashboard (all 8 pages, PDF)](dashboards/dashboard_screenshots/product_growth_analytics_lab_dashboard.pdf)** — no Power BI needed.
+
 Scope is kept honest. Where the data cannot answer a question, the project says so and
 frames the analysis around what the data does support.
 
